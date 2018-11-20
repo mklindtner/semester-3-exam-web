@@ -5,8 +5,8 @@ class getPosts extends React {
     super(props);
     this.state = {};
   }
-  render(){
-      
+  render() {
+      <h1 style="color: red">I am the getPost component</h1>
   }
 }
 

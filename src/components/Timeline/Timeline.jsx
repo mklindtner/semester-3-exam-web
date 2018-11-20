@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import getPosts from "./getPosts";
+import GetPosts from "./getPosts";
 
 class Timeline extends React {
   constructor(props) {
     super(props);
     this.state = {};
   }
-  render(){
-<getPosts />
+  render() {
+    <GetPosts />;
   }
 }
 
