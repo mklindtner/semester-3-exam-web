@@ -26,7 +26,9 @@ class RegistrationForm extends Component {
             selectedRegion: 0,
             selectedCity: 0,
             selectedEmail: "",
-            selectedPassword: ""
+            selectedPassword: "",
+
+            errors: []
         }
 
         this.locationMapper = new LocationMapper();
@@ -41,12 +43,18 @@ class RegistrationForm extends Component {
 
     render() {
 
-        const { stage } = this.state;
+        const { stage, errors } = this.state;
 
         return (
             <form>
                 {stage === 1 && this.renderFirstStage()}
                 {stage === 2 && this.renderSecondStage()}
+                {errors.length > 0 && <ul className="form-errors">
+                    {errors.map((error, index) =>
+                        <li key={index}>{error}</li>
+                    )}
+                </ul>
+                }
             </form>
         );
     }
@@ -82,12 +90,12 @@ class RegistrationForm extends Component {
     }
 
     onNameChange = (event) => {
-        this.setState({selectedName: event.target.value});
+        this.setState({ selectedName: event.target.value });
     }
 
     renderFirstStage = () => {
 
-        const { genders, countries, regions, cities, selectedName, selectedCountry, selectedRegion, selectedCity, selectedGender, selectedDateOfBirth } = this.state;
+        const { genders, countries, regions, cities, selectedName, selectedCountry, selectedRegion, selectedCity, selectedGender, selectedDateOfBirth, errors } = this.state;
 
         return (
             <FormGroup controlId="registration-1">
@@ -165,9 +173,16 @@ class RegistrationForm extends Component {
         }
 
         this.userMapper.create(user).then(response => {
-            if(response.status === 201){
+
+            if (response.status === 201) {
                 this.props.onRegistration(response.body);
+                this.setState({ errors: [] });
                 return;
+            }
+
+            if (response.status === 422) {
+                const messages = response.body.violations.map(violation => violation.message);
+                this.setState({ errors: messages });
             }
         });
     }
