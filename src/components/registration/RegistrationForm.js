@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
-import FieldGroup from './FieldGroup';
-import LocationMapper from '../data/LocationMapper';
-import UserMapper from '../data/UserMapper';
+import FieldGroup from '../FieldGroup';
+import LocationMapper from '../../data/LocationMapper';
+import UserMapper from '../../data/UserMapper';
 
 var DatePicker = require("react-16-bootstrap-date-picker");
 
@@ -35,7 +35,7 @@ class RegistrationForm extends Component {
 
     componentDidMount = async () => {
         Promise.all([this.locationMapper.getCountries(), this.userMapper.getGenders()]).then(results => {
-            this.setState({ countries: results[0], genders: results[1] });
+            this.setState({ countries: results[0].body, genders: results[1].body });
         });
     }
 
@@ -54,16 +54,16 @@ class RegistrationForm extends Component {
     onCountryChange = (event) => {
         event.persist();
         const value = event.target.value;
-        this.locationMapper.getRegions(value).then(regions => {
-            this.setState({ selectedCountry: value, cities: [], regions });
+        this.locationMapper.getRegions(value).then(response => {
+            this.setState({ selectedCountry: value, cities: [], regions: response.body });
         });
     }
 
     onRegionChange = (event) => {
         event.persist();
         const value = event.target.value;
-        this.locationMapper.getCities(value).then(cities => {
-            this.setState({ selectedRegion: value, cities });
+        this.locationMapper.getCities(value).then(response => {
+            this.setState({ selectedRegion: value, cities: response.body });
         });
     }
 

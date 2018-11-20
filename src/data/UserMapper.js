@@ -1,21 +1,14 @@
 import config from '../config.js';
+import {get, post} from './DataMapper';
 
 class UserMapper {
 
     getGenders = () => {
-        return fetch(config.restUrl + "users/genders")
-        .then(response => response.json());
+        return get(config.restUrl + "users/genders");
     }
 
     create = (user) => {
-        return fetch(config.restUrl + "users", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-            },
-            body: JSON.stringify(user)
-        }).then(response => response.json());
+        return post(config.restUrl + "users", user);
     }
 }
 

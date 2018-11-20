@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import RegistrationPage from './components/routes/RegistrationPage';
-import Timeline from './components/routes/timeline/Timeline';
+import RegistrationPage from './components/registration/RegistrationPage';
+import Timeline from './components/timeline/Timeline';
 
 import './App.css';
 import Layout from './components/hoc/Layout/Layout';

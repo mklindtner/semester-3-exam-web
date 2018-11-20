@@ -1,20 +1,18 @@
 import config from '../config.js';
+import {get, post} from './DataMapper';
 
 class LocationMapper {
 
     getCountries() {
-        return fetch(config.restUrl + "countries")
-            .then(response => response.json());
+        return get(config.restUrl + "countries");
     }
 
     getRegions(country) {
-        return fetch(config.restUrl + "regions/country/" + country)
-        .then(response => response.json());
+        return get(config.restUrl + "regions/country/" + country);
     }
 
     getCities(region) {
-        return fetch(config.restUrl + "cities/region/" + region)
-        .then(response => response.json());
+        return get(config.restUrl + "cities/region/" + region)
     }
 }
 
