@@ -1,4 +1,4 @@
-function post(url, entity, ) {
+function post(url, entity) {
     let status = -1;
     return fetch(url, {
         method: "POST",
@@ -7,12 +7,12 @@ function post(url, entity, ) {
             "Accept": "application/json",
         },
         body: JSON.stringify(entity)
-    }).then(response => {
+    }).then((response, error) => {
         status = response.status;
         return response.json();
-    }).then(body => ({
+    }).then(body => Promise.resolve({
+        status,
         body,
-        status
     }));
 }
 
@@ -26,10 +26,10 @@ function get(url) {
     }).then(response => {
         status = response.status;
         return response.json();
-    }).then(body => ({
+    }).then(body => Promise.resolve({
+        status,
         body,
-        status
-    }));
+    }))
 }
 
 export {

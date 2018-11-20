@@ -10,6 +10,10 @@ class UserMapper {
     create = (user) => {
         return post(config.restUrl + "users", user);
     }
+
+    authenticate = (email, password) => {
+        return post(config.restUrl + "authentication/user", {email, password});
+    }
 }
 
 export default UserMapper;

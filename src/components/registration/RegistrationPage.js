@@ -10,7 +10,8 @@ class RegistrationPage extends Component {
     render() {
         return (
             <div>
-                <h2>Authentication</h2>
+                <h2>Registration</h2>
+                <p>Create an account to more easily connect with your friends and family.</p>
                 <RegistrationForm />
             </div>
         );
