@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import AuthenticateForm from "../components/AuthenticationForm";
+import RegistrationForm from "../RegistrationForm";
 
-class AuthenticationPage extends Component {
+class RegistrationPage extends Component {
 
     constructor(props) {
         super(props);
@@ -11,10 +11,10 @@ class AuthenticationPage extends Component {
         return (
             <div>
                 <h2>Authentication</h2>
-                <AuthenticateForm />
+                <RegistrationForm />
             </div>
         );
     }
 }
 
-export default AuthenticationPage;
+export default RegistrationPage;

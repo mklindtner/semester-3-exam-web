@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import AuthenticationPage from './pages/AuthenticationPage';
+import RegistrationPage from './components/routes/RegistrationPage';
 
 import './App.css';
 import Layout from './components/hoc/Layout/Layout'
@@ -11,7 +11,7 @@ class App extends Component {
     return (
       <Router>
         <Layout>
-          <Route path="/authenticate" component={AuthenticationPage} />
+          <Route path="/registration" component={RegistrationPage} />
         </Layout>
       </Router>
     );
