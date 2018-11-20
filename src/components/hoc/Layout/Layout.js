@@ -1,18 +1,23 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
 
-class Layout extends Component{
-    state={
+class Layout extends Component {
+  state = {
 
-    }
-    render(){
-    return(
+  }
+  render() {
+    return (
       <>
-    <header>
-    <h1>Welcome to this the Tølbøllbook</h1>
-    <p><span>We </span>don't steal your information, we make you feel like you're on vacation </p>
-    </header>
-    {this.props.children}
+      <header>
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <a className="navbar-brand" href="#">Social</a>
+        
+        
+        </nav>
+      </header>
+      <main>
+        {this.props.children}
+      </main>
     </>
     )
   }

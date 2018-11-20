@@ -9,26 +9,26 @@ import Layout from './components/hoc/Layout/Layout';
 
 class App extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state = {authenticationContext: null}
+    this.state = { authenticationContext: null }
   }
 
-  onAuthenticate = (user) => {
-
+  onAuthentication = (user) => {
+    console.log({onAuthentication: user});
   }
 
   onRegistration = (user) => {
-    
+    console.log({onRegistration: user});
   }
 
   render() {
     return (
       <Router>
         <Layout>
-          <Route path="/registration" component={RegistrationPage} />
-          <Route path="/authentication" component={AuthenticationPage} />
-          <Route path="/timeline" component={Timeline} />
+          <Route path="/registration" component={(router) => <RegistrationPage app={this.state} router={router} onRegistration={this.onRegistration} />} />
+          <Route path="/authentication" component={(router) => <AuthenticationPage app={this.state} router={router} onAuthentication={this.onAuthentication} />} />
+          <Route path="/timeline" component={(router) => <Timeline app={this.state} router={router}/>} />
         </Layout>
       </Router>
     );

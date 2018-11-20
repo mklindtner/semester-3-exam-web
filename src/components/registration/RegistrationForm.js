@@ -165,7 +165,10 @@ class RegistrationForm extends Component {
         }
 
         this.userMapper.create(user).then(response => {
-            console.log(response);
+            if(response.status === 201){
+                this.props.onRegistration(response.body);
+                return;
+            }
         });
     }
 

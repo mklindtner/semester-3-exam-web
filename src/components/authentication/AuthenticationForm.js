@@ -7,7 +7,7 @@ import UserMapper from '../../data/UserMapper';
 
 var DatePicker = require("react-16-bootstrap-date-picker");
 
-class RegistrationForm extends Component {
+class AuthenticationForm extends Component {
 
     constructor(props) {
         super(props);
@@ -25,7 +25,7 @@ class RegistrationForm extends Component {
         const { email, password } = this.state;
 
         return (
-            <form>
+            <form id="authentication-form">
                 <FormGroup controlId="registration-2">
                     <FieldGroup
                         id="formControlsEmail"
@@ -54,7 +54,6 @@ class RegistrationForm extends Component {
         this.setState({ email: value });
     }
 
-
     onPasswordChange = (event) => {
         const value = event.target.value;
         this.setState({ password: value });
@@ -62,9 +61,12 @@ class RegistrationForm extends Component {
 
     onSubmit = () => {
         this.userMapper.authenticate(this.state.email, this.state.password).then(response => {
-            console.log(response);
+            if(response.status === 200){
+                this.props.onAuthentication(response.body);
+                return;
+            }
         })
     }
 }
 
-export default RegistrationForm;
+export default AuthenticationForm;
