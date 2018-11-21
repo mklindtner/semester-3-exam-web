@@ -5,11 +5,10 @@ class Timeline extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    console.log(props.app.authenticationContext);
   }
   render() {
-    return (
-      <Posts />
-    );
+    return <Posts />;
   }
 }
 

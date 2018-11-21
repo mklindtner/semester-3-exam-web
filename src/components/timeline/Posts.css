@@ -1,14 +1,17 @@
 .jumbotron {
     font-style: italic;
     color: black;
+    padding: 10;
 }
 
 .jumbotron p {
     font-size: 13px;
+    font-style: oblique;
 }
 
 #content {
+    font-family: normal;
     padding: 2px;
     font-size: 23px;
-    color: red;
+    color: black;
 }

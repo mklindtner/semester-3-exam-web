@@ -5,7 +5,7 @@ import "./Posts.css";
 class Posts extends Component {
   constructor(props) {
     super(props);
-    this.state = { posts: [] };
+    this.state = { posts: [], offset: 0 };
   }
 
   render() {
@@ -15,9 +15,9 @@ class Posts extends Component {
         {this.state.posts.map(post => (
           <div className="jumbotron">
             <p>author: {post.author.name}</p>
-            <p>{post.title}</p>
-            <p  id="content">{post.contents}</p>
-            <p>created: {post.timeCreated}</p>
+            <p id="content">{post.title}</p>
+            <p id="content">{post.contents}</p>
+            <p>posted: {post.timeCreated}</p>
           </div>
         ))}
       </>
