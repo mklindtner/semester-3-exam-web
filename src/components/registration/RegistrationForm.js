@@ -55,8 +55,7 @@ class RegistrationForm extends Component {
                             <p>{error}</p>
                         </div>
                     )}
-                </div>
-                }
+                </div>}
             </form>
         );
     }
@@ -176,16 +175,21 @@ class RegistrationForm extends Component {
 
         this.userMapper.create(user).then(response => {
 
+            // Success
             if (response.status === 201) {
                 this.props.onRegistration(response.body);
                 this.setState({ errors: [] });
                 return;
             }
 
+            // Validation error
             if (response.status === 422) {
                 const messages = response.body.violations.map(violation => violation.message);
                 this.setState({ errors: messages });
+                return;
             }
+
+            this.setState({errors: ["An error occurred."]});
         });
     }
 

@@ -14,7 +14,8 @@ class AuthenticationForm extends Component {
 
         this.state = {
             email: "",
-            password: ""
+            password: "",
+            errors: []
         }
 
         this.userMapper = new UserMapper();
@@ -22,7 +23,7 @@ class AuthenticationForm extends Component {
 
     render() {
 
-        const { email, password } = this.state;
+        const { email, password, errors } = this.state;
 
         return (
             <form id="authentication-form">
@@ -45,6 +46,13 @@ class AuthenticationForm extends Component {
                     />
                     <Button onClick={this.onSubmit}>Authenticate</Button>
                 </FormGroup>
+                {errors.length > 0 && <div className="form-errors">
+                    {errors.map((error, index) =>
+                        <div key={index} className="alert alert-danger">
+                            <p>{error}</p>
+                        </div>
+                    )}
+                </div>}
             </form>
         );
     }
@@ -61,10 +69,20 @@ class AuthenticationForm extends Component {
 
     onSubmit = () => {
         this.userMapper.authenticate(this.state.email, this.state.password).then(response => {
+            
+            console.log(response);
+
             if(response.status === 200){
                 this.props.onAuthentication(response.body);
                 return;
             }
+
+            if(response.status === 401){
+                this.setState({errors: ["Incorrect email or password."]});
+                return;
+            }
+
+            this.setState({errors: ["An error occurred."]});
         })
     }
 }
