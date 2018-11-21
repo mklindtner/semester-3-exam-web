@@ -49,11 +49,13 @@ class RegistrationForm extends Component {
             <form>
                 {stage === 1 && this.renderFirstStage()}
                 {stage === 2 && this.renderSecondStage()}
-                {errors.length > 0 && <ul className="form-errors">
+                {errors.length > 0 && <div className="form-errors">
                     {errors.map((error, index) =>
-                        <li key={index}>{error}</li>
+                        <div key={index} className="alert alert-danger">
+                            <p>{error}</p>
+                        </div>
                     )}
-                </ul>
+                </div>
                 }
             </form>
         );
