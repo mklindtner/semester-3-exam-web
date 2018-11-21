@@ -1,9 +1,11 @@
-import {post} from './DataMapper'
-import {baseURL} from '../../Config.js'
+import {
+  post
+} from './DataMapper'
+import config from '../../config.js'
 
 class PostMapper {
-    submitPost = (submittedPost) => {
-    return post(baseURL + 'posts' ,  submittedPost)
+  submitPost = (submittedPost) => {
+    return post(config.restUrl + 'posts', submittedPost)
   }
 }
 

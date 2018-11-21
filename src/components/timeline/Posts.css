@@ -1,0 +1,14 @@
+.jumbotron {
+    font-style: italic;
+    color: black;
+}
+
+.jumbotron p {
+    font-size: 13px;
+}
+
+#content {
+    padding: 2px;
+    font-size: 23px;
+    color: red;
+}
