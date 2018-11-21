@@ -11,12 +11,12 @@ class Posts extends Component {
   render() {
     return (
       <>
-        <h1>I am the Posts component</h1>
+        <h1 className="center">I am the Posts component</h1>
         {this.state.posts.map(post => (
           <div className="jumbotron">
             <p>author: {post.author.name}</p>
             <p>{post.title}</p>
-            <p>{post.contents}</p>
+            <p  id="content">{post.contents}</p>
             <p>created: {post.timeCreated}</p>
           </div>
         ))}
