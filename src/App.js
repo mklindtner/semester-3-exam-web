@@ -5,7 +5,7 @@ import AuthenticationPage from './components/authentication/AuthenticationPage';
 import Timeline from './components/timeline/Timeline';
 
 import './App.css';
-import Layout from './components/hoc/Layout/Layout.jsx';
+import Layout from './components/hoc/Layout/Layout';
 
 class App extends Component {
 
@@ -15,12 +15,20 @@ class App extends Component {
     const authenticationContext = localStorage.getItem("authenticationContext");
     if (authenticationContext !== null)
       this.state = { authenticationContext: JSON.parse(authenticationContext) };
+    else 
+      this.state = {};
   }
 
   onAuthentication = (authenticationContext) => {
     const text = JSON.stringify(authenticationContext);
     localStorage.setItem("authenticationContext", text);
     this.setState({ authenticationContext });
+  }
+
+  onLogout = () => {
+      localStorage.removeItem("authenticationContext");
+      this.setState({authenticationContext: null});
+
   }
 
   onRegistration = (user) => {
@@ -30,7 +38,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Layout app={this.state}>
+        <Layout app={this.state} onLogout={this.onLogout}>
           <Route path="/registration" component={(router) => <RegistrationPage app={this.state} router={router} onRegistration={this.onRegistration} />} />
           <Route path="/authentication" component={(router) => <AuthenticationPage app={this.state} router={router} onAuthentication={this.onAuthentication} />} />
           <Route path="/timeline" component={(router) => <Timeline app={this.state} router={router} />} />
