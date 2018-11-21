@@ -11,23 +11,20 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-//    const authenticationContext = localStorage.getItem("authenticationContext");
-//    console.log(authenticationContext);
-//    if (authenticationContext !== null){
-//      console.log(authenticationContext);
-//     authenticationContext = JSON.parse(authenticationContext);
-//    }
-//    this.state = { authenticationContext: authenticationContext };
+
+    const authenticationContext = localStorage.getItem("authenticationContext");
+    if (authenticationContext !== null)
+      this.state = { authenticationContext: JSON.parse(authenticationContext) };
   }
 
   onAuthentication = (authenticationContext) => {
-//    const text = JSON.stringify({token: authenticationContext.token});
-//    localStorage.setItem("authenticationContext", text);
+    const text = JSON.stringify(authenticationContext);
+    localStorage.setItem("authenticationContext", text);
     this.setState({ authenticationContext });
   }
 
   onRegistration = (user) => {
-    console.log({ onRegistration: user });
+  
   }
 
   render() {
