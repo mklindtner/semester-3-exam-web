@@ -33,5 +33,6 @@ function get(url) {
 }
 
 export {
-    get, post
+    get,
+    post
 }
