@@ -5,7 +5,7 @@ import AuthenticationPage from './components/authentication/AuthenticationPage';
 import Timeline from './components/timeline/Timeline';
 
 import './App.css';
-import Layout from './components/hoc/Layout/Layout';
+import Layout from './components/hoc/Layout/Layout.jsx';
 
 class App extends Component {
 
@@ -30,7 +30,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Layout>
+        <Layout app={this.state}>
           <Route path="/registration" component={(router) => <RegistrationPage app={this.state} router={router} onRegistration={this.onRegistration} />} />
           <Route path="/authentication" component={(router) => <AuthenticationPage app={this.state} router={router} onAuthentication={this.onAuthentication} />} />
           <Route path="/timeline" component={(router) => <Timeline app={this.state} router={router} />} />
