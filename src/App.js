@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import RegistrationPage from './components/registration/RegistrationPage';
 import AuthenticationPage from './components/authentication/AuthenticationPage';
 import Timeline from './components/timeline/Timeline';
+import {createBrowserHistory} from "history";
 
 import './App.css';
 import Layout from './components/hoc/Layout/Layout';
@@ -28,7 +29,7 @@ class App extends Component {
   onLogout = () => {
       localStorage.removeItem("authenticationContext");
       this.setState({authenticationContext: null});
-
+      createBrowserHistory.apply().push("/authentication");
   }
 
   onRegistration = (user) => {
