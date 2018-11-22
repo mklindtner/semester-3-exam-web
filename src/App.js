@@ -6,6 +6,7 @@ import ProfilePage from "./components/profile/ProfilePage";
 import { createBrowserHistory } from "history";
 import "./App.css";
 import {BrowserRouter as Router, Route, Link} from "react-router-dom";
+import CreatePost from "./components/CreatePost/CreatePost";
 
 class App extends Component {
   constructor(props) {
