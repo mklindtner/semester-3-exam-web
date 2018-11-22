@@ -1,6 +1,4 @@
-import {
-  post
-} from './DataMapper'
+import {post} from './DataMapper'
 import config from '../../config.js'
 
 class PostMapper {

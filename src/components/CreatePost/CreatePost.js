@@ -47,15 +47,9 @@ class CreatePost extends Component{
 
 
     render(){
-        function SuccesAlert() {
-            if(showAlert){
-                
-            }
-        }
-
         return(    
             <div className="SubmitForm">
-            {showAlert && <Alert bsStyle="succes" />}
+            {showAlert && <Alert bsStyle="succes"/>}
             <form onSubmit={this.submitPostHandler}>
             <label>
               Title:
