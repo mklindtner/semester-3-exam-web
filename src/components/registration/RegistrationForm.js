@@ -189,7 +189,12 @@ class RegistrationForm extends Component {
                 return;
             }
 
-            this.setState({errors: ["An error occurred."]});
+            if (response.status === 409) {
+                this.setState({ errors: ["That email is already in use."] })
+                return;
+            }
+
+            this.setState({ errors: ["An error occurred."] });
         });
     }
 
