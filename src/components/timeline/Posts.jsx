@@ -1,59 +1,59 @@
-import React, { Component } from "react";
-import { get } from "../../data/DataMapper.js";
-import "./Posts.css";
+import React from "react";
+import Comments from "./Comments";
 
-class Posts extends Component {
+class Posts extends React.Component {
   constructor(props) {
     super(props);
     this.state = { posts: [] };
   }
-
   render() {
-    console.log(this.state.posts);
     return (
       <>
-        <h1 className="center">I am the Posts component</h1>
-        {this.createPosts()}
+        <div className="posts">{this.createPosts()}</div>
       </>
     );
   }
 
   createPosts = () => {
-    return this.state.posts.map(post => (
+    return this.props.posts.map(post => (
       <div className="jumbotron col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <p>author: {post.author.name}</p>
-        <p id="content">{post.title}</p>
-        <p id="content">{post.contents}</p>
+        <p id="content">title: {post.title}</p>
+        <p id="content">content: {post.contents}</p>
         <p>posted: {post.timeCreated}</p>
-        <p>{this.props.children}</p>
-        <input
-          className="btn btn-md"
-          type="button"
-          onClick={this.clickHandler}
-        />
-        <Comments hide="true"/>
+
+        <button
+          className="btn btn-lg btn-success"
+          data-toggle="collapse"
+          href={"#collapseExample" + post.id}
+          role="button"
+          aria-expanded="false"
+          aria-controls="collapseExample"
+        >
+          Comments
+          <span class="glyphicon glyphicon-pencil" />
+        </button>
+
+        <div class="collapse" id={"collapseExample" + post.id}>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6 col-md-offset-3">
+                <textarea
+                  placeholder="Comment something!"
+                  class="pb-cmnt-textarea"
+                />
+                <form class="form-inline" />
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     ));
   };
 
-  componentDidMount = () => {
-    console.log("i mounted!");
-    this.getPosts(1);
-    console.log(this.props.user);
-  };
-
-  getPosts = id => {
-    return get(
-      "http://localhost:8080/ca3/api/posts/timeline/" +
-        14 +
-        "/" +
-        5 +
-        "?cutoff=" +
-        10
-    ).then(response => {
-      this.setState({ posts: response.body });
-    });
-  };
+  clickHandler() {
+    alert("I'm clicked!");
+  }
 }
 
 export default Posts;
