@@ -31,12 +31,12 @@ class App extends Component {
     createBrowserHistory.apply().push("/authentication");
   };
 
-  onRegistration = user => {};
+  onRegistration = user => { };
 
   render() {
     return (
       <Router>
-        <Layout app={this.state} onLogout={this.onLogout}>
+        <>
           <Route
             path="/profile/:user?"
             component={router => (
@@ -52,6 +52,7 @@ class App extends Component {
                 onRegistration={this.onRegistration}
               />
             )}
+
           />
           <Route
             path="/authentication"
@@ -67,7 +68,7 @@ class App extends Component {
             path="/timeline"
             component={router => <Timeline app={this.state} router={router} />}
           />
-        </Layout>
+        </>
       </Router>
     );
   }
