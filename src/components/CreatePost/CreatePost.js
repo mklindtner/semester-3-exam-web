@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Alert, Button} from 'react-bootstrap';
 import PostMapper from '../../data/PostMapper'
 import Spinner from '../ui/Spinner'
+import getAuthenticatedUser from '../../getAuthenticatedUser.js';
 
 class CreatePost extends Component{
     constructor(props){
@@ -12,17 +13,12 @@ class CreatePost extends Component{
     this.state = {
         title: '',
         content: '',
-        showLoading: false
-        
+        userId: '',
+        showLoading: false 
     }
+
     this.handleChange = this.handleChange.bind(this);
 }
-
-
-
-    handleDeletePost(){
-
-    }
 
     handleChange (evt) {
         this.setState({[evt.target.name]: evt.target.value})
@@ -33,7 +29,8 @@ class CreatePost extends Component{
         e.preventDefault();
         const post = {
             title: this.state.title,
-            content: this.state.content
+            contents: this.state.content,
+            author: getAuthenticatedUser().id
         }
 
         this.postMapper.submitPost(post).then(response => {
@@ -48,7 +45,7 @@ class CreatePost extends Component{
     render(){
      
         
-        return( <div className="SubmitForm">
+        return(<div className="SubmitForm">
               {this.state.showLoading && <Spinner bsStyle="succes"/>}
               {!this.state.showLoading &&
               <form onSubmit={this.submitPostHandler}>

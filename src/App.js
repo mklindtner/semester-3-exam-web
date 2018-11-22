@@ -19,6 +19,8 @@ class App extends Component {
     } else this.state = {};
   }
 
+  
+
   onAuthentication = authenticationContext => {
     const text = JSON.stringify(authenticationContext);
     localStorage.setItem("authenticationContext", text);
@@ -36,6 +38,7 @@ class App extends Component {
   render() {
     return ( 
       <>
+      <CreatePost />
     <Route
         path="/profile/:user?"
         component={router => (
