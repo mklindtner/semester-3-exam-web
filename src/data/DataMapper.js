@@ -1,3 +1,5 @@
+import getAuthenticationContext from '../getAuthenticationContext';
+
 function post(url, entity) {
     let status = -1;
     return fetch(url, {
@@ -5,6 +7,7 @@ function post(url, entity) {
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json",
+            "Authorization": "Bearer " + getToken(),
         },
         body: JSON.stringify(entity)
     }).then((response, error) => {
@@ -22,6 +25,7 @@ function get(url) {
         method: "GET",
         headers: {
             "Accept": "application/json",
+            "Authorization": "Bearer " + getToken()
         }
     }).then(response => {
         status = response.status;
@@ -30,6 +34,14 @@ function get(url) {
         status,
         body,
     }))
+}
+
+function getToken(){
+    const authContext = getAuthenticationContext();
+    if(authContext === null)
+        return "";
+
+    return authContext.token;
 }
 
 export {

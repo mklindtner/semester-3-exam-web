@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import UserMapper from "../../data/UserMapper";
 import { Tabs, Tab } from "react-bootstrap";
 import Header from "../header/Header";
+import getAuthenticationContext from "../../getAuthenticationContext";
+import ImageUploadForm from '../images/ImageUploadForm';
+import PaginatedImageGrid from "../images/PaginatedImageGrid";
 
 class ProfilePage extends Component {
 
@@ -15,9 +18,11 @@ class ProfilePage extends Component {
 
     componentDidMount() {
 
-        let userToRetrieve = this.props.app.authenticationContext.user.id;
+        let userToRetrieve;
         if (this.props.router.match.params.user != undefined)
             userToRetrieve = this.props.router.match.params.user;
+        else 
+            userToRetrieve = getAuthenticationContext().user.id;
 
         this.userMapper.getUser(userToRetrieve).then(response => {
             if (response.status === 200)
@@ -44,7 +49,8 @@ class ProfilePage extends Component {
                                         <p>Posts</p>
                                     </Tab>
                                     <Tab eventKey={2} title="Images">
-                                        <p>Images</p>
+                                        {this.state.user.id === getAuthenticationContext().user.id && <ImageUploadForm />}
+                                        <PaginatedImageGrid pageSize={20} user={getAuthenticationContext().user.id} />
                                     </Tab>
                                     <Tab eventKey={3} title="Friends">
                                         <p>Friends</p>

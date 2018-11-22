@@ -6,17 +6,19 @@ import ProfilePage from "./components/profile/ProfilePage";
 import { createBrowserHistory } from "history";
 import "./App.css";
 import {BrowserRouter as Router, Route, Link} from "react-router-dom";
+import CreatePost from "./components/CreatePost/CreatePost";
 
 class App extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
 
     const authenticationContext = localStorage.getItem("authenticationContext");
     if (authenticationContext !== null) {
       this.state = { authenticationContext: JSON.parse(authenticationContext) };
     } else this.state = {};
   }
+
+  
 
   onAuthentication = authenticationContext => {
     const text = JSON.stringify(authenticationContext);
@@ -35,6 +37,7 @@ class App extends Component {
   render() {
     return ( 
       <>
+      <CreatePost />
     <Route
         path="/profile/:user?"
         component={router => (
@@ -71,3 +74,4 @@ class App extends Component {
 }
 
 export default App;
+

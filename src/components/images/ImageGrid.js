@@ -3,10 +3,6 @@ import { Link } from "react-router-dom";
 
 class ImageGrid extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     render() {
 
         const { title, images } = this.props;
@@ -14,11 +10,13 @@ class ImageGrid extends Component {
         return (
             <div className="row image-grid-container">
                 <p className="image-grid-title">{title}</p>
-                <div className="image-grid">
+                <div className="row text-center text-lg-left">
                     {images.map(image =>
-                        <div className="image-item">
-                            <img src={image.uri} />
-                        </div>
+                        <div key={image.id} className="col-lg-3 col-md-4 col-xs-6">
+                        <a href="#" className="d-block mb-4 h-100">
+                            <img className="img-fluid img-thumbnail" src={image.uri} alt={image.title} />
+                        </a>
+                    </div>
                     )};
                 </div>
             </div>

@@ -208,6 +208,7 @@ class RegistrationForm extends Component {
                     minLength={0}
                     maxLength={255}
                     placeholder="Please enter your email address."
+                    value={this.state.selectedEmail}
                     onChange={this.onEmailChange}
                 />
                 <FieldGroup
@@ -217,6 +218,7 @@ class RegistrationForm extends Component {
                     minLength={0}
                     maxLength={255}
                     placeholder="Please choose a password."
+                    value={this.state.selectedPassword}
                     onChange={this.onPasswordchange}
                 />
                 <Button onClick={() => this.setState({ stage: this.state.stage - 1 })}>Previous</Button>
