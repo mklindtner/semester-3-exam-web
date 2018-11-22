@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-const header = () =>{
+const router = () =>{
     return <Router>
     <Layout app={this.state} onLogout={this.onLogout}>
     <Route
@@ -38,4 +38,4 @@ const header = () =>{
   </Router>
 }
 
-export default header;
+export default router;

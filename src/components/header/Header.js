@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom";
+import './Header.css';
 
-class Layout extends Component {
+class Header extends Component {
+
+  constructor(props) {
+    super(props);
+  }
 
   render() {
 
     return (
-      <>
       <header>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <a className="navbar-brand" href="#">Social</a>
@@ -27,13 +31,8 @@ class Layout extends Component {
           </div>
         </nav>
       </header >
-      <main>
-        {this.props.children}
-      </main>
-    </>
     )
   }
 }
 
-
-export default Layout;
+export default Header;

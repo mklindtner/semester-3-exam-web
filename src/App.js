@@ -6,7 +6,6 @@ import ProfilePage from "./components/profile/ProfilePage";
 import { createBrowserHistory } from "history";
 import router from './header/Router'
 import "./App.css";
-import Layout from "./components/hoc/Layout/Layout";
 
 class App extends Component {
   constructor(props) {
@@ -15,7 +14,6 @@ class App extends Component {
     const authenticationContext = localStorage.getItem("authenticationContext");
     if (authenticationContext !== null) {
       this.state = { authenticationContext: JSON.parse(authenticationContext) };
-      console.log(authenticationContext);
     } else this.state = {};
   }
 
@@ -31,12 +29,46 @@ class App extends Component {
     createBrowserHistory.apply().push("/authentication");
   };
 
-  onRegistration = user => {};
+  onRegistration = user => { };
 
   render() {
     return (
-     <router />
-    )
+      <Router>
+        <>
+          <Route
+            path="/profile/:user?"
+            component={router => (
+              <ProfilePage app={this.state} router={router} />
+            )}
+          />
+          <Route
+            path="/registration"
+            component={router => (
+              <RegistrationPage
+                app={this.state}
+                router={router}
+                onRegistration={this.onRegistration}
+              />
+            )}
+
+          />
+          <Route
+            path="/authentication"
+            component={router => (
+              <AuthenticationPage
+                app={this.state}
+                router={router}
+                onAuthentication={this.onAuthentication}
+              />
+            )}
+          />
+          <Route
+            path="/timeline"
+            component={router => <Timeline app={this.state} router={router} />} //skal den have onAuthentication? Hvor ligger user?
+          />
+        </>
+      </Router>
+    );
   }
 }
 
