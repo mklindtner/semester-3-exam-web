@@ -9,7 +9,7 @@ import "./App.css";
 
 class App extends Component {
   constructor(props) {
-    
+
     super(props);
     console.log(props);
 
@@ -73,3 +73,4 @@ class App extends Component {
 }
 
 export default App;
+

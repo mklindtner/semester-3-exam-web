@@ -69,9 +69,7 @@ class AuthenticationForm extends Component {
 
     onSubmit = () => {
         this.userMapper.authenticate(this.state.email, this.state.password).then(response => {
-
-            console.log(response);
-
+            
             if (response.status === 200) {
                 this.props.onAuthentication(response.body);
                 this.setState({ errors: [] });
