@@ -15,7 +15,6 @@ class App extends Component {
     const authenticationContext = localStorage.getItem("authenticationContext");
     if (authenticationContext !== null) {
       this.state = { authenticationContext: JSON.parse(authenticationContext) };
-      console.log(authenticationContext);
     } else this.state = {};
   }
 
@@ -65,7 +64,7 @@ class App extends Component {
           />
           <Route
             path="/timeline"
-            component={router => <Timeline app={this.state} router={router} />}
+            component={router => <Timeline app={this.state} router={router} />} //skal den have onAuthentication? Hvor ligger user?
           />
         </Layout>
       </Router>
