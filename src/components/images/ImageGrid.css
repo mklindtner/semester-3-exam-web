@@ -1,0 +1,7 @@
+.img-thumbnail {
+    max-height: 200px;
+}
+
+.image-grid-container > div > div {
+    margin-bottom: 30px;
+}
