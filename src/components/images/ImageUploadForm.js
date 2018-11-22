@@ -16,12 +16,20 @@ class ImageUploadForm extends Component {
 
     onSubmit = (event) => {
         event.preventDefault();
-        
+
         const title = event.target.title.value;
         const file = event.target.file.files[0];
 
-        console.log({title, file});
-        //this.imageMapper.create({title, uri: })
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+            let data = reader.result.replace(/^data:(.*;base64,)?/, '');
+            if ((data.length % 4) > 0) {
+                data += '='.repeat(4 - (data.length % 4));
+            }
+
+            this.imageMapper.create({title, data});
+        }
     }
 
     render() {

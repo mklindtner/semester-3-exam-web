@@ -50,7 +50,7 @@ class ProfilePage extends Component {
                                     </Tab>
                                     <Tab eventKey={2} title="Images">
                                         {this.state.user.id === getAuthenticationContext().user.id && <ImageUploadForm />}
-                                        <PaginatedImageGrid pageSize={25} user={getAuthenticationContext().user.id} />
+                                        <PaginatedImageGrid pageSize={20} user={getAuthenticationContext().user.id} />
                                     </Tab>
                                     <Tab eventKey={3} title="Friends">
                                         <p>Friends</p>

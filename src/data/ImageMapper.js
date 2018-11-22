@@ -11,8 +11,8 @@ class ImageMapper {
         return post(config.restUrl + `images`, image);
     }
 
-    getByUser(user) {
-
+    countByUser(user) {
+        return get(config.restUrl + `images/user/${user}/count`);
     }
 
     getByUserPaginated(user, pageSize, pageNumber) {
