@@ -1,5 +1,5 @@
 import {post} from './DataMapper'
-import config from '../../config.js'
+import config from '../config.js'
 
 class PostMapper {
   submitPost = (submittedPost) => {
