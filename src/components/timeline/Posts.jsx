@@ -5,7 +5,7 @@ import "./Posts.css";
 class Posts extends Component {
   constructor(props) {
     super(props);
-    this.state = { posts: []};
+    this.state = { posts: [] };
   }
 
   render() {
@@ -14,7 +14,6 @@ class Posts extends Component {
       <>
         <h1 className="center">I am the Posts component</h1>
         {this.createPosts()}
-        
       </>
     );
   }
@@ -27,20 +26,33 @@ class Posts extends Component {
         <p id="content">{post.contents}</p>
         <p>posted: {post.timeCreated}</p>
         <p>{this.props.children}</p>
-      </div>
-    ))}
+        <input
+          className="btn btn-md"
+          type="button"
+          onClick={this.clickHandler}
+        />
+        <Comments hide="true"/>
+        </div>
+    ));
+  };
+
   componentDidMount = () => {
-    console.log("i mounted!")
+    console.log("i mounted!");
     this.getPosts(1);
     console.log(this.props.user);
   };
 
   getPosts = id => {
-    return get("http://localhost:8080/ca3/api/posts/timeline/"+1+"/"+5+"?cutoff="+ 10).then(
-      response => {
-        this.setState({ posts: response.body });
-      }
-    );
+    return get(
+      "http://localhost:8080/ca3/api/posts/timeline/" +
+        14 +
+        "/" +
+        5 +
+        "?cutoff=" +
+        10
+    ).then(response => {
+      this.setState({ posts: response.body });
+    });
   };
 }
 
