@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom";
 import './Header.css';
+import {AuthProvider} from '../authcontext/AuthProvider'
 
 class Header extends Component {
 
@@ -10,7 +11,7 @@ class Header extends Component {
 
   render() {
 
-    return (
+    return (   
       <header>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <a className="navbar-brand" href="#">Social</a>
