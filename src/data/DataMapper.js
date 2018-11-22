@@ -38,7 +38,7 @@ function get(url) {
 
 function getToken(){
     const authContext = getAuthenticationContext();
-    if(authContext === undefined)
+    if(authContext === null)
         return "";
 
     return authContext.token;
