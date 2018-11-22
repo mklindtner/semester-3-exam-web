@@ -5,6 +5,8 @@ import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 import FieldGroup from '../FieldGroup';
 import ImageMapper from '../../data/ImageMapper';
 
+import './ImageUploadForm.css';
+
 class ImageUploadForm extends Component {
 
     constructor(props) {
@@ -28,7 +30,7 @@ class ImageUploadForm extends Component {
                 data += '='.repeat(4 - (data.length % 4));
             }
 
-            this.imageMapper.create({title, data});
+            this.imageMapper.create({ title, data });
         }
     }
 
@@ -38,7 +40,8 @@ class ImageUploadForm extends Component {
         const { errors } = this.state;
 
         return (
-            <div className="col-12">
+            <div className="col-12 image-upload-form-container">
+                <h2>Upload image</h2>
                 <form onSubmit={this.onSubmit} className="image-upload-form">
                     <FormGroup controlId="registration-2">
                         <FieldGroup

@@ -9,7 +9,7 @@ class ImageGrid extends Component {
         const { title, images } = this.props;
 
         return (
-            <div className="row image-grid-container">
+            <div className="col-12 image-grid-container">
                 <p className="image-grid-title">{title}</p>
                 <div className="row text-center text-lg-left">
                     {images.map(image =>

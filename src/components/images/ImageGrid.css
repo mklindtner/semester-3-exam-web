@@ -5,3 +5,9 @@
 .image-grid-container > div > div {
     margin-bottom: 30px;
 }
+
+.image-grid-container {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+}
