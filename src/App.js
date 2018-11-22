@@ -6,7 +6,6 @@ import Timeline from "./components/timeline/Timeline";
 import ProfilePage from "./components/profile/ProfilePage";
 import { createBrowserHistory } from "history";
 import "./App.css";
-import Layout from "./components/hoc/Layout/Layout";
 
 class App extends Component {
   constructor(props) {
