@@ -10,6 +10,7 @@ import "./App.css";
 class App extends Component {
   constructor(props) {
     super(props);
+    console.log(props);
 
     const authenticationContext = localStorage.getItem("authenticationContext");
     if (authenticationContext !== null) {
@@ -29,45 +30,40 @@ class App extends Component {
     createBrowserHistory.apply().push("/authentication");
   };
 
-  onRegistration = user => { };
+  onRegistration = user => {};
 
   render() {
     return (
-      <Router>
-        <>
-          <Route
-            path="/profile/:user?"
-            component={router => (
-              <ProfilePage app={this.state} router={router} />
-            )}
-          />
-          <Route
-            path="/registration"
-            component={router => (
-              <RegistrationPage
-                app={this.state}
-                router={router}
-                onRegistration={this.onRegistration}
-              />
-            )}
-
-          />
-          <Route
-            path="/authentication"
-            component={router => (
-              <AuthenticationPage
-                app={this.state}
-                router={router}
-                onAuthentication={this.onAuthentication}
-              />
-            )}
-          />
-          <Route
-            path="/timeline"
-            component={router => <Timeline app={this.state} router={router} />} //skal den have onAuthentication? Hvor ligger user?
-          />
-        </>
-      </Router>
+      <>
+        <Route
+          path="/profile/:user?"
+          component={router => <ProfilePage app={this.state} router={router} />}
+        />
+        <Route
+          path="/registration"
+          component={router => (
+            <RegistrationPage
+              app={this.state}
+              router={router}
+              onRegistration={this.onRegistration}
+            />
+          )}
+        />
+        <Route
+          path="/authentication"
+          component={router => (
+            <AuthenticationPage
+              app={this.state}
+              router={router}
+              onAuthentication={this.onAuthentication}
+            />
+          )}
+        />
+        <Route
+          path="/timeline"
+          component={router => <Timeline app={this.state} router={router} />} //skal den have onAuthentication? Hvor ligger user?
+        />
+      </>
     );
   }
 }

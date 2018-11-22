@@ -69,20 +69,21 @@ class AuthenticationForm extends Component {
 
     onSubmit = () => {
         this.userMapper.authenticate(this.state.email, this.state.password).then(response => {
-            
+
             console.log(response);
 
-            if(response.status === 200){
+            if (response.status === 200) {
                 this.props.onAuthentication(response.body);
+                this.setState({ errors: [] });
                 return;
             }
 
-            if(response.status === 401){
-                this.setState({errors: ["Incorrect email or password."]});
+            if (response.status === 401) {
+                this.setState({ errors: ["Incorrect email or password."] });
                 return;
             }
 
-            this.setState({errors: ["An error occurred."]});
+            this.setState({ errors: ["An error occurred."] });
         })
     }
 }
