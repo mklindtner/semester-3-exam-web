@@ -5,7 +5,7 @@ import Timeline from "./components/timeline/Timeline";
 import ProfilePage from "./components/profile/ProfilePage";
 import { createBrowserHistory } from "history";
 import "./App.css";
-import {BrowserRouter as Router, Route, Link} from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import CreatePost from "./components/CreatePost/CreatePost";
 
 class App extends Component {
@@ -18,7 +18,7 @@ class App extends Component {
     } else this.state = {};
   }
 
-  
+
 
   onAuthentication = authenticationContext => {
     const text = JSON.stringify(authenticationContext);
@@ -32,13 +32,12 @@ class App extends Component {
     createBrowserHistory.apply().push("/authentication");
   };
 
-  onRegistration = user => {};
+  onRegistration = user => { };
 
   render() {
     return ( 
       <>
-      <CreatePost />
-    <Route
+      <Route
         path="/profile/:user?"
         component={router => (
           <ProfilePage app={this.state} router={router} />
@@ -68,6 +67,7 @@ class App extends Component {
         path="/timeline"
         component={router => <Timeline app={this.state} router={router} />}
       />
+      <Route path="/post" component={router => <CreatePost />} />
   </>
     );
   }
