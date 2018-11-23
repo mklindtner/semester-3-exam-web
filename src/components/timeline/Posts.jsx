@@ -6,7 +6,7 @@ class Posts extends React.Component {
     super(props);
     this.state = { posts: [] };
   }
-  render() {
+  render = () => {
     return (
       <>
         <div className="posts">{this.createPosts()}</div>
@@ -16,11 +16,13 @@ class Posts extends React.Component {
 
   createPosts = () => {
     return this.props.posts.map(post => (
-      <div className="jumbotron col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <p>author: {post.author.name}</p>
-        <p id="content">title: {post.title}</p>
-        <p id="content">content: {post.contents}</p>
-        <p>posted: {post.timeCreated}</p>
+      <div className="container jumbotron col-lg-12 col-md-12 col-sm-12 col-xs-12" key={post.id}>
+        <div className="row">
+          <p className="col-lg-3 col-md-4 col-sm-6 col-xs-12">author: {post.author.name}</p>
+          <p className="col-lg-3 col-md-4 col-sm-6 col-xs-12">posted: {post.timeCreated}</p>
+        </div>
+        <p className="">title: {post.title}</p>
+        <p className="">content: {post.contents}</p>
 
         <button
           className="btn btn-lg btn-success"
@@ -31,18 +33,18 @@ class Posts extends React.Component {
           aria-controls="collapseExample"
         >
           Comments
-          <span class="glyphicon glyphicon-pencil" />
+          <span className="glyphicon glyphicon-pencil" />
         </button>
 
-        <div class="collapse" id={"collapseExample" + post.id}>
-          <div class="container">
-            <div class="row">
-              <div class="col-md-6 col-md-offset-3">
+        <div className="collapse" id={"collapseExample" + post.id}>
+          <div className="container">
+            <div className="row">
+              <div className="col-md-6 col-md-offset-3">
                 <textarea
                   placeholder="Comment something!"
-                  class="pb-cmnt-textarea"
+                  className="pb-cmnt-textarea"
                 />
-                <form class="form-inline" />
+                <form className="form-inline" />
               </div>
             </div>
           </div>
