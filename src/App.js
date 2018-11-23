@@ -8,6 +8,7 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import CreatePost from "./components/CreatePost/CreatePost";
 import HomePage from './components/HomePage';
+import { ToastContainer } from "react-toastr";
 
 class App extends Component {
   constructor(props) {
@@ -17,6 +18,8 @@ class App extends Component {
     if (authenticationContext !== null) {
       this.state = { authenticationContext: JSON.parse(authenticationContext) };
     } else this.state = {};
+
+    this.toastr = null;
   }
 
   onAuthentication = authenticationContext => {
@@ -24,12 +27,14 @@ class App extends Component {
     localStorage.setItem("authenticationContext", text);
     this.setState({ authenticationContext });
     this.props.router.history.push("/profile");
+    this.toastr.success("You are now authenticated.");
   };
 
   onLogout = () => {
     localStorage.removeItem("authenticationContext");
     this.setState({ authenticationContext: null });
     this.props.router.history.push("/authentication");
+    //toastr.success('Have fun storming the castle!', 'Miracle Max Says')
   };
 
   onRegistration = user => {
@@ -39,6 +44,10 @@ class App extends Component {
   render() {
     return ( 
       <>
+      <ToastContainer
+        ref={ref => this.toastr = ref}
+        className="toast-top-right"
+      />
       <Route exact={true} path="/" component={HomePage} />
       <Route
         path="/profile/:user?"
