@@ -18,21 +18,22 @@ class App extends Component {
     } else this.state = {};
   }
 
-
-
   onAuthentication = authenticationContext => {
     const text = JSON.stringify(authenticationContext);
     localStorage.setItem("authenticationContext", text);
     this.setState({ authenticationContext });
+    this.props.router.history.push("/profile");
   };
 
   onLogout = () => {
     localStorage.removeItem("authenticationContext");
     this.setState({ authenticationContext: null });
-    createBrowserHistory.apply().push("/authentication");
+    this.props.router.history.push("/authentication");
   };
 
-  onRegistration = user => { };
+  onRegistration = user => {
+    this.props.router.history.push("/authentication");
+  };
 
   render() {
     return ( 
@@ -40,7 +41,7 @@ class App extends Component {
       <Route
         path="/profile/:user?"
         component={router => (
-          <ProfilePage app={this.state} router={router} />
+          <ProfilePage app={this.state} router={router} onLogout={this.onLogout}/>
         )}
       />
       <Route
@@ -65,7 +66,7 @@ class App extends Component {
       />
       <Route
         path="/timeline"
-        component={router => <Timeline app={this.state} router={router} />}
+        component={router => <Timeline app={this.state} router={router} onLogout={this.onLogout} />}
       />
       <Route path="/post" component={router => <CreatePost />} />
   </>

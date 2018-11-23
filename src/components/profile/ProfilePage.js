@@ -31,9 +31,10 @@ class ProfilePage extends Component {
     }
 
     render() {
+
         return (
             <>
-            <Header app={this.props.app} router={this.props.router} />
+            <Header app={this.props.app} router={this.props.router} onLogout={this.props.onLogout} />
             <main>
                 <div id="profile-page">
                     {this.state.user != null && <div id="profile-page" className="row">
