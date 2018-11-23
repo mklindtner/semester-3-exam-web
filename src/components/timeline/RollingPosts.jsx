@@ -12,9 +12,12 @@ class RollingPosts extends Component {
       cutoff: null
     };
 
+    this.isLoading = false;
+
     window.onscroll = event => {
       let element = event.currentTarget;
       if (
+        this.isLoading === false &&
         this.state.hasMore &&
         window.innerHeight + document.documentElement.scrollTop >
           document.documentElement.offsetHeight - 200
@@ -46,13 +49,17 @@ class RollingPosts extends Component {
   loadPosts = id => {
     const cutoff =
       this.state.cutoff == null ? "" : "?cutoff=" + this.state.cutoff;
+    this.isLoading = true;
     get(
       "http://localhost:8080/ca3/api/posts/timeline/" + id + "/5" + cutoff
     ).then(response => {
+      this.isLoading = false;
       if (response.body.length === 0) {
         this.setState({ hasMore: false });
         return;
       }
+
+      console.log(response.body.map(post => post.id));
 
       this.setState(prevState => ({
         posts: prevState.posts.concat(response.body),
