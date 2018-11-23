@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import { Button, FormGroup, FormLabel, FormControl } from 'react-bootstrap';
 
 import FieldGroup from '../FieldGroup';
 import ImageMapper from '../../data/ImageMapper';

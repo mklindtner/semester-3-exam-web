@@ -8,7 +8,7 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import CreatePost from "./components/CreatePost/CreatePost";
 import HomePage from './components/HomePage';
-import { ToastContainer } from "react-toastr";
+import { ToastContainer, ToastMessageAnimated } from "react-toastr";
 
 class App extends Component {
   constructor(props) {
@@ -34,11 +34,12 @@ class App extends Component {
     localStorage.removeItem("authenticationContext");
     this.setState({ authenticationContext: null });
     this.props.router.history.push("/authentication");
-    //toastr.success('Have fun storming the castle!', 'Miracle Max Says')
+    this.toastr.success("You are now logged out.");
   };
 
   onRegistration = user => {
     this.props.router.history.push("/authentication");
+    this.toastr.success("Your user account was created.")
   };
 
   render() {
@@ -47,6 +48,7 @@ class App extends Component {
       <ToastContainer
         ref={ref => this.toastr = ref}
         className="toast-top-right"
+        toastMessageFactory={React.createFactory(ToastMessageAnimated)}
       />
       <Route exact={true} path="/" component={HomePage} />
       <Route

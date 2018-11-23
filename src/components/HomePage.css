@@ -1,14 +1,13 @@
 #homepage-container {
-      background-image: url("http://www.psdgraphics.com/file/2017/abstract-geometric-background.png");
-        height: 100%; 
-            background-position: center;
-          background-repeat: no-repeat;
-          background-size: cover;
-          
+    background-image: url("http://www.psdgraphics.com/file/2017/abstract-geometric-background.png");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     position: relative;
 }
 
-body, html, #root{
+body, html, #root {
     height: 100%;
 }
 
