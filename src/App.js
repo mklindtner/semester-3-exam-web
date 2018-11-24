@@ -42,6 +42,10 @@ class App extends Component {
     this.toastr.success("Your user account was created.")
   };
 
+  toastrFactory = () => {
+    return this.toastr;
+  }
+
   render() {
     return ( 
       <>
@@ -54,7 +58,7 @@ class App extends Component {
       <Route
         path="/profile/:user?"
         component={router => (
-          <ProfilePage app={this.state} router={router} onLogout={this.onLogout} />
+          <ProfilePage app={this.state} router={router} toastrFactory={this.toastrFactory} onLogout={this.onLogout} />
         )}
       />
       <Route

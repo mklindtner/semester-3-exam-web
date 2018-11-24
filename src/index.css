@@ -38,3 +38,25 @@ header {
 .tab-content {
   padding-top: 20px;
 }
+
+.content-container {
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.content-header {
+  background-image: url("http://www.psdgraphics.com/file/2017/abstract-geometric-background.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: -20px -20px 20px -20px;
+  padding: 10px;
+  font-weight: bold;
+  color: white;
+}
+
+.control-label {
+  padding: 10px 0;
+  display: block;
+}
