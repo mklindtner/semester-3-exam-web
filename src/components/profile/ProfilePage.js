@@ -75,7 +75,7 @@ class ProfilePage extends Component {
                                         <p>Posts</p>
                                     </Tab>
                                     <Tab eventKey={2} title="Images">
-                                        <ImageUploadForm onSubmit={this.onImageSubmit} />
+                                        {getAuthenticationContext().user.id === this.userToRetrieve && <ImageUploadForm onSubmit={this.onImageSubmit} />}
                                         <PaginatedImageGrid pageSize={20} edit={true} fetch={this.fetchImages} />
                                     </Tab>
                                     <Tab eventKey={3} title="Friends">
