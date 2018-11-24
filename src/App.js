@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import CreatePost from "./components/CreatePost/CreatePost";
 import HomePage from './components/HomePage';
 import { ToastContainer, ToastMessageAnimated } from "react-toastr";
+import SettingsPage from "./components/SettingPage";
 
 class App extends Component {
   constructor(props) {
@@ -60,6 +61,13 @@ class App extends Component {
         component={router => (
           <ProfilePage app={this.state} router={router} toastrFactory={this.toastrFactory} onLogout={this.onLogout} />
         )}
+      />
+      <Route path="/settings" component={router =>
+        <SettingsPage
+          app={this.state}
+          router={router}
+          onLogout={this.onLogout}
+        />}
       />
       <Route
         path="/registration"

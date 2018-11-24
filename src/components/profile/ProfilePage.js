@@ -60,32 +60,30 @@ class ProfilePage extends Component {
         return (
             <>
             <Header app={this.props.app} router={this.props.router} onLogout={this.props.onLogout} />
-            <main>
-                <div id="profile-page">
-                    {this.state.user != null && <div id="profile-page" className="row">
-                        <div className="row">
-                            <div className="col-xl">
-                                <h2>{this.state.user.name}' Profile</h2>
-                            </div>
+            <main id="profile-page">
+                {this.state.user != null && <div id="profile-page" className="row">
+                    <div className="row">
+                        <div className="col-xl">
+                            <h2>{this.state.user.name}</h2>
                         </div>
-                        <div className="row">
-                            <div className="col-xl">
-                                <Tabs defaultActiveKey={2} id="uncontrolled-tab-example">
-                                    <Tab eventKey={1} title="Posts">
-                                        <p>Posts</p>
-                                    </Tab>
-                                    <Tab eventKey={2} title="Images">
-                                        {getAuthenticationContext().user.id === this.userToRetrieve && <ImageUploadForm onSubmit={this.onImageSubmit} />}
-                                        <PaginatedImageGrid pageSize={20} edit={true} fetch={this.fetchImages} />
-                                    </Tab>
-                                    <Tab eventKey={3} title="Friends">
-                                        <p>Friends</p>
-                                    </Tab>
-                                </Tabs>
-                            </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-xl">
+                            <Tabs defaultActiveKey={2} id="uncontrolled-tab-example">
+                                <Tab eventKey={1} title="Posts">
+                                    <p>Posts</p>
+                                </Tab>
+                                <Tab eventKey={2} title="Images">
+                                    {getAuthenticationContext().user.id === this.userToRetrieve && <ImageUploadForm onSubmit={this.onImageSubmit} />}
+                                    <PaginatedImageGrid pageSize={20} edit={true} fetch={this.fetchImages} />
+                                </Tab>
+                                <Tab eventKey={3} title="Friends">
+                                    <p>Friends</p>
+                                </Tab>
+                            </Tabs>
                         </div>
-                    </div>}
-                </div>
+                    </div>
+                </div>}
             </main>
             </>
         );

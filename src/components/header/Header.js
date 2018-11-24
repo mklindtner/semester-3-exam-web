@@ -17,7 +17,7 @@ class Header extends Component {
           <div className="pull-right">
             <ul className="nav navbar-nav navbar-right">
               {this.props.app.authenticationContext != null &&
-                <li className="dropdown">
+                <li className="dropdown" id="user-status">
                   <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                     {this.props.app.authenticationContext.user.name}<span className="caret"></span></a>
                   <ul className="dropdown-menu" role="menu">
