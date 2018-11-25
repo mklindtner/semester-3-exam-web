@@ -2,11 +2,21 @@ import React, { Component } from "react";
 import './HomePage.css'
 import Header from "./header/Header";
 import "./SettingsPage.css"
+import ProfileImageForm from './images/ProfileImageForm';
+import UserMapper from '../data/UserMapper';
+import getAuthenticatedUser from "../getAuthenticatedUser";
 
 class SettingsPage extends Component {
 
     constructor(props) {
         super(props);
+    
+        this.userMapper = new UserMapper();
+    }
+
+    onProfileUpdate = (image) => {
+        console.log(image);
+        this.userMapper.updateProfileImage(getAuthenticatedUser().id, image);
     }
 
     render = () => {
@@ -20,14 +30,16 @@ class SettingsPage extends Component {
                     </div>
                 </div>
                 <div className="row">
-                    <div class="col-xs-3 tab-container">
-                        <ul class="nav nav-tabs tabs-left sideways">
+                    <div className="col-xs-3 tab-container">
+                        <ul className="nav nav-tabs tabs-left sideways">
                             <li><a href="#profile-v" data-toggle="tab">Profile</a></li>
                         </ul>
                     </div>
-                    <div class="col-xs-9">
-                        <div class="tab-content">
-                            <div class="tab-pane" id="profile-v">Profile Tab.</div>
+                    <div className="col-xs-9">
+                        <div className="tab-content">
+                            <div className="tab-pane" id="profile-v">
+                                <ProfileImageForm onSubmit={this.onProfileUpdate}/>
+                            </div>
                         </div>
                     </div>
                 </div>

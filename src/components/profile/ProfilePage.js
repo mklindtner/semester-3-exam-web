@@ -13,8 +13,6 @@ class ProfilePage extends Component {
     constructor(props) {
         super(props);
 
-        console.log(props);
-
         this.userMapper = new UserMapper();
         this.imageMapper = new ImageMapper();
         this.state = { user: null, posts: [], images: [], friends: [] };
@@ -64,6 +62,7 @@ class ProfilePage extends Component {
                 {this.state.user != null && <div id="profile-page" className="row">
                     <div className="row">
                         <div className="col-xl">
+                            <img src={this.state.user.profilePicture.src} />
                             <h2>{this.state.user.name}</h2>
                         </div>
                     </div>

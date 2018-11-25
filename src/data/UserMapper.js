@@ -1,5 +1,5 @@
 import config from '../config.js';
-import {get, post} from './DataMapper';
+import { get, post, put } from './DataMapper';
 
 class UserMapper {
 
@@ -12,11 +12,15 @@ class UserMapper {
     }
 
     authenticate = (email, password) => {
-        return post(config.restUrl + "authentication/user", {email, password});
+        return post(config.restUrl + "authentication/user", { email, password });
     }
 
-    getUser(id){
+    getUser(id) {
         return get(config.restUrl + "users/" + id);
+    }
+
+    updateProfileImage = (user, image) => {
+        return put(config.restUrl + "users/" + user + "/profile-image", image);
     }
 }
 
