@@ -12,6 +12,7 @@ import CreatePost from "../CreatePost/CreatePost";
 
 import RollingPosts from "../timeline/RollingPosts";
 import Posts from "../timeline/Posts";
+import FriendGrid from "../FriendGrid";
 
 class ProfilePage extends Component {
 
@@ -27,9 +28,13 @@ class ProfilePage extends Component {
 
     componentDidMount() {
 
-        this.userMapper.getUser(this.userToRetrieve).then(response => {
-            if (response.status === 200) {
-                this.setState({ user: response.body });
+        const friends = this.userMapper.getFriends(this.userToRetrieve);
+        const userDetails = this.userMapper.getUser(this.userToRetrieve);
+
+        Promise.all([friends, userDetails]).then(results => {
+
+            if (results[0].status === 200) {
+                this.setState({ user: results[1].body, friends: results[0].body });
                 return;
             }
 
@@ -114,7 +119,7 @@ class ProfilePage extends Component {
                                     <PaginatedImageGrid pageSize={20} edit={true} fetch={this.fetchImages} />
                                 </Tab>
                                 <Tab eventKey={3} title="Friends">
-                                    <p>Friends</p>
+                                    <FriendGrid friends={this.state.friends} />
                                 </Tab>
                             </Tabs>
                         </div>

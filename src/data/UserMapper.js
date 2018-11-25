@@ -22,6 +22,10 @@ class UserMapper {
     updateProfileImage = (user, image) => {
         return put(config.restUrl + "users/" + user + "/profile-image", image);
     }
+
+    getFriends = (user) => {
+        return get(config.restUrl + `users/${user}/friends`);
+    }
 }
 
 export default UserMapper;
