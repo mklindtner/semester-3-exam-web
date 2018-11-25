@@ -1,26 +1,24 @@
 import React, { Component } from "react";
-import { get } from "../../data/DataMapper.js";
 import Posts from "./Posts";
 import "./Posts.css";
-import config from "../../config.js";
 
 class RollingPosts extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      posts: [],
-      hasMore: true,
-      cutoff: null
+      posts: []
     };
 
+    this.cutoff = null;
+    this.hasMap = true;
     this.isLoading = false;
 
     window.onscroll = event => {
       let element = event.currentTarget;
       if (
         this.isLoading === false &&
-        this.state.hasMore &&
+        this.hasMore &&
         window.innerHeight + document.documentElement.scrollTop >
         document.documentElement.offsetHeight - 200
       ) {
@@ -49,23 +47,19 @@ class RollingPosts extends Component {
   };
 
   loadPosts = () => {
-    const cutoff =
-      this.state.cutoff == null ? "" : "?cutoff=" + this.state.cutoff;
     this.isLoading = true;
-    get(config.restUrl + "posts/timeline/" + this.props.user + "/5" + cutoff
-    ).then(response => {
+    this.props.fetch(this.props.user, this.cutoff, posts => {
       this.isLoading = false;
-      if (response.body.length === 0) {
-        this.setState({ hasMore: false });
+      if (posts.length === 0) {
+        this.hasMore = false;
         return;
       }
 
-      console.log(response.body.map(post => post.id));
-
       this.setState(prevState => ({
-        posts: prevState.posts.concat(response.body),
-        cutoff: response.body[response.body.length - 1].id
+        posts: prevState.posts.concat(posts),
       }));
+
+      this.cutoff = posts[posts.length - 1].id;
     });
   };
 }

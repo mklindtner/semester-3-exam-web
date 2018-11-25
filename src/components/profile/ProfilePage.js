@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import UserMapper from "../../data/UserMapper";
 import ImageMapper from "../../data/ImageMapper";
+import PostMapper from "../../data/PostMapper";
 import { Tabs, Tab } from "react-bootstrap";
 import Header from "../header/Header";
 import getAuthenticationContext from "../../getAuthenticationContext";
@@ -10,6 +11,7 @@ import PaginatedImageGrid from "../images/PaginatedImageGrid";
 import CreatePost from "../CreatePost/CreatePost";
 
 import RollingPosts from "../timeline/RollingPosts";
+import Posts from "../timeline/Posts";
 
 class ProfilePage extends Component {
 
@@ -18,6 +20,7 @@ class ProfilePage extends Component {
 
         this.userMapper = new UserMapper();
         this.imageMapper = new ImageMapper();
+        this.postMapper = new PostMapper();
         this.state = { user: null, posts: [], images: [], friends: [] };
         this.userToRetrieve = props.router.match.params.user ? props.router.match.params.user : getAuthenticationContext().user.id;
     }
@@ -56,17 +59,32 @@ class ProfilePage extends Component {
         });
     }
 
-    onSubmit = (post, callback) => {
+    onPostSubmit = (post, callback) => {
         this.postMapper.submitPost(post).then(response => {
             if (response.status === 201) {
-                callback(response.body);
                 this.props.toastrFactory().success("The post was created.");
+                console.log(response.body);
+                this.setState(prevState => { posts: prevState.posts.splice(0, 0, response.body) }, () => {
+                    callback(response.body);
+                });
                 return;
             }
 
             this.props.toastrFactory().error("Could not create post.");
         });
     };
+
+    fetchPosts = (user, cutoff, callback) => {
+        this.postMapper.getRollingPosts(user, 25, cutoff).then(response => {
+            if (response.status === 200) {
+                callback(response.body);
+                return;
+            }
+
+            this.props.toastrFactory().error("Could not fetch profile posts.");
+            callback([]);
+        })
+    }
 
     render() {
 
@@ -85,8 +103,9 @@ class ProfilePage extends Component {
                         <div className="col-xl">
                             <Tabs defaultActiveKey={2} id="uncontrolled-tab-example">
                                 <Tab eventKey={1} title="Posts">
-                                    {getAuthenticationContext().user.id === this.userToRetrieve && <CreatePost onSubmit={this.onImageSubmit} />}
-                                    <RollingPosts user={this.userToRetrieve}/>
+                                    {getAuthenticationContext().user.id === this.userToRetrieve && <CreatePost onSubmit={this.onPostSubmit} />}
+                                    <Posts posts={this.state.posts} />
+                                    <RollingPosts user={this.userToRetrieve} fetch={this.fetchPosts} />
                                 </Tab>
                                 <Tab eventKey={2} title="Images">
                                     {getAuthenticationContext().user.id === this.userToRetrieve && <ImageUploadForm onSubmit={this.onImageSubmit} />}
