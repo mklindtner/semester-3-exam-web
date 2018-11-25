@@ -3,7 +3,8 @@ import {Alert, Button} from 'react-bootstrap';
 import PostMapper from '../../data/PostMapper'
 import Spinner from '../ui/Spinner'
 import getAuthenticatedUser from '../../getAuthenticatedUser.js';
-
+import {FormGroup} from 'react-bootstrap'
+import CreateGif from './gif/CreateGif'
 class CreatePost extends Component{
     constructor(props){
         super(props);
@@ -33,9 +34,10 @@ class CreatePost extends Component{
             author: getAuthenticatedUser().id
         }
 
+        this.setState({showLoading: true})
         this.postMapper.submitPost(post).then(response => {
         console.log(response)
-        this.setState({showLoading: true})
+        this.setState({showLoading: false})
         });
         
     
@@ -49,6 +51,7 @@ class CreatePost extends Component{
               {this.state.showLoading && <Spinner bsStyle="succes"/>}
               {!this.state.showLoading &&
               <form onSubmit={this.submitPostHandler}>
+              <FormGroup bsSize="large">
                    <label>
                      Title:
                      <textarea value={this.state.value} onChange={this.handleChange} name="title"/>
@@ -58,9 +61,11 @@ class CreatePost extends Component{
                      <textarea value={this.state.value} onChange={this.handleChange} name="content" />
                    </label>
                    <input type="submit" value="Submit" />
-                 </form>}
+                   </FormGroup>
+                 </form>
+              }
+              <CreateGif />
                  </div> 
-
         )
     }
 }

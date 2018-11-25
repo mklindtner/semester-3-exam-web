@@ -5,6 +5,7 @@ class PostMapper {
   submitPost = (submittedPost) => {
     return post(config.restUrl + 'posts', submittedPost)
   }
+  
 }
 
 export default PostMapper
