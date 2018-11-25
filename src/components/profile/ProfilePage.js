@@ -21,8 +21,8 @@ class ProfilePage extends Component {
         this.userMapper = new UserMapper();
         this.imageMapper = new ImageMapper();
         this.postMapper = new PostMapper();
-        this.state = { user: null, posts: [], images: [], friends: [] };
         this.userToRetrieve = props.router.match.params.user ? props.router.match.params.user : getAuthenticationContext().user.id;
+        this.state = { user: null, posts: [], images: [], friends: [] };
     }
 
     componentDidMount() {
@@ -63,10 +63,10 @@ class ProfilePage extends Component {
         this.postMapper.submitPost(post).then(response => {
             if (response.status === 201) {
                 this.props.toastrFactory().success("The post was created.");
-                console.log(response.body);
-                this.setState(prevState => { posts: prevState.posts.splice(0, 0, response.body) }, () => {
-                    callback(response.body);
-                });
+                this.setState(prevState => {
+                    prevState.posts.unshift(response.body);
+                    return { posts: prevState.posts };
+                }, () => callback(response.body));
                 return;
             }
 
@@ -87,6 +87,8 @@ class ProfilePage extends Component {
     }
 
     render() {
+
+        console.log(this.state.posts);
 
         return (
             <>
