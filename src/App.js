@@ -50,52 +50,54 @@ class App extends Component {
   render() {
     return ( 
       <>
-      <ToastContainer
-        ref={ref => this.toastr = ref}
-        className="toast-top-right"
-        toastMessageFactory={React.createFactory(ToastMessageAnimated)}
-      />
-      <Route exact={true} path="/" component={HomePage} />
-      <Route
-        path="/profile/:user?"
-        component={router => (
-          <ProfilePage app={this.state} router={router} toastrFactory={this.toastrFactory} onLogout={this.onLogout} />
-        )}
-      />
-      <Route path="/settings" component={router =>
-        <SettingsPage
-          app={this.state}
-          router={router}
-          onLogout={this.onLogout}
-        />}
-      />
-      <Route
-        path="/registration"
-        component={router =>
-          <HomePage component={() =>
-            <RegistrationPage
-              app={this.state}
-              router={router}
-              onRegistration={this.onRegistration}
-            />
+      <div id="top-container">
+        <ToastContainer
+          ref={ref => this.toastr = ref}
+          className="toast-top-right"
+          toastMessageFactory={React.createFactory(ToastMessageAnimated)}
+        />
+        <Route exact={true} path="/" component={HomePage} />
+        <Route
+          path="/profile/:user?"
+          component={router => (
+            <ProfilePage app={this.state} router={router} toastrFactory={this.toastrFactory} onLogout={this.onLogout} />
+          )}
+        />
+        <Route path="/settings" component={router =>
+          <SettingsPage
+            app={this.state}
+            router={router}
+            onLogout={this.onLogout}
+          />}
+        />
+        <Route
+          path="/registration"
+          component={router =>
+            <HomePage component={() =>
+              <RegistrationPage
+                app={this.state}
+                router={router}
+                onRegistration={this.onRegistration}
+              />
+            } />
           } />
-        } />
-      <Route
-        path="/authentication"
-        component={router =>
-          <HomePage component={() =>
-            <AuthenticationPage
-              app={this.state}
-              router={router}
-              onAuthentication={this.onAuthentication}
-            />
+        <Route
+          path="/authentication"
+          component={router =>
+            <HomePage component={() =>
+              <AuthenticationPage
+                app={this.state}
+                router={router}
+                onAuthentication={this.onAuthentication}
+              />
+            } />
           } />
-        } />
-      <Route
-        path="/timeline"
-        component={router => <Timeline app={this.state} router={router} onLogout={this.onLogout} />}
-      />
-      <Route path="/post" component={router => <CreatePost />} />
+        <Route
+          path="/timeline"
+          component={router => <Timeline app={this.state} router={router} onLogout={this.onLogout} />}
+        />
+        <Route path="/post" component={router => <CreatePost />} />
+      </div>
   </>
         );
   }

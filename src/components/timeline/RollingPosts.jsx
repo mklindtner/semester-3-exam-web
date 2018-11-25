@@ -11,25 +11,15 @@ class RollingPosts extends Component {
     };
 
     this.cutoff = null;
-    this.hasMap = true;
+    this.hasMore = true;
     this.isLoading = false;
 
-    window.onscroll = event => {
-      let element = event.currentTarget;
-      if (
-        this.isLoading === false &&
-        this.hasMore &&
-        window.innerHeight + document.documentElement.scrollTop >
-        document.documentElement.offsetHeight - 200
-      ) {
-        this.loadPosts(this.props.user);
-      }
-    };
+    window.onscroll = event => this.onScroll(event);
   }
 
   render() {
     return (
-      <div onScroll={this.onScroll}>
+      <div>
         <Posts posts={this.state.posts} />
       </div>
     );
@@ -40,9 +30,13 @@ class RollingPosts extends Component {
   };
 
   onScroll = event => {
-    let element = event.target;
-    if (element.scrollHeight - element.scrollTop === element.clientHeight) {
-      this.loadPosts();
+
+    if (
+      this.isLoading === false &&
+      this.hasMore &&
+      window.innerHeight + document.documentElement.scrollTop > document.getElementById("top-container").clientHeight - document.getElementById("top-container").clientHeight / 10
+    ) {
+      this.loadPosts(this.props.user);
     }
   };
 
