@@ -65,7 +65,7 @@ class ProfilePage extends Component {
     }
 
     onPostSubmit = (post, callback) => {
-        this.postMapper.submitPost(post).then(response => {
+        this.postMapper.submitTextPost(post).then(response => {
             if (response.status === 201) {
                 this.props.toastrFactory().success("The post was created.");
                 this.setState(prevState => {
@@ -92,8 +92,6 @@ class ProfilePage extends Component {
     }
 
     render() {
-
-        console.log(this.state.posts);
 
         return (
             <>
