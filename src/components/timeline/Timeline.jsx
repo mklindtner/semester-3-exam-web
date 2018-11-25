@@ -15,7 +15,7 @@ class Timeline extends Component {
         <div className="page-header container">
         <h1>Timeline</h1>
         </div>
-        <RollingPosts app={this.props.app} />;
+        <RollingPosts app={this.props.app} user={this.props.app.authenticationContext.user.id} />;
       </>
     );
   }

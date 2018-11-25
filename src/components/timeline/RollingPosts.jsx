@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import { get } from "../../data/DataMapper.js";
 import Posts from "./Posts";
 import "./Posts.css";
+import config from "../../config.js";
 
 class RollingPosts extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -20,9 +22,9 @@ class RollingPosts extends Component {
         this.isLoading === false &&
         this.state.hasMore &&
         window.innerHeight + document.documentElement.scrollTop >
-          document.documentElement.offsetHeight - 200
+        document.documentElement.offsetHeight - 200
       ) {
-        this.loadPosts(this.props.app.authenticationContext.user.id);
+        this.loadPosts(this.props.user);
       }
     };
   }
@@ -50,8 +52,7 @@ class RollingPosts extends Component {
     const cutoff =
       this.state.cutoff == null ? "" : "?cutoff=" + this.state.cutoff;
     this.isLoading = true;
-    get(
-      "http://localhost:8080/ca3/api/posts/timeline/" + id + "/5" + cutoff
+    get(config.restUrl + "posts/timeline/" + id + "/5" + cutoff
     ).then(response => {
       this.isLoading = false;
       if (response.body.length === 0) {
