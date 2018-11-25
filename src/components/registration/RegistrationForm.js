@@ -170,6 +170,11 @@ class RegistrationForm extends Component {
             dateOfBirth: new Date(this.state.dateOfBirth).toISOString().substring(0, 10),
         }
 
+        if(user.password !== user.passwordRepeat){
+            this.setState({errors: ["The two passwords must match."]});
+            return;
+        }
+
         this.userMapper.create(user).then(response => {
 
             // Success
