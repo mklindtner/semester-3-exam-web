@@ -103,7 +103,7 @@ class ProfilePage extends Component {
                     </div>
                     <div className="row">
                         <div className="col-xl">
-                            <Tabs defaultActiveKey={2} id="uncontrolled-tab-example">
+                            <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
                                 <Tab eventKey={1} title="Posts">
                                     {getAuthenticationContext().user.id === this.userToRetrieve && <CreatePost onSubmit={this.onPostSubmit} />}
                                     <Posts posts={this.state.posts} />
