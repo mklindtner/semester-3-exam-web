@@ -7,6 +7,9 @@ import Header from "../header/Header";
 import getAuthenticationContext from "../../getAuthenticationContext";
 import ImageUploadForm from '../images/ImageUploadForm';
 import PaginatedImageGrid from "../images/PaginatedImageGrid";
+import CreatePost from "../CreatePost/CreatePost";
+
+import RollingPosts from "../timeline/RollingPosts";
 
 class ProfilePage extends Component {
 
@@ -53,6 +56,18 @@ class ProfilePage extends Component {
         });
     }
 
+    onSubmit = (post, callback) => {
+        this.postMapper.submitPost(post).then(response => {
+            if (response.status === 201) {
+                callback(response.body);
+                this.props.toastrFactory().success("The post was created.");
+                return;
+            }
+
+            this.props.toastrFactory().error("Could not create post.");
+        });
+    };
+
     render() {
 
         return (
@@ -70,7 +85,8 @@ class ProfilePage extends Component {
                         <div className="col-xl">
                             <Tabs defaultActiveKey={2} id="uncontrolled-tab-example">
                                 <Tab eventKey={1} title="Posts">
-                                    <p>Posts</p>
+                                    {getAuthenticationContext().user.id === this.userToRetrieve && <CreatePost onSubmit={this.onImageSubmit} />}
+                                    <RollingPosts user={this.userToRetrieve}/>
                                 </Tab>
                                 <Tab eventKey={2} title="Images">
                                     {getAuthenticationContext().user.id === this.userToRetrieve && <ImageUploadForm onSubmit={this.onImageSubmit} />}

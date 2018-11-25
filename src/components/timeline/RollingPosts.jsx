@@ -38,7 +38,7 @@ class RollingPosts extends Component {
   }
 
   componentDidMount = () => {
-    this.loadPosts(this.props.app.authenticationContext.user.id);
+    this.loadPosts();
   };
 
   onScroll = event => {
@@ -48,11 +48,11 @@ class RollingPosts extends Component {
     }
   };
 
-  loadPosts = id => {
+  loadPosts = () => {
     const cutoff =
       this.state.cutoff == null ? "" : "?cutoff=" + this.state.cutoff;
     this.isLoading = true;
-    get(config.restUrl + "posts/timeline/" + id + "/5" + cutoff
+    get(config.restUrl + "posts/timeline/" + this.props.user + "/5" + cutoff
     ).then(response => {
       this.isLoading = false;
       if (response.body.length === 0) {
