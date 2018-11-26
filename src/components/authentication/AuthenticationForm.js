@@ -44,7 +44,7 @@ class AuthenticationForm extends Component {
                         placeholder="Enter your password."
                         onChange={this.onPasswordChange}
                     />
-                    <Button onClick={this.onSubmit}>Authenticate</Button>
+                    <Button onClick={this.onSubmit}>Log in</Button>
                 </FormGroup>
                 {errors.length > 0 && <div className="form-errors">
                     {errors.map((error, index) =>
