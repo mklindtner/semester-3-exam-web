@@ -56,7 +56,7 @@ class ProfilePage extends Component {
     onImageSubmit = (image) => {
         this.imageMapper.create(image).then(response => {
             if (response.status === 201) {
-                this.props.toastr.error("The image was successfully uplaoded.");
+                this.props.toastrFactory().success("The image was successfully uplaoded.");
                 return;
             }
 

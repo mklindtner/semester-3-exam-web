@@ -15,8 +15,14 @@ class SettingsPage extends Component {
     }
 
     onProfileUpdate = (image) => {
-        console.log(image);
-        this.userMapper.updateProfileImage(getAuthenticatedUser().id, image);
+        this.userMapper.updateProfileImage(getAuthenticatedUser().id, image).then(response => {
+            if(response.status === 200){
+                this.props.toastrFactory().success("Updated profile picture.");
+                return;
+            }
+
+            this.props.toastrFactory().error("Could not update profile picture.");
+        });
     }
 
     render = () => {
