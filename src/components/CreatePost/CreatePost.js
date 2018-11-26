@@ -60,6 +60,7 @@ class CreatePost extends Component {
                         </FormGroup>
                         <input type="submit" value="Submit" />
                     </FormGroup>
+                    <CreateGif />
                 </form>
             </Spinner>
         </div>
