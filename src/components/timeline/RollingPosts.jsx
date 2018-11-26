@@ -58,9 +58,6 @@ class RollingPosts extends Component {
         this.setState({ hasMore: false });
         return;
       }
-
-      console.log(response.body.map(post => post.id));
-
       this.setState(prevState => ({
         posts: prevState.posts.concat(response.body),
         cutoff: response.body[response.body.length - 1].id

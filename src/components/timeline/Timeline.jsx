@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import RollingPosts from "./RollingPosts";
+import Header from "../header/Header";
 
 class Timeline extends Component {
   constructor(props) {
@@ -12,10 +13,13 @@ class Timeline extends Component {
   render() {
     return (
       <>
-        <div className="page-header container">
-        <h1>Timeline</h1>
-        </div>
-        <RollingPosts app={this.props.app} />;
+        <Header app={this.props.app} router={this.props.router} />
+        <main>
+          <div className="page-header container">
+            <h1>Timeline</h1>
+          </div>
+          <RollingPosts app={this.props.app} />;
+        </main>
       </>
     );
   }
