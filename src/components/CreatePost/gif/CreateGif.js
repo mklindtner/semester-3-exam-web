@@ -25,8 +25,9 @@ class CreateGif extends Component {
         console.log(response.data.data.images.original.url);
         this.setState({
           gifUrl: response.data.data.images.original.url,
-          showpic: true
+          showpic: true,
         });
+        this.props.uris.push(this.state.gifUrl);
         console.log(this.state.mood);
       });
   };

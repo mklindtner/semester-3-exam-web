@@ -13,7 +13,9 @@ class CreatePost extends Component {
         this.state = {
             title: '',
             content: '',
-            showLoading: false
+            showLoading: false, 
+            withContent: false,
+            dataUris: []
         }
     }
 
@@ -21,18 +23,24 @@ class CreatePost extends Component {
         this.setState({ [evt.target.name]: evt.target.value })
     }
 
+    gifAddedHandler = (e) =>{
+        e.preventDefault();
+        this.setState({withContent: true})
+    }
+
     submitPostHandler = (e) => {
         e.preventDefault();
         const post = {
             title: this.state.title,
             contents: this.state.content,
-            author: getAuthenticatedUser().id
+            author: getAuthenticatedUser().id,
         }
 
         this.setState({ showLoading: true })
         this.props.onSubmit(post, (post) => {
             this.setState({ showLoading: false });
         });
+
     }
 
 
@@ -60,7 +68,7 @@ class CreatePost extends Component {
                         </FormGroup>
                         <input type="submit" value="Submit" />
                     </FormGroup>
-                    <CreateGif />
+                    <CreateGif uris={this.state.dataUris} />
                 </form>
             </Spinner>
         </div>

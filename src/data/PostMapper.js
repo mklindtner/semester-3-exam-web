@@ -6,6 +6,10 @@ class PostMapper {
     return post(config.restUrl + 'posts/text', submittedPost)
   }
 
+  submitTextPost = (submittedPost) => {
+    return post(config.restUrl + 'posts/image', submittedPost)
+  }
+
   getRollingPosts(user, pageSize, cutoff) {
     return get(config.restUrl + `posts/user/${user}/${pageSize}/${cutoff === null ? "" : "?cutoff=" + cutoff}`);
   }
