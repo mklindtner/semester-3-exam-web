@@ -1,0 +1,22 @@
+#homepage-container {
+    background-image: url("http://www.psdgraphics.com/file/2017/abstract-geometric-background.png");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+body, html, #root {
+    height: 100%;
+}
+
+#right-component {
+    max-width: 512px;
+    background: #fff;
+    padding: 10px 30px;
+    border: 1px solid #ccc;
+    position: absolute;
+    top: 50px;
+    right: 50px;
+}

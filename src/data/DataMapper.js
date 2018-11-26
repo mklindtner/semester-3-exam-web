@@ -36,6 +36,25 @@ function get(url) {
     }))
 }
 
+function put(url, entity) {
+    let status = -1;
+    return fetch(url, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": "Bearer " + getToken(),
+        },
+        body: JSON.stringify(entity)
+    }).then((response, error) => {
+        status = response.status;
+        return response.json();
+    }).then(body => Promise.resolve({
+        status,
+        body,
+    }));
+}
+
 function getToken(){
     const authContext = getAuthenticationContext();
     if(authContext === null)
@@ -46,5 +65,6 @@ function getToken(){
 
 export {
     get,
-    post
+    post,
+    put
 }

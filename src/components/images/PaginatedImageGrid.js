@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import ImageMapper from '../../data/ImageMapper';
 import ImageGrid from './ImageGrid';
 import Spinner from '../ui/Spinner';
+import getAuthenticationContext from "../../getAuthenticationContext";
+import ImageUploadForm from '../images/ImageUploadForm';
 
 class PaginatedImageGrid extends Component {
 
@@ -11,12 +13,12 @@ class PaginatedImageGrid extends Component {
         super(props);
 
         this.state = { images: [], count: -1, currentPage: 1, loading: true };
-        this.imageMapper = new ImageMapper();
     }
 
     componentDidMount = () => {
         this.page(1);
     }
+
 
     page(pageNumber) {
 
@@ -25,14 +27,12 @@ class PaginatedImageGrid extends Component {
         if (this.state.count != -1 && pageNumber > Math.ceil(this.state.count / this.props.pageSize))
             return;
 
-        if(!this.state.loading)
-            this.setState({loading: true});
-        this.imageMapper.getByUserPaginated(this.props.user, this.props.pageSize, pageNumber)
-            .then(response => {
-                if (response.status === 200) {
-                    this.setState({ images: response.body.results, count: response.body.count, currentPage: pageNumber, loading: false });
-                }
-            });
+        if (!this.state.loading)
+            this.setState({ loading: true });
+
+        this.props.fetch(this.props.pageSize, pageNumber, (results, total) => {
+            this.setState({ images: results, count: total, currentPage: pageNumber, loading: false });
+        });
     }
 
     render() {

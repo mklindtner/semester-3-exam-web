@@ -1,25 +1,16 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
-
 import FieldGroup from '../FieldGroup';
-import ImageMapper from '../../data/ImageMapper';
 
 import './ImageUploadForm.css';
 
 class ImageUploadForm extends Component {
 
-    constructor(props) {
-        super(props);
-
-        this.state = { errors: [] };
-        this.imageMapper = new ImageMapper();
-    }
-
     onSubmit = (event) => {
         event.preventDefault();
 
-        const title = event.target.title.value;
+        const description = event.target.description.value;
         const file = event.target.file.files[0];
 
         const reader = new FileReader();
@@ -30,27 +21,26 @@ class ImageUploadForm extends Component {
                 data += '='.repeat(4 - (data.length % 4));
             }
 
-            this.imageMapper.create({ title, data });
+            this.props.onSubmit({description, data});
         }
     }
 
     render() {
 
-        const { title, images } = this.props;
-        const { errors } = this.state;
+        const { description, images } = this.props;
 
         return (
-            <div className="col-12 image-upload-form-container">
-                <h2>Upload image</h2>
+            <div className="col-12 image-upload-form-container content-container">
+                <p className="content-header">Upload image</p>
                 <form onSubmit={this.onSubmit} className="image-upload-form">
                     <FormGroup controlId="registration-2">
                         <FieldGroup
-                            id="formControlsTitle"
+                            id="formControlsDescription"
                             type="text"
-                            name="title"
-                            label="Title"
+                            name="description"
+                            label="Description"
                             minLength={0}
-                            placeholder="Title your image."
+                            placeholder="What is happening in this image?"
                         />
                         <FieldGroup
                             id="formControlsFile"
@@ -62,13 +52,6 @@ class ImageUploadForm extends Component {
                         />
                         <Button type="submit">Upload image</Button>
                     </FormGroup>
-                    {errors.length > 0 && <div className="form-errors">
-                        {errors.map((error, index) =>
-                            <div key={index} className="alert alert-danger">
-                                <p>{error}</p>
-                            </div>
-                        )}
-                    </div>}
                 </form>
             </div>
         );

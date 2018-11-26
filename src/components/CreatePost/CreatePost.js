@@ -1,27 +1,24 @@
-import React, {Component} from 'react';
-import {Alert, Button} from 'react-bootstrap';
+import React, { Component } from 'react';
 import PostMapper from '../../data/PostMapper'
 import Spinner from '../ui/Spinner'
 import getAuthenticatedUser from '../../getAuthenticatedUser.js';
+import CreateGif from './gif/CreateGif'
+import FieldGroup from '../FieldGroup';
 
-class CreatePost extends Component{
-    constructor(props){
+import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+
+class CreatePost extends Component {
+    constructor(props) {
         super(props);
-
-        this.postMapper = new PostMapper();
-    
-    this.state = {
-        title: '',
-        content: '',
-        userId: '',
-        showLoading: false 
+        this.state = {
+            title: '',
+            content: '',
+            showLoading: false
+        }
     }
 
-    this.handleChange = this.handleChange.bind(this);
-}
-
-    handleChange (evt) {
-        this.setState({[evt.target.name]: evt.target.value})
+    handleChange = (evt) => {
+        this.setState({ [evt.target.name]: evt.target.value })
     }
 
 
@@ -33,34 +30,41 @@ class CreatePost extends Component{
             author: getAuthenticatedUser().id
         }
 
-        this.postMapper.submitPost(post).then(response => {
-        console.log(response)
-        this.setState({showLoading: true})
+        this.setState({ showLoading: true })
+        this.props.onSubmit(post, (post) => {
+            this.setState({ showLoading: false });
         });
-        
-    
     }
 
 
-    render(){
-     
-        
-        return(<div className="SubmitForm">
-              {this.state.showLoading && <Spinner bsStyle="succes"/>}
-              {!this.state.showLoading &&
-              <form onSubmit={this.submitPostHandler}>
-                   <label>
-                     Title:
-                     <textarea value={this.state.value} onChange={this.handleChange} name="title"/>
-                   </label>
-                   <label>
-                     Content:
-                     <textarea value={this.state.value} onChange={this.handleChange} name="content" />
-                   </label>
-                   <input type="submit" value="Submit" />
-                 </form>}
-                 </div> 
+    render() {
 
+
+        return (<div className="SubmitForm">
+            {this.state.showLoading && <Spinner bsStyle="succes" />}
+            {!this.state.showLoading &&
+                <form onSubmit={this.submitPostHandler}>
+                    <FormGroup bsSize="large">
+                        <FieldGroup
+                            id="formControlsTitle"
+                            type="text"
+                            label="Title"
+                            name="title"
+                            minLength={0}
+                            maxLength={255}
+                            placeholder="Please enter the title."
+                            value={this.state.title}
+                            onChange={this.handleChange}
+                        />
+                        <FormGroup controlId="formControlsTextarea">
+                            <ControlLabel>Content</ControlLabel>
+                            <FormControl style={{minHeight: '200px'}} componentClass="textarea" placeholder="Please enter the post content." name="content" value={this.state.content} onChange={this.handleChange} />
+                        </FormGroup>
+                        <input type="submit" value="Submit" />
+                    </FormGroup>
+                </form>
+            }
+        </div>
         )
     }
 }
