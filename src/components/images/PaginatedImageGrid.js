@@ -38,8 +38,9 @@ class PaginatedImageGrid extends Component {
     render() {
         return (
             <div className="paginated-image-grid">
-                {this.state.loading ? <Spinner /> : <ImageGrid images={this.state.images} />}
-                {this.renderPaginationButtons()}
+                <Spinner loading={this.state.loading}>
+                    <ImageGrid images={this.state.images} />
+                </Spinner>
             </div>
         );
     }

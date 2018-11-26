@@ -10,7 +10,8 @@ class Timeline extends Component {
   }
 
   fetchTimeline = (user, cutoff, callback) => {
-    get(config.restUrl + "posts/timeline/" + this.props.user + "/5" + cutoff
+    get(
+      config.restUrl + "posts/timeline/" + this.props.user + "/5" + cutoff
     ).then(response => {
       if (response.status === 200) {
         callback(response.body);
@@ -19,15 +20,19 @@ class Timeline extends Component {
 
       callback([]);
     });
-  }
+  };
 
   render() {
     return (
       <>
-      <div className="page-header container">
-        <h1>Timeline</h1>
-      </div>
-      <RollingPosts app={this.props.app} user={this.props.app.authenticationContext.user.id} fetch={this.fetchTimeline} />
+        <div className="page-header container">
+          <h1>Timeline</h1>
+        </div>
+        <RollingPosts
+          app={this.props.app}
+          user={this.props.app.authenticationContext.user.id}
+          fetch={this.fetchTimeline}
+        />
       </>
     );
   }

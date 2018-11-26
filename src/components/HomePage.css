@@ -7,7 +7,7 @@
     position: relative;
 }
 
-body, html, #root {
+body, html, #root, #top-container {
     height: 100%;
 }
 

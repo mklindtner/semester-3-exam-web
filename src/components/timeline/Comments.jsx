@@ -17,6 +17,9 @@ class Comments extends React.Component {
               <form class="form-inline" />
             </div>
           </div>
+          <div class="row">
+          <input className="btn"></input>
+          </div>
         </div>
       </>
     );

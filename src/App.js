@@ -68,6 +68,7 @@ class App extends Component {
             app={this.state}
             router={router}
             onLogout={this.onLogout}
+            toastrFactory={this.toastrFactory}
           />}
         />
         <Route
