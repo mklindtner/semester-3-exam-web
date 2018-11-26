@@ -3,7 +3,6 @@ import Posts from "./Posts";
 import "./Posts.css";
 
 class RollingPosts extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -30,11 +29,12 @@ class RollingPosts extends Component {
   };
 
   onScroll = event => {
-
     if (
       this.isLoading === false &&
       this.hasMore &&
-      window.innerHeight + document.documentElement.scrollTop > document.getElementById("top-container").clientHeight - document.getElementById("top-container").clientHeight / 10
+      window.innerHeight + document.documentElement.scrollTop >
+        document.getElementById("top-container").clientHeight -
+          document.getElementById("top-container").clientHeight / 10
     ) {
       this.loadPosts(this.props.user);
     }
@@ -48,9 +48,8 @@ class RollingPosts extends Component {
         this.hasMore = false;
         return;
       }
-
       this.setState(prevState => ({
-        posts: prevState.posts.concat(posts),
+        posts: prevState.posts.concat(posts)
       }));
 
       this.cutoff = posts[posts.length - 1].id;

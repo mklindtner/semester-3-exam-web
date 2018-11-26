@@ -1,5 +1,5 @@
-import React from 'react'
-import './Spinner.css'
+import React from "react";
+import "./Spinner.css";
 
 function getClasses(props) {
     const classes = [];
@@ -16,7 +16,5 @@ const spinner = (props) => (
             <div className="loader">Loading...</div> : props.children}
     </div>
 );
-
-
 
 export default spinner;
