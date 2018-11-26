@@ -3,6 +3,7 @@ import './Spinner.css'
 
 const spinner = () =>(
     <div className="loader">Loading...</div>
+    
 );
 
 

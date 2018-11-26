@@ -41,7 +41,7 @@ class CreatePost extends Component {
 
 
         return (<div className="SubmitForm">
-            {this.state.showLoading && <Spinner bsStyle="succes" />}
+            {this.state.showLoading && <Spinner />}
             {!this.state.showLoading &&
                 <form onSubmit={this.submitPostHandler}>
                     <FormGroup bsSize="large">
@@ -62,6 +62,7 @@ class CreatePost extends Component {
                         </FormGroup>
                         <input type="submit" value="Submit" />
                     </FormGroup>
+                    <CreateGif />
                 </form>
             }
         </div>
