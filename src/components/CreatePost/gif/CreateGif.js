@@ -7,7 +7,9 @@ class CreateGif extends Component {
     api: "http://api.giphy.com/v1/gifs/random",
     mood: "Happy",
     apikey: "BwtD6SkWywtWl6Y9yOdnlXKbkmezp1M9",
-    gifUrl: "",
+    imageData: null,
+    rawPictureData: null,
+    isPicture: false,
     showpic: false,
     hover: false
   };
@@ -24,16 +26,15 @@ class CreateGif extends Component {
       .then(response => {
         console.log(response.data.data.images.original.url);
         this.setState({
-          gifUrl: response.data.data.images.original.url,
+          imageData: response.data.data.images.original.url,
           showpic: true,
         });
-        this.props.uris.push(this.state.gifUrl);
         console.log(this.state.mood);
       });
   };
 
   deleteHandler = () => {
-    this.setState({ showpic: false, gifUrl: "" });
+    this.setState({ showpic: false, imageData: "" });
   };
 
   toggleHoverOn = () => {
@@ -44,6 +45,24 @@ class CreateGif extends Component {
     this.setState({ hover: false });
   };
 
+  handleSelectedFile = (event) =>{
+    const reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
+    this.setState({
+        rawPictureData: URL.createObjectURL(event.target.files[0])
+    })
+    reader.onload = () => {
+        let data = reader.result.replace(/^data:(.*;base64,)?/, '');
+        if ((data.length % 4) > 0) {
+            data += '='.repeat(4 - (data.length % 4));
+        }
+    this.setState({
+        imageData: data,
+        isPicture: true
+    })
+    console.log(this.state.imageData)
+  }
+  };
   render() {
     var imageStyle;
     if (this.state.hover) {
@@ -65,6 +84,10 @@ class CreateGif extends Component {
 
     return (
       <div>
+        <input type="file" onChange={this.handleSelectedFile} name="file" id="" />
+        {this.state.isPicture &&
+        <img src={this.state.rawPictureData}></img>
+        }
         <div className="Create-Image">Mood of the day!</div>
         <form id="Query-form">
           <select
@@ -84,7 +107,7 @@ class CreateGif extends Component {
           </select>
         </form>
 
-        <button className="Mood-button" onClick={this.runTimer}>
+        <button className="Mood-button" onClick={this.runTimer} >
           Get today's GIF
         </button>
         <p>Mood is: {this.state.mood}</p>
@@ -92,7 +115,7 @@ class CreateGif extends Component {
           <div>
             <img
               style={imageStyle}
-              src={this.state.gifUrl}
+              src={this.state.imageData}
               alt="mood"
               onClick={this.deleteHandler}
               onMouseEnter={this.toggleHoverOn}
