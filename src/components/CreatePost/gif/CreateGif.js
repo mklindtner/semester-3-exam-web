@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./CreateGif.css";
 
+
 class CreateGif extends Component {
   state = {
     api: "http://api.giphy.com/v1/gifs/random",
@@ -11,7 +12,8 @@ class CreateGif extends Component {
     rawPictureData: null,
     isPicture: false,
     showpic: false,
-    hover: false
+    hover: false,
+    submitted: false
   };
 
   runTimer = word => {
@@ -58,12 +60,14 @@ class CreateGif extends Component {
         }
     this.setState({
         imageData: data,
-        isPicture: true
+        isPicture: true,
     })
     console.log(this.state.imageData)
   }
   };
   render() {
+  
+
     var imageStyle;
     if (this.state.hover) {
       imageStyle = {
@@ -84,6 +88,7 @@ class CreateGif extends Component {
 
     return (
       <div>
+        
         <input type="file" onChange={this.handleSelectedFile} name="file" id="" />
         {this.state.isPicture &&
         <img src={this.state.rawPictureData}></img>

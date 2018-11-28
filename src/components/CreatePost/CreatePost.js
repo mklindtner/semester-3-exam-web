@@ -4,8 +4,9 @@ import Spinner from '../ui/Spinner'
 import getAuthenticatedUser from '../../getAuthenticatedUser.js';
 import CreateGif from './gif/CreateGif'
 import FieldGroup from '../FieldGroup';
-
+import {Redirect} from 'react-router-dom'
 import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import { ToastContainer, ToastMessageAnimated } from "react-toastr";
 
 class CreatePost extends Component {
     constructor(props) {
@@ -15,8 +16,13 @@ class CreatePost extends Component {
             content: '',
             showLoading: false, 
             withContent: false,
-            images: []
+            images: [],
+            submitted: false
         }
+    }
+
+    componentDidMount(){
+      
     }
 
     handleChange = (evt) => {
@@ -27,8 +33,14 @@ class CreatePost extends Component {
         this.setState({withContent: true, images: [...this.state.images, image]})
     }
 
+    isPostValidleHandler = () =>{
+        if(this.state.title == '' || this.state.content == '')
+        this.props.history.replace('/post')
+        //lav toastr her
+    }
     submitPostHandler = (e) => {
         e.preventDefault();
+
         const post = {
             title: this.state.title,
             contents: this.state.content,
@@ -44,9 +56,14 @@ class CreatePost extends Component {
 
 
     render() {
+        let redirect = null;
+        if (this.state.submitted){
+            redirect = <Redirect to="/timeline" />;
+        }
 
 
         return (<div className="SubmitForm">
+         {redirect}
             <Spinner loading={this.state.showLoading}>
                 <form onSubmit={this.submitPostHandler}>
                     <FormGroup bsSize="large">
