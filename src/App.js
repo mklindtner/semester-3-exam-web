@@ -56,6 +56,7 @@ class App extends Component {
           className="toast-top-right"
           toastMessageFactory={React.createFactory(ToastMessageAnimated)}
         />
+        {/*<Route component={ErrorPage}/>  skal testes*/}
         <Route exact={true} path="/" component={HomePage} />
         <Route
           path="/profile/:user?"
