@@ -7,7 +7,7 @@ import FieldGroup from '../FieldGroup';
 import {Redirect} from 'react-router-dom'
 import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 import { ToastContainer, ToastMessageAnimated } from "react-toastr";
-
+import {withRouter} from 'react-router-dom'
 class CreatePost extends Component {
     constructor(props) {
         super(props);
@@ -93,4 +93,4 @@ class CreatePost extends Component {
 }
 
 
-export default CreatePost;
+export default withRouter(CreatePost);
