@@ -12,3 +12,28 @@
 .nav-item:hover a {
     background: none !important;
 }
+
+nav .nav-link {
+    color: #fff;
+    font-weight: bold;
+    display: block;
+}
+
+nav {
+    padding: 0 20px;
+}
+
+#header-nav>div>a {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#header-nav>.left {
+    float: left;
+    padding-right: 20px;
+}
+
+#header-nav>.right {
+    float: right;
+    padding-left: 20px;
+}
