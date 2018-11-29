@@ -5,11 +5,13 @@ import Timeline from "./components/timeline/Timeline";
 import ProfilePage from "./components/profile/ProfilePage";
 import { createBrowserHistory } from "history";
 import "./App.css";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import CreatePost from "./components/CreatePost/CreatePost";
 import HomePage from './components/HomePage';
 import { ToastContainer, ToastMessageAnimated } from "react-toastr";
 import SettingsPage from "./components/SettingPage";
+import ErrorPage from './components/Error/ErrorPage';
+
 
 class App extends Component {
   constructor(props) {
@@ -56,6 +58,7 @@ class App extends Component {
           className="toast-top-right"
           toastMessageFactory={React.createFactory(ToastMessageAnimated)}
         />
+        <Switch>
         <Route exact={true} path="/" component={HomePage} />
         <Route
           path="/profile/:user?"
@@ -98,7 +101,11 @@ class App extends Component {
           component={router => <Timeline app={this.state} router={router} onLogout={this.onLogout} />}
         />
         <Route path="/post" component={router => <CreatePost />} />
-      </div>
+        <Switch>
+        <Route path="*" exact={true} component={ErrorPage}></Route>
+        </Switch>
+        </Switch>
+  </div>
   </>
         );
   }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PostMapper from '../../data/PostMapper'
-import Spinner from '../ui/Spinner'
+import Spinner from '../UI/Spinner/Spinner'
 import getAuthenticatedUser from '../../getAuthenticatedUser.js';
 import CreateGif from './gif/CreateGif'
 import FieldGroup from '../FieldGroup';
@@ -8,6 +8,8 @@ import {Redirect} from 'react-router-dom'
 import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 import { ToastContainer, ToastMessageAnimated } from "react-toastr";
 import {withRouter} from 'react-router-dom'
+import Modal from '../../components/UI/Modal/Modal'
+
 class CreatePost extends Component {
     constructor(props) {
         super(props);
@@ -16,6 +18,7 @@ class CreatePost extends Component {
             content: '',
             showLoading: false, 
             withContent: false,
+            showModal: false,
             images: [],
             submitted: false
         }
@@ -44,18 +47,43 @@ class CreatePost extends Component {
         const post = {
             title: this.state.title,
             contents: this.state.content,
-            author: getAuthenticatedUser().id,
             images: this.state.images
         }
 
-        this.setState({ showLoading: true })
-        this.props.onSubmit(post, (post) => {
-            this.setState({ showLoading: false });
-        });
+        this.setState({ showLoading: true });
+
+        PostMapper.submitTextPost(post).then(
+            this.setState({showLoading: false})
+        );
+    }
+
+    showModalHandler = () =>{
+        this.setState({showModal: !this.state.showModal})
     }
 
 
+    addedImageHandler = (image) => {
+        console.log(image);
+        this.state.images.push(image);
+        this.showModalHandler();
+    }
+
+
+    showThumbnailHandler = () =>{
+     
+    }
+    
+
     render() {
+        let imageStyles = {
+            width: '10%',
+            height: '20%',
+            display: 'inline-block'
+        }
+        let image= this.state.images.map(image => {
+            return <img key={image} src={image} style={imageStyles}  />
+        });
+
         let redirect = null;
         if (this.state.submitted){
             redirect = <Redirect to="/timeline" />;
@@ -78,14 +106,24 @@ class CreatePost extends Component {
                             value={this.state.title}
                             onChange={this.handleChange}
                         />
+                        
                         <FormGroup controlId="formControlsTextarea">
                             <ControlLabel>Content</ControlLabel>
                             <FormControl style={{ minHeight: '200px' }} componentClass="textarea" placeholder="Please enter the post content." name="content" value={this.state.content} onChange={this.handleChange} />
                         </FormGroup>
-                        <input type="submit" value="Submit" />
+                        <input type="submit" value="Submit"     />
                     </FormGroup>
-                    <CreateGif onAddGif={this.contentAddedHandler} />
+                    <div className="thumbnail-container">
+                    {image}
+                    </div>
+                    
+                    
+                    <Modal show={this.state.showModal} modalClosed={this.showModalHandler}>
+                    <CreateGif onSelect={this.addedImageHandler} />
+                     </Modal >
                 </form>
+                
+                <button onClick={this.showModalHandler}>Attach Images</button>
             </Spinner>
         </div>
         )

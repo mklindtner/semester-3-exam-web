@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./CreateGif.css";
 
+const expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+const regex = new RegExp(expression);
 
 class CreateGif extends Component {
   state = {
@@ -9,21 +11,19 @@ class CreateGif extends Component {
     mood: "Happy",
     apikey: "BwtD6SkWywtWl6Y9yOdnlXKbkmezp1M9",
     imageData: null,
-    rawPictureData: null,
+    fileData: null,
+    PictureData: null,
     isPicture: false,
     showpic: false,
     hover: false,
     submitted: false
   };
 
-  runTimer = word => {
-    console.log(word);
-    console.log(this.state.mood);
+  runTimer = e => {
+    e.preventDefault();
     axios
       .get(
-        `${this.state.api}?api_key=${this.state.apikey}&tag=${
-          this.state.mood
-        }&limit=1`
+        `${this.state.api}?api_key=${this.state.apikey}&tag=${this.state.mood}&limit=1`
       )
       .then(response => {
         console.log(response.data.data.images.original.url);
@@ -47,24 +47,45 @@ class CreateGif extends Component {
     this.setState({ hover: false });
   };
 
+
+
   handleSelectedFile = (event) =>{
+    event.preventDefault();
     const reader = new FileReader();
     reader.readAsDataURL(event.target.files[0]);
     this.setState({
-        rawPictureData: URL.createObjectURL(event.target.files[0])
+        fileData: event.target.files[0],
+        imageData: URL.createObjectURL(event.target.files[0])
     })
+    console.log(URL.createObjectURL(event.target.files[0]))
+  
+  };
+
+
+  addImageHandler = (event) =>{
+    event.preventDefault();
+    console.log(this.state.imageData);
+    console.log("AIDS");
+    if(this.state.fileData !== null){
+    const reader = new FileReader();
+    reader.readAsDataURL(this.state.fileData);
     reader.onload = () => {
         let data = reader.result.replace(/^data:(.*;base64,)?/, '');
         if ((data.length % 4) > 0) {
             data += '='.repeat(4 - (data.length % 4));
         }
-    this.setState({
-        imageData: data,
-        isPicture: true,
-    })
-    console.log(this.state.imageData)
+        this.props.onSelect(data);
+       
+      }
+
+  }else if(this.state.imageData){
+    this.props.onSelect(this.state.imageData);
+  }else{
+  //lav toastr fejl
+  console.log("sut min dodo");
+}
   }
-  };
+
   render() {
   
 
@@ -90,9 +111,6 @@ class CreateGif extends Component {
       <div>
         
         <input type="file" onChange={this.handleSelectedFile} name="file" id="" />
-        {this.state.isPicture &&
-        <img src={this.state.rawPictureData}></img>
-        }
         <div className="Create-Image">Mood of the day!</div>
         <form id="Query-form">
           <select
@@ -112,13 +130,13 @@ class CreateGif extends Component {
           </select>
         </form>
 
-        <button className="Mood-button" onClick={this.runTimer} >
+        <button className="mood-button" onClick={this.runTimer}>
           Get today's GIF
         </button>
         <p>Mood is: {this.state.mood}</p>
-        {this.state.showpic && (
+        {this.state.imageData && (
           <div>
-            <img
+              <img
               style={imageStyle}
               src={this.state.imageData}
               alt="mood"
@@ -129,7 +147,9 @@ class CreateGif extends Component {
             />
           </div>
         )}
+        <button onClick={this.addImageHandler}>Add image to Post</button>
       </div>
+      
     );
   }
 }
