@@ -16,8 +16,8 @@ class Header extends Component {
           <a className="navbar-brand" href="#">Social</a>
           <div className="pull-left">
             <ul className="nav navbar-nav navbar-left">
-              <li class="nav-item">
-                <a class="nav-link" href="timeline">Timeline</a>
+              <li className="nav-item">
+                <a className="nav-link" href="timeline">Timeline</a>
               </li>
             </ul>
           </div>

@@ -100,7 +100,8 @@ class ProfilePage extends Component {
                 {this.state.user != null && <div id="profile-page" className="row">
                     <div className="row">
                         <div className="col-xl">
-                            <img src={this.state.user.profilePicture.src} />
+                            {this.state.user.profilePicture != undefined && 
+                                <img src={this.state.user.profilePicture.full} />}
                             <h2>{this.state.user.name}</h2>
                         </div>
                     </div>

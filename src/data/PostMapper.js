@@ -3,7 +3,7 @@ import config from '../config.js'
 
 class PostMapper {
   submitTextPost = (submittedPost) => {
-    return post(config.restUrl + 'posts/text', submittedPost)
+    return post(config.restUrl + 'posts', submittedPost)
   }
 
   getRollingPosts(user, pageSize, cutoff) {
