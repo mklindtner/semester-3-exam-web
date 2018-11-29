@@ -74,12 +74,13 @@ class CreateGif extends Component {
         if ((data.length % 4) > 0) {
             data += '='.repeat(4 - (data.length % 4));
         }
-        this.props.onSelect(data);
+        this.props.onSelectUrl(this.state.imageData);
+        this.props.onSelectFile(data);
        
       }
 
   }else if(this.state.imageData){
-    this.props.onSelect(this.state.imageData);
+    this.props.onSelectUrl(this.state.imageData);
   }else{
   //lav toastr fejl
   console.log("sut min dodo");

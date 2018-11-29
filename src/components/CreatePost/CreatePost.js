@@ -9,6 +9,7 @@ import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 import { ToastContainer, ToastMessageAnimated } from "react-toastr";
 import {withRouter} from 'react-router-dom'
 import Modal from '../../components/UI/Modal/Modal'
+import './CreatePost.css'
 
 class CreatePost extends Component {
     constructor(props) {
@@ -17,10 +18,10 @@ class CreatePost extends Component {
             title: '',
             content: '',
             showLoading: false, 
-            withContent: false,
             showModal: false,
             images: [],
-            submitted: false
+            submitted: false,
+            fileData: null
         }
     }
 
@@ -68,6 +69,10 @@ class CreatePost extends Component {
         this.showModalHandler();
     }
 
+    addFileDataHandler = (data) =>{
+        this.setState({fileData: data})
+    }
+
 
     showThumbnailHandler = () =>{
      
@@ -75,13 +80,8 @@ class CreatePost extends Component {
     
 
     render() {
-        let imageStyles = {
-            width: '10%',
-            height: '20%',
-            display: 'inline-block'
-        }
         let image= this.state.images.map(image => {
-            return <img key={image} src={image} style={imageStyles}  />
+            return <img key={image} src={image} />
         });
 
         let redirect = null;
@@ -114,12 +114,12 @@ class CreatePost extends Component {
                         <input type="submit" value="Submit"     />
                     </FormGroup>
                     <div className="thumbnail-container">
-                    {image}
+                    <span id="img">{image}</span>
                     </div>
                     
                     
                     <Modal show={this.state.showModal} modalClosed={this.showModalHandler}>
-                    <CreateGif onSelect={this.addedImageHandler} />
+                    <CreateGif onSelectUrl={this.addedImageHandler} onSelectFile={this.addFileDataHandler}/>
                      </Modal >
                 </form>
                 
