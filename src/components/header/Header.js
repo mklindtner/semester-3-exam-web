@@ -38,7 +38,7 @@ class Header extends Component {
             </a>
           </div>
           <div className="left">
-            <a className="nav-link" href="timeline">
+            <a className="nav-link" href="/timeline">
               Timeline
             </a>
           </div>
