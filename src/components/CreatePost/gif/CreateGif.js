@@ -19,8 +19,8 @@ class CreateGif extends Component {
     submitted: false
   };
 
-  componentWillReceiveProps(){
-    if(this.props.modalImageData){
+  componentWillReceiveProps(newProps){
+    if(newProps.modalImageData){
       this.setState({imageData: this.props.modalImageData})
     }
   }
@@ -94,8 +94,6 @@ class CreateGif extends Component {
 
   render() {
    
-  
-
     var imageStyle;
     if (this.state.hover) {
       imageStyle = {

@@ -41,6 +41,7 @@ class CreatePost extends Component {
         this.props.history.replace('/post')
         //lav toastr her
     }
+
     submitPostHandler = (e) => {
         e.preventDefault();
 
@@ -62,11 +63,18 @@ class CreatePost extends Component {
     }
 
     showModalSpeceficHandler = (event, image) =>{
+        let index = this.state.images.indexOf(image)
+        if(event.ctrlKey){
+            let temp = this.state.images.slice(); //makes a shallow copy of the array
+            temp.splice(index, 1); //remove item
+            this.setState(prevState => ({ images: temp }));
+     }else{
      this.setState(
          state => ({imageModalData: image}),
          () => this.showModalHandler()
      );
     }
+}
 
 
     addedImageHandler = (image) => {
