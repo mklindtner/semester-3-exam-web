@@ -3,11 +3,16 @@
     padding-right: 15px;
     width: auto;
     height: 175px;
-    display:inline-block;
+    display: inline-block;
+ 
+
 }
 
 .thumbnail-container {
     overflow-x: scroll;
+    
+    display: inline-block;
+
 }
 
 .thumbnail-container img:hover{

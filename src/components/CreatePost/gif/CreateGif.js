@@ -19,6 +19,13 @@ class CreateGif extends Component {
     submitted: false
   };
 
+  componentWillReceiveProps(){
+    if(this.props.modalImageData){
+      this.setState({imageData: this.props.modalImageData})
+    }
+  }
+
+
   runTimer = e => {
     e.preventDefault();
     axios
@@ -76,9 +83,7 @@ class CreateGif extends Component {
         }
         this.props.onSelectUrl(this.state.imageData);
         this.props.onSelectFile(data);
-       
       }
-
   }else if(this.state.imageData){
     this.props.onSelectUrl(this.state.imageData);
   }else{
@@ -88,6 +93,7 @@ class CreateGif extends Component {
   }
 
   render() {
+   
   
 
     var imageStyle;

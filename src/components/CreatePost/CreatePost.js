@@ -17,6 +17,7 @@ class CreatePost extends Component {
         this.state = {
             title: '',
             content: '',
+            imageModalData: null,
             showLoading: false, 
             showModal: false,
             images: [],
@@ -25,9 +26,7 @@ class CreatePost extends Component {
         }
     }
 
-    componentDidMount(){
-      
-    }
+
 
     handleChange = (evt) => {
         this.setState({ [evt.target.name]: evt.target.value })
@@ -62,6 +61,13 @@ class CreatePost extends Component {
         this.setState({showModal: !this.state.showModal})
     }
 
+    showModalSpeceficHandler = (event, image) =>{
+     this.setState(
+         state => ({imageModalData: image}),
+         () => this.showModalHandler()
+     );
+    }
+
 
     addedImageHandler = (image) => {
         console.log(image);
@@ -74,14 +80,11 @@ class CreatePost extends Component {
     }
 
 
-    showThumbnailHandler = () =>{
-     
-    }
     
 
     render() {
-        let image= this.state.images.map(image => {
-            return <img key={image} src={image} />
+        let image= this.state.images.map((image, index) => {
+            return <img key={index} src={image} onClick={(e) =>this.showModalSpeceficHandler(e, image)}/>
         });
 
         let redirect = null;
@@ -114,12 +117,12 @@ class CreatePost extends Component {
                         <input type="submit" value="Submit"     />
                     </FormGroup>
                     <div className="thumbnail-container">
-                    <span id="img">{image}</span>
+                    {image}
                     </div>
                     
                     
                     <Modal show={this.state.showModal} modalClosed={this.showModalHandler}>
-                    <CreateGif onSelectUrl={this.addedImageHandler} onSelectFile={this.addFileDataHandler}/>
+                    <CreateGif onSelectUrl={this.addedImageHandler} onSelectFile={this.addFileDataHandler} modalImageData={this.state.imageModalData}  />
                      </Modal >
                 </form>
                 
