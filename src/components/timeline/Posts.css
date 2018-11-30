@@ -1,40 +1,21 @@
-.jumbotron {
-    font-style: italic;
+.post {
     color: black;
-    padding: 10px;
-
-}
-
-.jumbotron p {
-    font-size: 13px;
-    font-style: oblique;
-}
-
-#content {
-    font-family: normal;
-    padding: 2px;
-    font-size: 23px;
-    color: black;
-}
-
-.pb-cmnt-container {
-    font-family: Lato;
-    margin-top: 100px;
-}
-
-.pb-cmnt-textarea {
-    resize: none;
     padding: 20px;
-    height: 130px;
-    width: 100%;
-    border: 1px solid #F2F2F2;
+    font-size: 16px;   
+    background: #efefef;
+    border: 1px solid #ddd;
 }
 
-.vertical-center {
-    min-height: 100%;
-    /* Fallback for browsers do NOT support vh unit */
-    min-height: 100vh;
-    /* These two lines are counted as one :-)       */
-    display: flex;
-    align-items: center;
+.post .clear-fix {
+    overflow: auto;
+}
+
+.post .author {
+    font-weight: bold;
+    float: left;
+}
+
+.post .created {
+    font-weight: bold;
+    float:right;
 }
