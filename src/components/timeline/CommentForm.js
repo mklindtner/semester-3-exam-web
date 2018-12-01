@@ -26,8 +26,7 @@ export default class CommentForm extends Component {
                 <form onSubmit={this.onCommentSubmit}>
                     <FormGroup bsSize="large">
                         <FormGroup controlId="formControlsTextarea">
-                            <ControlLabel>Content</ControlLabel>
-                            <FormControl componentClass="textarea" placeholder="Comment here." name="content" value={this.state.content} onChange={this.handleChange} />
+                            <FormControl style={{fontSize: '14px'}} componentClass="textarea" placeholder="Write a comment!" name="content" value={this.state.content} onChange={this.handleChange} />
                         </FormGroup>
                         <input type="submit" value="Submit" />
                     </FormGroup>
