@@ -17,7 +17,7 @@ class Timeline extends Component {
 
   fetchTimeline = (user, cutoff, callback) => {
     get(
-      config.restUrl + "posts/timeline/" + user + "/5" + (cutoff == null ? "" : ("?cutoff=" + cutoff))
+      config.restUrl + "posts/timeline/" + user + "/25" + (cutoff == null ? "" : ("?cutoff=" + cutoff))
     ).then(response => {
       if (response.status === 200) {
         callback(response.body);
