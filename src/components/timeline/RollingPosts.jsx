@@ -19,7 +19,7 @@ class RollingPosts extends Component {
   render() {
     return (
       <div>
-        <Posts posts={this.state.posts} />
+        <Posts posts={this.state.posts} comments={this.props.comments} />
       </div>
     );
   }

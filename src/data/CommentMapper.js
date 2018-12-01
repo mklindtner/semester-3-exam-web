@@ -3,12 +3,18 @@ import {get, post} from './DataMapper';
 
 class CommentMapper {
 
-    getPostComments(post, pageSize, pageNumber) {
-        return get(config.restUrl + `posts/${post}/page/${pageSize}/${pageNumber}`);
+    createPostComment(postId, contents){
+        return post(config.restUrl + `posts/${postId}/comments`, {
+            contents
+        });
     }
 
-    getPostCommentsCount(post){
-        return get(config.resultUrl + `posts/${post}/count`).then(response => {
+    getPostComments(postId, pageSize, pageNumber) {
+        return get(config.restUrl + `posts/${postId}/comments/page/${pageSize}/${pageNumber}`);
+    }
+
+    getPostCommentsCount(postId){
+        return get(config.restUrl + `posts/${postId}/comments/count`).then(response => {
             return response.status === 200 ? Promise.resolve(response.body.count) : -1;
         });
     }
