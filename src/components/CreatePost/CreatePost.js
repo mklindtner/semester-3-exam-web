@@ -5,6 +5,7 @@ import CreateGif from './gif/CreateGif'
 import FieldGroup from '../FieldGroup';
 
 import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import './CreatePost.css'
 
 class CreatePost extends Component {
     constructor(props) {
@@ -31,17 +32,14 @@ class CreatePost extends Component {
         });
     }
 
-
     render() {
-
 
         return (<div className="SubmitForm">
             <Spinner loading={this.state.showLoading}>
                 <form onSubmit={this.submitPostHandler}>
                     <FormGroup bsSize="large">
                         <FormGroup controlId="formControlsTextarea">
-                            <ControlLabel>Content</ControlLabel>
-                            <FormControl style={{ minHeight: '200px' }} componentClass="textarea" placeholder="Please enter the post content." name="content" value={this.state.content} onChange={this.handleChange} />
+                            <FormControl style={{ minHeight: '200px' }} componentClass="textarea" placeholder="How are you feeling?" name="content" value={this.state.content} onChange={this.handleChange} />
                         </FormGroup>
                         <input type="submit" value="Submit" />
                     </FormGroup>
