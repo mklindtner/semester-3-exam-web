@@ -6,8 +6,8 @@ export default function User({ name, id }) {
   return (
     <li className="list-group-item">
       <a href={"/profile/" + id}>
+      <span style={{marginRight: '10px'}} className="icon glyphicon glyphicon-user" />
       {name}
-        <span className="icon glyphicon glyphicon-user" />
       </a>
     </li>
   );

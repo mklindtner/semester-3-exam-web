@@ -1,7 +1,22 @@
 #user-status {
-    background: #ddd;
     margin-right: 25px;
     font-weight: bold;
+}
+
+header {
+    padding: 10px;
+}
+
+#user-status > a {
+    color: white;
+}
+
+#user-status a {
+    background: none !important;
+}
+
+nav {
+    padding: 0 20px;
 }
 
 .nav-item a {
@@ -17,10 +32,7 @@ nav .nav-link {
     color: #fff;
     font-weight: bold;
     display: block;
-}
-
-nav {
-    padding: 0 20px;
+    padding: 0 !important; 
 }
 
 #header-nav>div>a {
@@ -30,10 +42,22 @@ nav {
 
 #header-nav>.left {
     float: left;
-    padding-right: 20px;
+    padding: 20px;
 }
 
 #header-nav>.right {
     float: right;
-    padding-left: 20px;
+    padding: 20px;
+}
+
+header .search-input {
+    margin-top: -10px;
+}
+
+header .user-status.right ul li a{
+    padding: 0;
+}
+
+header .user-status.right ul.navbar-nav{
+    margin: 0;
 }

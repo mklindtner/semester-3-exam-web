@@ -42,10 +42,10 @@ class Header extends Component {
               Timeline
             </a>
           </div>
-          <div className="left" style={{ width: this.state.width - 280 }}>
-            <UserSearch hitBoxWidth={this.state.width - 300 }/>
+          <div className="left search-input" style={{ width: this.state.width - 340 }}>
+            <UserSearch />
           </div>
-          <div className="right">
+          <div className="right user-status">
             <ul className="nav navbar-nav navbar-right">
               {this.props.app.authenticationContext != null && (
                 <li className="dropdown" id="user-status">
