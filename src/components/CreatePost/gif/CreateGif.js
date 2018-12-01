@@ -82,7 +82,6 @@ class CreateGif extends Component {
             data += '='.repeat(4 - (data.length % 4));
         }
         this.props.onSelectUrl(this.state.imageData);
-        this.props.onSelectFile(data);
       }
   }else if(this.state.imageData){
     this.props.onSelectUrl(this.state.imageData);

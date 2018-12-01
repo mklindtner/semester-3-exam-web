@@ -17,7 +17,7 @@ class CreatePost extends Component {
         this.state = {
             title: '',
             content: '',
-            imageModalData: null,
+            imageModalData: '',
             showLoading: false, 
             showModal: false,
             images: [],
@@ -42,13 +42,22 @@ class CreatePost extends Component {
         //lav toastr her
     }
 
+    /*  const reader = new FileReader();
+        reader.readAsDataURL(urls);
+        reader.onload = () => {
+            let data = reader.result.replace(/^data:(.*;base64,)?/, '');
+            if ((data.length % 4) > 0) {
+                data += '='.repeat(4 - (data.length % 4));
+            }*/
+    
+    
+
     submitPostHandler = (e) => {
         e.preventDefault();
 
         const post = {
-            title: this.state.title,
             contents: this.state.content,
-            images: this.state.images
+            images: this.encodeURLHandler(this.state.images)
         }
 
         this.setState({ showLoading: true });
@@ -69,10 +78,12 @@ class CreatePost extends Component {
             temp.splice(index, 1); //remove item
             this.setState(prevState => ({ images: temp }));
      }else{
+         console.log(image);
      this.setState(
          state => ({imageModalData: image}),
          () => this.showModalHandler()
      );
+    console.log('image state is: ' + this.state.imageModalData)
     }
 }
 
@@ -82,13 +93,6 @@ class CreatePost extends Component {
         this.state.images.push(image);
         this.showModalHandler();
     }
-
-    addFileDataHandler = (data) =>{
-        this.setState({fileData: data})
-    }
-
-
-    
 
     render() {
         let image= this.state.images.map((image, index) => {
