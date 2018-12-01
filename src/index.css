@@ -80,14 +80,14 @@ a.disabled {
 }
 
 a.disabled:hover {
-  cursor:default;
+  cursor: default;
   text-decoration: none;
 }
 
 input[type="submit"] {
-  background: blue;
+  background: orange;
   border: none;
-  padding: 10px;
+  padding: 10px 20px;
   color: white;
   font-weight: bold;
   border: 1px solid #ddd;
