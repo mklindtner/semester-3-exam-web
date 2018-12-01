@@ -35,9 +35,8 @@ class CreatePost extends Component {
     render() {
 
         return (
-            <div className="SubmitForm content-container">
+            <div className="content-container">
                 <Spinner loading={this.state.showLoading}>
-                    <p className="content-header">Create post</p>
                     <form onSubmit={this.submitPostHandler}>
                         <FormGroup bsSize="large">
                             <FormGroup controlId="formControlsTextarea">

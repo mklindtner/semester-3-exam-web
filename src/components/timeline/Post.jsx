@@ -7,7 +7,7 @@ class Post extends React.Component {
     render = () => {
         return (
             <div className="post" key={this.props.post.id}>
-                <div className="clear-fix">
+                <div className="post-header">
                     <div className="author-pic">
                         <SmallProfilePicture user={this.props.post.author}/>
                     </div>

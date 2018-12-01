@@ -10,6 +10,7 @@ import CreatePost from "./components/CreatePost/CreatePost";
 import HomePage from './components/HomePage';
 import { ToastContainer, ToastMessageAnimated } from "react-toastr";
 import SettingsPage from "./components/SettingPage";
+import FriendRequestsPage from "./components/FriendRequestsPage";
 
 class App extends Component {
   constructor(props) {
@@ -95,7 +96,11 @@ class App extends Component {
           } />
         <Route
           path="/timeline"
-          component={router => <Timeline app={this.state} router={router}  toastrFactory={this.toastrFactory} onLogout={this.onLogout} />}
+          component={router => <Timeline app={this.state} router={router} toastrFactory={this.toastrFactory} onLogout={this.onLogout} />}
+        />
+        <Route
+          path="/friend-requests"
+          component={router => <FriendRequestsPage app={this.state} router={router} toastrFactory={this.toastrFactory} onLogout={this.onLogout} />}
         />
         <Route path="/post" component={router => <CreatePost />} />
       </div>

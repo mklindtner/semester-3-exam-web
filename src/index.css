@@ -21,17 +21,6 @@ p {
   line-height: 28px;
 }
 
-header {
-  height: 75px;
-  padding-top: 12px;
-  background-image: url("http://www.psdgraphics.com/file/2017/abstract-geometric-background.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: fixed;
-  z-index: 100;
-}
-
 main {
   padding-top: 120px;
 }

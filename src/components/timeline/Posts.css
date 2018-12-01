@@ -7,16 +7,24 @@
     margin-bottom: 20px;
 }
 
-.post .clear-fix {
+.post .post-header {
+    margin-bottom: 10px;
     overflow: auto;
 }
 
 .post .author {
     font-weight: bold;
     float: left;
+    margin-top: 10px;
+    margin-left: 10px;
 }
 
 .post .created {
     font-weight: bold;
     float:right;
+    margin-top: 10px;
+}
+
+.post .author-pic {
+    float:left;
 }
