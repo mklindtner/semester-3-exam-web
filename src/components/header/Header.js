@@ -13,7 +13,6 @@ class Header extends Component {
   }
 
   updateDimensions = () => {
-    console.log(document.documentElement.clientWidth);
     this.setState({ width: document.documentElement.clientWidth });
   };
 
@@ -23,6 +22,7 @@ class Header extends Component {
 
   componentDidMount = function() {
     window.addEventListener("resize", this.updateDimensions);
+    this.updateDimensions();
   };
   componentWillUnmount = function() {
     window.removeEventListener("resize", this.updateDimensions);
@@ -30,8 +30,8 @@ class Header extends Component {
 
   render() {
     return (
-      <header onRes>
-        <nav id="header-nav" class="row">
+      <header>
+        <nav id="header-nav" className="row">
           <div className="left">
             <a className="nav-link" href="#">
               Social

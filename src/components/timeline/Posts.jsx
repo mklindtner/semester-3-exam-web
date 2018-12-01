@@ -6,7 +6,7 @@ class Posts extends React.Component {
 
   render = () => {
     return this.props.posts.map(post => (
-      <Post post={post} comments={this.props.comments}/>
+      <Post key={post.id} post={post} comments={this.props.comments}/>
     ));
   };
 }

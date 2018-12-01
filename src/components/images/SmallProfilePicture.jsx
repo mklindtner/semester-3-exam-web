@@ -1,20 +1,17 @@
 import React from "react";
 
 class SmallProfilePicture extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-    this.picture = profilePictureBlack;
-  }
-
-  componentDidMount() {}
 
   render() {
-    if(this.props.image === null){
-        return <img src="/pictures/smallProfilePicture.svg" alt="picture of your friend" />
-        } else {
-            return <img src={this.props.image} alt="picture of your friend" />
-        }
+    const styles = {
+      width: this.props.width == undefined ? '50px' : this.props.width,
+      height: this.props.height == undefined ? '50px' : this.props.height
+    };
+
+    if (this.props.user.profilePicture == undefined || this.props.user.profilePicture.thumbnail == undefined)
+      return <img className="profile-picture small" style={styles} src="/pictures/smallProfilePicture.svg" alt={this.props.user.name} />
+
+    return <img className="profile-picture small" style={styles} src={this.props.user.profilePicture.thumbnail} alt={this.props.user.name} />
   }
 }
 

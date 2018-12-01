@@ -94,6 +94,9 @@ class PaginatedComments extends Component {
 
     createPaginationButtons = () => {
 
+        if (this.state.total == 1)
+            return null;
+
         const lastPage = this.getLastPage();
 
         const buttons = [];

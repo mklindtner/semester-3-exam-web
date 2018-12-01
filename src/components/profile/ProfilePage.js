@@ -100,33 +100,37 @@ class ProfilePage extends Component {
             <>
             <Header app={this.props.app} router={this.props.router} onLogout={this.props.onLogout} />
             <main id="profile-page">
-                {this.state.user != null && <div id="profile-page" className="row">
-                    <div className="row">
-                        <div className="col-xl">
-                            {this.state.user.profilePicture != undefined && 
-                                <img src={this.state.user.profilePicture.full} />}
-                            <h2>{this.state.user.name}</h2>
+                <div className="col s4">
+                </div>
+                <div className="col s8">
+                    {this.state.user != null && <div id="profile-page" className="row">
+                        <div className="row">
+                            <div className="col-xl">
+                                {this.state.user.profilePicture != undefined &&
+                                    <img src={this.state.user.profilePicture.full} />}
+                                <h2>{this.state.user.name}</h2>
+                            </div>
                         </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-xl">
-                            <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
-                                <Tab eventKey={1} title="Posts">
-                                    {getAuthenticationContext().user.id === this.userToRetrieve && <CreatePost onSubmit={this.onPostSubmit} />}
-                                    <Posts posts={this.state.posts} />
-                                    <RollingPosts user={this.userToRetrieve} fetch={this.fetchPosts} comments={this.createCommentSection} />
-                                </Tab>
-                                <Tab eventKey={2} title="Images">
-                                    {getAuthenticationContext().user.id === this.userToRetrieve && <ImageUploadForm onSubmit={this.onImageSubmit} />}
-                                    <PaginatedImageGrid pageSize={20} edit={true} fetch={this.fetchImages} />
-                                </Tab>
-                                <Tab eventKey={3} title="Friends">
-                                    <FriendGrid friends={this.state.friends} />
-                                </Tab>
-                            </Tabs>
+                        <div className="row">
+                            <div className="col-xl">
+                                <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
+                                    <Tab eventKey={1} title="Posts">
+                                        {getAuthenticationContext().user.id === this.userToRetrieve && <CreatePost onSubmit={this.onPostSubmit} />}
+                                        <Posts posts={this.state.posts} />
+                                        <RollingPosts user={this.userToRetrieve} fetch={this.fetchPosts} comments={this.createCommentSection} />
+                                    </Tab>
+                                    <Tab eventKey={2} title="Images">
+                                        {getAuthenticationContext().user.id === this.userToRetrieve && <ImageUploadForm onSubmit={this.onImageSubmit} />}
+                                        <PaginatedImageGrid pageSize={20} edit={true} fetch={this.fetchImages} />
+                                    </Tab>
+                                    <Tab eventKey={3} title="Friends">
+                                        <FriendGrid friends={this.state.friends} />
+                                    </Tab>
+                                </Tabs>
+                            </div>
                         </div>
-                    </div>
-                </div>}
+                    </div>}
+                </div>
             </main>
             </>
         );
@@ -134,7 +138,7 @@ class ProfilePage extends Component {
 
     onCommentSubmit = (postId, contents, resultCallback) => {
         this.commentMapper.createPostComment(postId, contents).then(response => {
-            if(response.status === 201){
+            if (response.status === 201) {
                 this.props.toastrFactory().success("The comment was posted.");
                 resultCallback(response.body);
                 return;
@@ -146,27 +150,27 @@ class ProfilePage extends Component {
     }
 
     createCommentSection = (postId) => {
-        return <PaginatedComments 
-        parent={postId}
-        onCommentSubmit={(content, resultCallback) => this.onCommentSubmit(postId, content, resultCallback)} 
-        pageSize={10}
-        fetch={this.fetchComments}/>
+        return <PaginatedComments
+            parent={postId}
+            onCommentSubmit={(content, resultCallback) => this.onCommentSubmit(postId, content, resultCallback)}
+            pageSize={10}
+            fetch={this.fetchComments} />
     }
 
     fetchComments = (postId, pageSize, pageNumber, callback) => {
-        
+
         const comments = this.commentMapper.getPostComments(postId, pageSize, pageNumber);
         const count = this.commentMapper.getPostCommentsCount(postId);
-        
+
         Promise.all([comments, count]).then(results => {
-      
-                if(results[0].status === 200 && results[0].status === 200){
-                    callback(results[0].body, results[1]);
-                    return;
-                }
-                
-                this.props.toastrFactory().error("Could not fetch comments.");
-                callback([], 0);
+
+            if (results[0].status === 200 && results[0].status === 200) {
+                callback(results[0].body, results[1]);
+                return;
+            }
+
+            this.props.toastrFactory().error("Could not fetch comments.");
+            callback([], 0);
         });
     }
 }

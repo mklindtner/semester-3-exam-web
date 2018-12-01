@@ -54,7 +54,7 @@ header .search-input {
     margin-top: -10px;
 }
 
-header .user-status.right ul li a{
+header .user-status.right > ul > li > a{
     padding: 0;
 }
 
