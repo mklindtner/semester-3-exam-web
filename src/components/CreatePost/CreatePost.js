@@ -34,19 +34,21 @@ class CreatePost extends Component {
 
     render() {
 
-        return (<div className="SubmitForm">
-            <Spinner loading={this.state.showLoading}>
-                <form onSubmit={this.submitPostHandler}>
-                    <FormGroup bsSize="large">
-                        <FormGroup controlId="formControlsTextarea">
-                            <FormControl style={{ minHeight: '200px' }} componentClass="textarea" placeholder="How are you feeling?" name="content" value={this.state.content} onChange={this.handleChange} />
+        return (
+            <div className="SubmitForm content-container">
+                <Spinner loading={this.state.showLoading}>
+                    <p className="content-header">Create post</p>
+                    <form onSubmit={this.submitPostHandler}>
+                        <FormGroup bsSize="large">
+                            <FormGroup controlId="formControlsTextarea">
+                                <FormControl style={{ minHeight: '200px' }} componentClass="textarea" placeholder="How are you feeling?" name="content" value={this.state.content} onChange={this.handleChange} />
+                            </FormGroup>
+                            <input type="submit" value="Submit" />
                         </FormGroup>
-                        <input type="submit" value="Submit" />
-                    </FormGroup>
-                    <CreateGif />
-                </form>
-            </Spinner>
-        </div>
+                        <CreateGif />
+                    </form>
+                </Spinner>
+            </div>
         )
     }
 }

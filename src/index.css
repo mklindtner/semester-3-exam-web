@@ -49,17 +49,11 @@ main {
   border: 1px solid #ddd;
   padding: 20px;
   margin-bottom: 20px;
+  background: #eee;
 }
 
 .content-header {
-  background-image: url("http://www.psdgraphics.com/file/2017/abstract-geometric-background.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  margin: -20px -20px 20px -20px;
-  padding: 10px;
   font-weight: bold;
-  color: white;
 }
 
 .control-label {

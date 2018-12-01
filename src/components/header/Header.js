@@ -31,7 +31,7 @@ class Header extends Component {
   render() {
     return (
       <header>
-        <nav id="header-nav" className="row">
+        <nav id="header-nav">
           <div className="left">
             <a className="nav-link" href="#">
               Social
