@@ -95,7 +95,7 @@ class App extends Component {
           } />
         <Route
           path="/timeline"
-          component={router => <Timeline app={this.state} router={router} onLogout={this.onLogout} />}
+          component={router => <Timeline app={this.state} router={router}  toastrFactory={this.toastrFactory} onLogout={this.onLogout} />}
         />
         <Route path="/post" component={router => <CreatePost />} />
       </div>
