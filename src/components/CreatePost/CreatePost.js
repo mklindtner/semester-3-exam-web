@@ -19,6 +19,7 @@ class CreatePost extends Component {
             content: '',
             showLoading: false,
             showModal: false,
+            showImage: null,
             images: []
         }
 
@@ -81,18 +82,26 @@ class CreatePost extends Component {
         this.setState({ showModal: !this.state.showModal })
     }
 
-    removeThumbnail = (event, image) => {
+    onThumbnailClick = (event, image) => {
         let index = this.state.images.indexOf(image)
         if (event.ctrlKey) {
             let temp = this.state.images.slice(); //makes a shallow copy of the array
             temp.splice(index, 1); //remove item
             this.setState(prevState => ({ images: temp }));
+        } else {
+            this.setState({
+                showImage: image
+            })
         }
+    }
+
+    onThumbnailFullClose = () => {
+        this.setState({ showImage: null });
     }
 
     addedImageHandler = (image) => {
         this.getCorrectFormat(image, result => {
-            this.setState({ images: this.state.images.concat({...result, src: image.src}) })
+            this.setState({ images: this.state.images.concat({ ...result, src: image.src }) })
         })
         this.toggleModal();
     }
@@ -109,14 +118,19 @@ class CreatePost extends Component {
                         <input type="submit" value="Submit" />
                         <div className="thumbnail-container">
                             {this.state.images.map((image, index) =>
-                                <img key={index} src={image.src} onClick={(e) => this.removeThumbnail(e, image)} />
+                                <img key={index} src={image.src} onClick={(e) => this.onThumbnailClick(e, image)} />
                             )}
                         </div>
                     </form>
                     <Modal show={this.state.showModal} onClose={this.toggleModal}>
-                        <CreateGif onImageAdded={this.addedImageHandler} />
+                        <CreateGif onImageAdded={this.addedImageHandler} image={this.state.showImage} />
                     </Modal >
-                    {!this.state.showModal && <button onClick={this.toggleModal}>Attach Images</button>}
+
+                    {this.state.showImage &&
+                        <Modal show={true} onClose={this.toggleModal} onClose={this.onThumbnailFullClose}>
+                            <img src={this.state.showImage.src} />
+                        </Modal >}
+                    {!this.state.showModal && <button onClick={this.toggleModal} >Attach Images</button>}
                 </div>
             </Spinner>
         </div>

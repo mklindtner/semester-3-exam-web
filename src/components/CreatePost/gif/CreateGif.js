@@ -6,11 +6,9 @@ class CreateGif extends Component {
 
   constructor(props) {
     super(props);
-  
+
     this.state = {
-      currentImage: null,
-      showpic: false,
-      hover: false,
+      currentImage: props.image
     }
   }
 
@@ -26,18 +24,6 @@ class CreateGif extends Component {
         })
       })
   }
-
-  deleteHandler = () => {
-    this.setState({ showpic: false, currentImage: null });
-  };
-
-  toggleHoverOn = () => {
-    this.setState({ hover: true });
-  };
-
-  toggleHoverOff = () => {
-    this.setState({ hover: false });
-  };
 
   onFileSelected = (event) => {
     const reader = new FileReader();
@@ -58,16 +44,6 @@ class CreateGif extends Component {
   }
 
   render() {
-
-    var imageStyle;
-    if (this.state.hover) {
-      imageStyle = {
-        opacity: 0.7,
-        position: "relative",
-        cursor: "pointer",
-        transition: "0.6s",
-      };
-    }
 
     return (
       <div className="image-selector">
@@ -92,13 +68,8 @@ class CreateGif extends Component {
         {this.state.currentImage && (
           <div>
             <img
-              style={imageStyle}
               src={this.state.currentImage.src}
               alt="mood"
-              onClick={this.deleteHandler}
-              onMouseEnter={this.toggleHoverOn}
-              onMouseLeave={this.toggleHoverOff}
-              title="Click to delete picture"
             />
           </div>
         )}
