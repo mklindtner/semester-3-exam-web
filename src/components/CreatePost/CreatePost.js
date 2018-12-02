@@ -50,7 +50,27 @@ class CreatePost extends Component {
                 data += '='.repeat(4 - (data.length % 4));
             }*/
     
-    
+    encodeURLHandler = (images) =>{
+        const expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+        const regex = new RegExp(expression);
+        let urls = [];
+        images.map(img =>{
+        if(!img.match(regex)){
+        const reader = new FileReader();
+        reader.readAsDataURL(img);
+        reader.onload = () => {
+        img = reader.result.replace(/^data:(.*;base64,)?/, '');
+            if ((img.length % 4) > 0) {
+                img += '='.repeat(4 - (img.length % 4));
+            }
+            }
+            urls.push(img);
+        }
+        urls.push(img);
+        });
+        return urls;
+    }
+        
 
     submitPostHandler = (e) => {
         e.preventDefault();
@@ -109,25 +129,13 @@ class CreatePost extends Component {
          {redirect}
             <Spinner loading={this.state.showLoading}>
                 <form onSubmit={this.submitPostHandler}>
-                    <FormGroup bsSize="large">
-                        <FieldGroup
-                            id="formControlsTitle"
-                            type="text"
-                            label="Title"
-                            name="title"
-                            minLength={0}
-                            maxLength={255}
-                            placeholder="Please enter the title."
-                            value={this.state.title}
-                            onChange={this.handleChange}
-                        />
+                  
                         
                         <FormGroup controlId="formControlsTextarea">
                             <ControlLabel>Content</ControlLabel>
                             <FormControl style={{ minHeight: '200px' }} componentClass="textarea" placeholder="Please enter the post content." name="content" value={this.state.content} onChange={this.handleChange} />
                         </FormGroup>
                         <input type="submit" value="Submit"     />
-                    </FormGroup>
                     <div className="thumbnail-container">
                     {image}
                     </div>
