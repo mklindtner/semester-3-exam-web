@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import ImageMapper from '../../data/ImageMapper';
 import ImageGrid from './ImageGrid';
-import Spinner from '../ui/Spinner';
+import Spinner from '../UI/Spinner/Spinner';
 import getAuthenticationContext from "../../getAuthenticationContext";
 import ImageUploadForm from '../images/ImageUploadForm';
 

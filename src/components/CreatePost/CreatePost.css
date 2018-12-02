@@ -1,3 +1,25 @@
 #formControlsTextarea {
     font-size: 14px;
 }
+
+.thumbnail-container img{
+    padding-left: 15px;
+    padding-right: 15px;
+    width: auto;
+    height: 175px;
+    display: inline-block;
+ 
+
+}
+
+.thumbnail-container {
+    overflow-x: scroll;
+    
+    display: inline-block;
+
+}
+
+.thumbnail-container img:hover{
+   transform: scale(1.1);
+   transition: 0.4s;
+}
