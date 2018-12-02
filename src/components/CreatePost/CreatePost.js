@@ -32,11 +32,7 @@ class CreatePost extends Component {
 
     submitPostHandler = (e) => {
 
-    isPostValidleHandler = () =>{
-        if(this.state.title === '' || this.state.content === '')
-        this.props.history.replace('/post')
-        //lav toastr her
-    }
+  e.preventDefault();
 
         const post = {
             contents: this.state.content,
