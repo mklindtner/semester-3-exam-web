@@ -24,7 +24,7 @@ class PaginatedImageGrid extends Component {
 
         if (pageNumber < 1)
             return;
-        if (this.state.count != -1 && pageNumber > Math.ceil(this.state.count / this.props.pageSize))
+        if (this.state.count !== -1 && pageNumber > Math.ceil(this.state.count / this.props.pageSize))
             return;
 
         if (!this.state.loading)
