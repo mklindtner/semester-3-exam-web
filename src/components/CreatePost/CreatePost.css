@@ -2,24 +2,31 @@
     font-size: 14px;
 }
 
-.thumbnail-container img{
-    padding-left: 15px;
-    padding-right: 15px;
-    width: auto;
-    height: 175px;
-    display: inline-block;
- 
-
+.create-post-thumbnails {
+    overflow: auto;
+    margin-top: 20px;
 }
 
 .thumbnail-container {
-    overflow-x: scroll;
-    
-    display: inline-block;
-
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    float:left;
+    margin-right: 20px;
+    margin-bottom: 20px;
 }
 
-.thumbnail-container img:hover{
-   transform: scale(1.1);
-   transition: 0.4s;
+.thumbnail-container img {
+    object-fit: cover;
+    height: -webkit-fill-available;
+}
+
+.thumbnail-container img:hover {
+    transform: scale(1.1);
+    transition: 0.4s;
+}
+
+.create-post input[type="submit"]{
+    margin-bottom: 20px;
 }

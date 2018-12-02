@@ -107,33 +107,36 @@ class CreatePost extends Component {
     }
 
     render() {
-        return (<div className="SubmitForm">
-            <Spinner loading={this.state.showLoading}>
-                <div className="content-container">
-                    <p className="content-header">Create Post</p>
-                    <form onSubmit={this.submitPostHandler}>
-                        <FormGroup controlId="formControlsTextarea">
-                            <FormControl style={{ minHeight: '200px' }} componentClass="textarea" placeholder="Please enter the post content." name="content" value={this.state.content} onChange={this.handleChange} />
-                        </FormGroup>
-                        <input type="submit" value="Submit" />
-                        <div className="thumbnail-container">
-                            {this.state.images.map((image, index) =>
-                                <img key={index} src={image.src} onClick={(e) => this.onThumbnailClick(e, image)} />
-                            )}
-                        </div>
-                    </form>
-                    <Modal show={this.state.showModal} onClose={this.toggleModal}>
-                        <CreateGif onImageAdded={this.addedImageHandler} image={this.state.showImage} />
-                    </Modal >
+        return (
+            <div className="create-post">
+                <Spinner loading={this.state.showLoading}>
+                    <div className="content-container">
+                        <p className="content-header">Create Post</p>
+                        <form onSubmit={this.submitPostHandler}>
+                            <FormGroup controlId="formControlsTextarea">
+                                <FormControl style={{ minHeight: '200px' }} componentClass="textarea" placeholder="Please enter the post content." name="content" value={this.state.content} onChange={this.handleChange} />
+                            </FormGroup>
+                            <div className="create-post-thumbnails">
+                                {this.state.images.map((image, index) =>
+                                    <div key={index} className="thumbnail-container">
+                                        <img src={image.src} onClick={(e) => this.onThumbnailClick(e, image)} />
+                                    </div>
+                                )}
+                            </div>
+                            <input type="submit" value="Submit" />
+                        </form>
+                        <Modal show={this.state.showModal} onClose={this.toggleModal}>
+                            <CreateGif onImageAdded={this.addedImageHandler} image={this.state.showImage} />
+                        </Modal >
 
-                    {this.state.showImage &&
-                        <Modal show={true} onClose={this.toggleModal} onClose={this.onThumbnailFullClose}>
-                            <img src={this.state.showImage.src} />
-                        </Modal >}
-                    {!this.state.showModal && <button onClick={this.toggleModal} >Attach Images</button>}
-                </div>
-            </Spinner>
-        </div>
+                        {this.state.showImage &&
+                            <Modal show={true} onClose={this.toggleModal} onClose={this.onThumbnailFullClose}>
+                                <img src={this.state.showImage.src} />
+                            </Modal >}
+                        {!this.state.showModal && <button onClick={this.toggleModal} >Attach Images</button>}
+                    </div>
+                </Spinner>
+            </div>
         )
     }
 }
