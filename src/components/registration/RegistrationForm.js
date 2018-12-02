@@ -170,6 +170,12 @@ class RegistrationForm extends Component {
             dateOfBirth: new Date(this.state.dateOfBirth).toISOString().substring(0, 10),
         }
 
+        
+        if(user.password.length < 4){
+            this.setState({errors: ["The password must be longer than 3 characters."]});
+            return;
+        }
+
         if(user.password !== user.passwordRepeat){
             this.setState({errors: ["The two passwords must match."]});
             return;

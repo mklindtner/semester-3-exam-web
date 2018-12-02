@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import RollingPosts from "./RollingPosts";
 import config from "../../config.js";
 import { get } from "../../data/DataMapper.js";
+import Header from "../header/Header";
 
 class Timeline extends Component {
   constructor(props) {
@@ -25,14 +26,23 @@ class Timeline extends Component {
   render() {
     return (
       <>
-        <div className="page-header container">
-          <h1>Timeline</h1>
+      <Header app={this.props.app} router={this.props.router} onLogout={this.props.onLogout} />
+      <main id="timeline-page">
+        <div className="row">
+          <div className="col-xl">
+            <h2>Timeline</h2>
+          </div>
         </div>
-        <RollingPosts
-          app={this.props.app}
-          user={this.props.app.authenticationContext.user.id}
-          fetch={this.fetchTimeline}
-        />
+        <div className="row">
+          <div className="col-xl">
+            <RollingPosts
+              app={this.props.app}
+              user={this.props.app.authenticationContext.user.id}
+              fetch={this.fetchTimeline}
+            />
+          </div>
+        </div>
+      </main>
       </>
     );
   }

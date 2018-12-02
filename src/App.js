@@ -30,18 +30,18 @@ class App extends Component {
     localStorage.setItem("authenticationContext", text);
     this.setState({ authenticationContext });
     this.props.router.history.push("/profile");
-    this.toastr.success("You are now authenticated.");
+    this.toastr.success("You are now logged in.");
   };
 
   onLogout = () => {
     localStorage.removeItem("authenticationContext");
     this.setState({ authenticationContext: null });
-    this.props.router.history.push("/authentication");
+    this.props.router.history.push("/login");
     this.toastr.success("You are now logged out.");
   };
 
   onRegistration = user => {
-    this.props.router.history.push("/authentication");
+    this.props.router.history.push("/login");
     this.toastr.success("Your user account was created.")
   };
 
@@ -86,7 +86,7 @@ class App extends Component {
             } />
           } />
         <Route
-          path="/authentication"
+          path="/login"
           component={router =>
             <HomePage component={() =>
               <AuthenticationPage

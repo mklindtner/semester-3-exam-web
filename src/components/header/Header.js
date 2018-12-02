@@ -10,10 +10,17 @@ class Header extends Component {
 
   render() {
 
-    return (   
+    return (
       <header>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <a className="navbar-brand" href="#">Social</a>
+          <div className="pull-left">
+            <ul className="nav navbar-nav navbar-left">
+              <li class="nav-item">
+                <a class="nav-link" href="timeline">Timeline</a>
+              </li>
+            </ul>
+          </div>
           <div className="pull-right">
             <ul className="nav navbar-nav navbar-right">
               {this.props.app.authenticationContext != null &&
