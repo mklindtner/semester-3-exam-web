@@ -9,8 +9,6 @@ class Modal extends Component{
    shouldComponentUpdate(nextProps){
        return nextProps.show !== this.props.show || nextProps.children !== this.props.children;
    }
-
-  
    
    componentWillUpdate(){
        console.log('Modal updated')
@@ -20,7 +18,7 @@ class Modal extends Component{
 
     return(
     <div>
-    <Backdrop show={this.props.show} clicked={this.props.modalClosed} />
+    <Backdrop show={this.props.show} clicked={this.props.onClose} />
     <div className="Modal"
         style={{
             transform: this.props.show ? 'translateY(0)' : 'translateY(-100vh)',
