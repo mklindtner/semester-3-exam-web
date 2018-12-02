@@ -94,20 +94,20 @@ class PaginatedComments extends Component {
 
     createPaginationButtons = () => {
 
-        if (this.state.total == 1)
+        if (this.state.total == 0)
             return null;
 
         const lastPage = this.getLastPage();
 
         const buttons = [];
         for (let i = 1; i <= lastPage; i++)
-            buttons.push(<li key={i} onClick={() => this.page(i)} className={i === this.currentPage ? "page-item active" : "page-item"}><a class="page-link">{i}</a></li>)
+            buttons.push(<li key={i} onClick={() => this.page(i)} className={i === this.currentPage ? "page-item active" : "page-item"}><a className="page-link">{i}</a></li>)
 
         return (
-            <ul class="pagination">
-                <li onClick={() => this.page(this.currentPage - 1)} className={this.currentPage < 2 ? "page-item disabled" : "page-item"}><a class="page-link">{'<'}</a></li>
+            <ul className="pagination">
+                <li onClick={() => this.page(this.currentPage - 1)} className={this.currentPage < 2 ? "page-item disabled" : "page-item"}><a className="page-link">{'<'}</a></li>
                 {buttons}
-                <li onClick={() => this.page(this.currentPage + 1)} className={this.currentPage >= lastPage ? "page-item disabled" : "page-item"}><a class="page-link">></a></li>
+                <li onClick={() => this.page(this.currentPage + 1)} className={this.currentPage >= lastPage ? "page-item disabled" : "page-item"}><a className="page-link">></a></li>
             </ul>
         )
     }

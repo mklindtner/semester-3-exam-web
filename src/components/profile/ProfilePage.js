@@ -29,9 +29,35 @@ class ProfilePage extends Component {
         this.imageMapper = new ImageMapper();
         this.postMapper = new PostMapper();
         this.commentMapper = new CommentMapper();
-        this.userToRetrieve = props.router.match.params.user ? props.router.match.params.user : getAuthenticationContext().user.id;
+        this.userToRetrieve = this.getUserToRetrive();
         this.state = { user: null, posts: [], images: [], friends: [] };
     }
+
+    getUserToRetrive = () => {
+
+        const {user, tab} = this.props.router.match.params;
+
+        if(user == undefined && tab == undefined)
+            return getAuthenticationContext().user.id;
+
+        if(user != undefined && tab != undefined)
+            return user;
+
+        return user.match("[0-9]+") ? user : getAuthenticationContext().user.id;
+    }
+
+    getActiveTab = () => {
+        
+                const {user, tab} = this.props.router.match.params;
+        
+                if(user == undefined && tab == undefined)
+                    return "posts";
+        
+                if(user != undefined && tab != undefined)
+                    return tab;
+        
+                return user.match("[0-9]+") ? "posts" : user;
+            }
 
     componentDidMount() {
 
@@ -97,8 +123,14 @@ class ProfilePage extends Component {
             callback([]);
         })
     }
+    
+    onTabChange = (activeKey) => {
+        this.props.router.history.push(activeKey);
+    } 
 
     render() {
+
+        const activeTab = this.getActiveTab();
 
         return (
             <>
@@ -115,17 +147,17 @@ class ProfilePage extends Component {
                     <div className="col-sm-9">
                         <div id="profile-page">
                             <div className="row">
-                                <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
-                                    <Tab eventKey={1} title="Posts">
+                                <Tabs onSelect={this.onTabChange} defaultActiveKey={activeTab} id="uncontrolled-tab-example">
+                                    <Tab eventKey="posts" title="Posts">
                                         {getAuthenticationContext().user.id == this.userToRetrieve && <CreatePost onSubmit={this.onPostSubmit} />}
                                         <Posts posts={this.state.posts} />
                                         <RollingPosts user={this.userToRetrieve} fetch={this.fetchPosts} comments={this.createCommentSection} />
                                     </Tab>
-                                    <Tab eventKey={2} title="Images">
+                                    <Tab eventKey="images" title="Images">
                                         {getAuthenticationContext().user.id == this.userToRetrieve && <ImageUploadForm onSubmit={this.onImageSubmit} />}
                                         <PaginatedImageGrid pageSize={20} edit={true} fetch={this.fetchImages} />
                                     </Tab>
-                                    <Tab eventKey={3} title="Friends">
+                                    <Tab eventKey="friends" title="Friends">
                                         <FriendGrid friends={this.state.friends} />
                                     </Tab>
                                 </Tabs>

@@ -59,7 +59,7 @@ class App extends Component {
         />
         <Route exact={true} path="/" component={HomePage} />
         <Route
-          path="/profile/:user?"
+          path="/profile/:user?/:tab?"
           component={router => (
             <ProfilePage app={this.state} router={router} toastrFactory={this.toastrFactory} onLogout={this.onLogout} />
           )}
