@@ -27,7 +27,7 @@ class PaginatedComments extends Component {
     }
 
     onPrevPage = () => {
-        if (this.currentPage == 1)
+        if (this.currentPage === 1)
             return;
 
         this.page(--this.currentPage);

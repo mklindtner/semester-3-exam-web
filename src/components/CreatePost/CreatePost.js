@@ -37,7 +37,7 @@ class CreatePost extends Component {
     }
 
     isPostValidleHandler = () =>{
-        if(this.state.title == '' || this.state.content == '')
+        if(this.state.title === '' || this.state.content === '')
         this.props.history.replace('/post')
         //lav toastr her
     }

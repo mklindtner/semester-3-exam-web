@@ -25,7 +25,7 @@ export default class FriendStatus extends Component {
         Promise.all([request, friendship]).then(results => {
             this.setState({
                 sent: results[0].status === 200 ? true : false,
-                friendship: results[1].status == 200 ? results[1].body : null
+                friendship: results[1].status === 200 ? results[1].body : null
             })
         });
     }

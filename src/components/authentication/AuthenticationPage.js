@@ -3,15 +3,8 @@ import AuthenticationForm from "./AuthenticationForm";
 import { Link } from "react-router-dom";
 import './AuthenticationPage.css';
 
-class AuthenticationPage extends Component {
+const authenticationPage = (props) => {
 
-    constructor(props) {
-        super(props);
-
-        this.state = {};
-    }
-
-    render() {
         return (
             <div id="authentication-page" className="row">
                 <h2>Login</h2>
@@ -21,6 +14,6 @@ class AuthenticationPage extends Component {
             </div>
         );
     }
-}
 
-export default AuthenticationPage;
+
+export default authenticationPage;

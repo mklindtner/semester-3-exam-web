@@ -37,7 +37,7 @@ class ProfilePage extends Component {
 
         const {user, tab} = this.props.router.match.params;
 
-        if(user == undefined && tab == undefined)
+        if(user === undefined && tab === undefined)
             return getAuthenticationContext().user.id;
 
         if(user != undefined && tab != undefined)
@@ -50,10 +50,10 @@ class ProfilePage extends Component {
         
                 const {user, tab} = this.props.router.match.params;
         
-                if(user == undefined && tab == undefined)
+                if(user === undefined && tab === undefined)
                     return "posts";
         
-                if(user != undefined && tab != undefined)
+                if(user !== undefined && tab !== undefined)
                     return tab;
         
                 return user.match("[0-9]+") ? "posts" : user;
@@ -136,12 +136,12 @@ class ProfilePage extends Component {
             <>
             <Header app={this.props.app} router={this.props.router} onLogout={this.props.onLogout} />
             <main id="profile-page" className="container">
-                {this.state.user != null && <div className="row">
+                {this.state.user !== null && <div className="row">
                     <div className="col-sm-3">
                         <div>
                             <LargeProfilePicture width="100%" height="auto" user={this.state.user} />
                             <h2 className="profile-name">{this.state.user.name}</h2>
-                            {getAuthenticationContext().user.id != this.userToRetrieve && <FriendStatus other={this.userToRetrieve} toastrFactory={this.props.toastrFactory}/>}
+                            {getAuthenticationContext().user.id !== this.userToRetrieve && <FriendStatus other={this.userToRetrieve} toastrFactory={this.props.toastrFactory}/>}
                         </div>
                     </div>
                     <div className="col-sm-9">
@@ -149,12 +149,12 @@ class ProfilePage extends Component {
                             <div className="row">
                                 <Tabs onSelect={this.onTabChange} defaultActiveKey={activeTab} id="uncontrolled-tab-example">
                                     <Tab eventKey="posts" title="Posts">
-                                        {getAuthenticationContext().user.id == this.userToRetrieve && <CreatePost onSubmit={this.onPostSubmit} />}
+                                        {getAuthenticationContext().user.id === this.userToRetrieve && <CreatePost onSubmit={this.onPostSubmit} />}
                                         <Posts posts={this.state.posts} />
                                         <RollingPosts user={this.userToRetrieve} fetch={this.fetchPosts} comments={this.createCommentSection} />
                                     </Tab>
                                     <Tab eventKey="images" title="Images">
-                                        {getAuthenticationContext().user.id == this.userToRetrieve && <ImageUploadForm onSubmit={this.onImageSubmit} />}
+                                        {getAuthenticationContext().user.id === this.userToRetrieve && <ImageUploadForm onSubmit={this.onImageSubmit} />}
                                         <PaginatedImageGrid pageSize={20} edit={true} fetch={this.fetchImages} />
                                     </Tab>
                                     <Tab eventKey="friends" title="Friends">

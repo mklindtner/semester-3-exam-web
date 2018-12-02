@@ -2,11 +2,8 @@ import React from "react";
 import './FriendGrid.css';
 import LargeProfilePicture from '../components/images/LargeProfilePicture';
 
-class FriendGrid extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  render = () => {
+const friendGrid  = () => {
+
     return (
       <div className="col-12 friend-grid-container">
         <div className="row text-center text-lg-left">
@@ -22,6 +19,6 @@ class FriendGrid extends React.Component {
       </div>
     )
   }
-}
 
-export default FriendGrid;
+
+export default friendGrid;
