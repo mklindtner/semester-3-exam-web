@@ -12,9 +12,3 @@
     transition: all 0.5s ease-out;
     text-align: center;
 }
-
-@media (min-width: 600px) {
-    .Modal {
-        width: 750px;
-    }
-}
