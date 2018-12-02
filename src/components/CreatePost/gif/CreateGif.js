@@ -2,47 +2,33 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./CreateGif.css";
 
-
-
 class CreateGif extends Component {
-  state = {
-    api: "http://api.giphy.com/v1/gifs/random",
-    mood: "Happy",
-    apikey: "BwtD6SkWywtWl6Y9yOdnlXKbkmezp1M9",
-    imageData: null,
-    fileData: null,
-    PictureData: null,
-    isPicture: false,
-    showpic: false,
-    hover: false,
-    submitted: false
-  };
 
-  componentWillReceiveProps(newProps){
-    if(newProps.modalImageData){
-      this.setState({imageData: this.props.modalImageData})
+  constructor(props) {
+    super(props);
+  
+    this.state = {
+      currentImage: null,
+      showpic: false,
+      hover: false,
     }
   }
 
-
-  runTimer = e => {
-    e.preventDefault();
-    axios
-      .get(
-        `${this.state.api}?api_key=${this.state.apikey}&tag=${this.state.mood}&limit=1`
-      )
+  getGif = mood => {
+    axios.get(`http://api.giphy.com/v1/gifs/random?api_key=BwtD6SkWywtWl6Y9yOdnlXKbkmezp1M9&tag=${mood}&limit=1`)
       .then(response => {
-        console.log(response.data.data.images.original.url);
         this.setState({
-          imageData: response.data.data.images.original.url,
-          showpic: true,
-        });
-        console.log(this.state.mood);
-      });
-  };
+          currentImage: {
+            type: "URL",
+            src: response.data.data.images.original.url,
+            toSubmit: response.data.data.images.original.url
+          }
+        })
+      })
+  }
 
   deleteHandler = () => {
-    this.setState({ showpic: false, imageData: "" });
+    this.setState({ showpic: false, currentImage: null });
   };
 
   toggleHoverOn = () => {
@@ -53,45 +39,26 @@ class CreateGif extends Component {
     this.setState({ hover: false });
   };
 
-
-
-  handleSelectedFile = (event) =>{
-    event.preventDefault();
+  onFileSelected = (event) => {
     const reader = new FileReader();
     reader.readAsDataURL(event.target.files[0]);
     this.setState({
-        fileData: event.target.files[0],
-        imageData: URL.createObjectURL(event.target.files[0])
-    })
-    console.log(URL.createObjectURL(event.target.files[0]))
-  
-  };
-
-
-  addImageHandler = (event) =>{
-    event.preventDefault();
-    console.log(this.state.imageData);
-    console.log("AIDS");
-    if(this.state.fileData !== null){
-    const reader = new FileReader();
-    reader.readAsDataURL(this.state.fileData);
-    reader.onload = () => {
-        let data = reader.result.replace(/^data:(.*;base64,)?/, '');
-        if ((data.length % 4) > 0) {
-            data += '='.repeat(4 - (data.length % 4));
-        }
-        this.props.onSelectUrl(this.state.imageData);
+      currentImage: {
+        type: "FILE",
+        src: URL.createObjectURL(event.target.files[0]),
+        toSubmit: event.target.files[0]
       }
-  }else if(this.state.imageData){
-    this.props.onSelectUrl(this.state.imageData);
-  }else{
-  //lav toastr fejl
-  console.log("sut min dodo");
-}
+    })
+  }
+
+
+  addImageHandler = (event) => {
+    this.props.onImageAdded(this.state.currentImage);
+    this.setState({ currentImage: null });
   }
 
   render() {
-   
+
     var imageStyle;
     if (this.state.hover) {
       imageStyle = {
@@ -99,26 +66,16 @@ class CreateGif extends Component {
         position: "relative",
         cursor: "pointer",
         transition: "0.6s",
-        width: "400px",
-        height: "400px"
-      };
-    } else {
-      imageStyle = {
-        /* kode til hvilken width og height */
-        width: "400px",
-        height: "400px"
       };
     }
 
     return (
-      <div>
-        
-        <input type="file" onChange={this.handleSelectedFile} name="file" id="" />
-        <div className="Create-Image">Mood of the day!</div>
+      <div className="image-selector">
+        <input type="file" onChange={this.onFileSelected} name="file" id="" />
         <form id="Query-form">
           <select
             value={this.state.mood}
-            onChange={event => this.setState({ mood: event.target.value })}
+            onChange={event => this.getGif(event.target.value)}
           >
             <option value="Happy">Happy</option>
             <option value="Lit">Lit</option>
@@ -132,16 +89,11 @@ class CreateGif extends Component {
             <option value="Sheldon">Like Tor browser Tommy</option>
           </select>
         </form>
-
-        <button className="mood-button" onClick={this.runTimer}>
-          Get today's GIF
-        </button>
-        <p>Mood is: {this.state.mood}</p>
-        {this.state.imageData && (
+        {this.state.currentImage && (
           <div>
-              <img
+            <img
               style={imageStyle}
-              src={this.state.imageData}
+              src={this.state.currentImage.src}
               alt="mood"
               onClick={this.deleteHandler}
               onMouseEnter={this.toggleHoverOn}
@@ -150,9 +102,8 @@ class CreateGif extends Component {
             />
           </div>
         )}
-        <button onClick={this.addImageHandler}>Add image to Post</button>
+        {this.state.currentImage && <button onClick={this.addImageHandler}>Add image to Post</button>}
       </div>
-      
     );
   }
 }

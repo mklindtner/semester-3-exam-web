@@ -35,18 +35,23 @@ class ProfilePage extends Component {
 
     getUserToRetrive = () => {
 
-        const {user, tab} = this.props.router.match.params;
+        const { user, tab } = this.props.router.match.params;
 
+<<<<<<< HEAD
         if(user === undefined && tab === undefined)
+=======
+        if (user == undefined && tab == undefined)
+>>>>>>> ec16e4879679db517c5ac739870276810b611ab3
             return getAuthenticationContext().user.id;
 
-        if(user != undefined && tab != undefined)
+        if (user != undefined && tab != undefined)
             return user;
 
         return user.match("[0-9]+") ? user : getAuthenticationContext().user.id;
     }
 
     getActiveTab = () => {
+<<<<<<< HEAD
         
                 const {user, tab} = this.props.router.match.params;
         
@@ -58,6 +63,19 @@ class ProfilePage extends Component {
         
                 return user.match("[0-9]+") ? "posts" : user;
             }
+=======
+
+        const { user, tab } = this.props.router.match.params;
+
+        if (user == undefined && tab == undefined)
+            return "posts";
+
+        if (user != undefined && tab != undefined)
+            return tab;
+
+        return user.match("[0-9]+") ? "posts" : user;
+    }
+>>>>>>> ec16e4879679db517c5ac739870276810b611ab3
 
     componentDidMount() {
 
@@ -123,10 +141,18 @@ class ProfilePage extends Component {
             callback([]);
         })
     }
-    
+
     onTabChange = (activeKey) => {
+        const { user, tab } = this.props.router.match.params;
+
+        if (user == undefined && tab == undefined)
+        this.props.router.history.push("/profile/" + activeKey);
+
+        if (user != undefined && tab != undefined)
+        this.props.router.history.push("/profile/" + user  + "/" + activeKey);
+
         this.props.router.history.push(activeKey);
-    } 
+    }
 
     render() {
 
@@ -141,7 +167,11 @@ class ProfilePage extends Component {
                         <div>
                             <LargeProfilePicture width="100%" height="auto" user={this.state.user} />
                             <h2 className="profile-name">{this.state.user.name}</h2>
+<<<<<<< HEAD
                             {getAuthenticationContext().user.id !== this.userToRetrieve && <FriendStatus other={this.userToRetrieve} toastrFactory={this.props.toastrFactory}/>}
+=======
+                            {getAuthenticationContext().user.id != this.userToRetrieve && <FriendStatus other={this.userToRetrieve} toastrFactory={this.props.toastrFactory} />}
+>>>>>>> ec16e4879679db517c5ac739870276810b611ab3
                         </div>
                     </div>
                     <div className="col-sm-9">
