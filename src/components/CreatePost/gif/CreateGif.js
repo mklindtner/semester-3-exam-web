@@ -66,20 +66,11 @@ class CreateGif extends Component {
         position: "relative",
         cursor: "pointer",
         transition: "0.6s",
-        width: "400px",
-        height: "400px"
-      };
-    } else {
-      imageStyle = {
-        /* kode til hvilken width og height */
-        width: "400px",
-        height: "400px"
       };
     }
 
     return (
-      <div>
-
+      <div className="image-selector">
         <input type="file" onChange={this.onFileSelected} name="file" id="" />
         <form id="Query-form">
           <select
