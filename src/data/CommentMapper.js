@@ -1,5 +1,5 @@
 import config from '../config.js';
-import {get, post} from './DataMapper';
+import {get, post, deleter} from './DataMapper';
 
 class CommentMapper {
 
@@ -11,6 +11,10 @@ class CommentMapper {
 
     getPostComments(postId, pageSize, pageNumber) {
         return get(config.restUrl + `posts/${postId}/comments/page/${pageSize}/${pageNumber}`);
+    }
+
+    deletePostComments(postId, commentId){
+        return deleter(config.restUrl + `posts/${postId}/comments/${commentId}`);
     }
 
     getPostCommentsCount(postId){

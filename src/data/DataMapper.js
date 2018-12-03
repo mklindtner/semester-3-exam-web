@@ -27,7 +27,8 @@ function deleter(url, entity) {
             "Content-Type": "application/json",
             "Accept": "application/json",
             "Authorization": "Bearer " + getToken()
-        }
+        },
+        body: JSON.stringify(entity)
     }).then(response =>{
         status = response.status;
         return response.json();
@@ -83,6 +84,7 @@ function getToken(){
 
 export {
     get,
+    deleter,
     post,
     put
 }
