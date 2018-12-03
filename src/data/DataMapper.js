@@ -26,9 +26,15 @@ function deleter(url, entity) {
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json",
-            "Authorization": 
+            "Authorization": "Bearer " + getToken()
         }
-    })
+    }).then(response =>{
+        status = response.status;
+        return response.json();
+    }).then(body => Promise.resolve({
+        status,
+         body,
+    }))
 }
 
 function get(url) {
