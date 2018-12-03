@@ -98,13 +98,16 @@ class ProfilePage extends Component {
     }
 
     onPostSubmit = (post, callback) => {
-        this.postMapper.submitTextPost(post).then(response => {
+        this.postMapper.createPost(post).then(response => {
             if (response.status === 201) {
-                this.props.toastrFactory().success("The post was created.");
                 this.setState(prevState => {
                     prevState.posts.unshift(response.body);
                     return { posts: prevState.posts };
-                }, () => callback(response.body));
+                }, () => {
+                    this.props.toastrFactory().success("The post was created.");
+                    callback(response.body)
+                });
+
                 return;
             }
 
@@ -128,13 +131,19 @@ class ProfilePage extends Component {
 
         const { user, tab } = this.props.router.match.params;
 
-        if (user == undefined && tab == undefined)
-            this.props.router.history.push("/profile/" + this.userToRetrieve + activeKey);
+        console.log({user, tab, activeKey});
 
-        if (user != undefined && tab != undefined)
+        if (user == undefined && tab == undefined) {
+            this.props.router.history.push("/profile/" + activeKey);
+            return;
+        }
+
+        if (user != undefined && tab != undefined) {
             this.props.router.history.push("/profile/" + this.userToRetrieve + "/" + activeKey);
+            return;
+        }
 
-        this.props.router.history.push(activeKey);
+        this.props.router.history.push("/profile/" + this.userToRetrieve + "/" + activeKey);
     }
 
     render() {
@@ -158,7 +167,8 @@ class ProfilePage extends Component {
                             <div className="row">
                                 <Tabs onSelect={this.onTabChange} defaultActiveKey={activeTab} id="uncontrolled-tab-example">
                                     <Tab eventKey="posts" title="Posts">
-                                        {getAuthenticationContext().user.id === this.userToRetrieve && <CreatePost onSubmit={this.onPostSubmit} />}
+                                        {getAuthenticationContext().user.id === this.userToRetrieve &&
+                                            <CreatePost onSubmit={this.onPostSubmit} />}
                                         <Posts posts={this.state.posts} />
                                         <RollingPosts user={this.userToRetrieve} fetch={this.fetchPosts} comments={this.createCommentSection} />
                                     </Tab>

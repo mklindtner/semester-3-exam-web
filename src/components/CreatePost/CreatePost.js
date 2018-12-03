@@ -32,7 +32,7 @@ class CreatePost extends Component {
 
     submitPostHandler = (e) => {
 
-  e.preventDefault();
+        e.preventDefault();
 
         const post = {
             contents: this.state.content,
@@ -40,7 +40,7 @@ class CreatePost extends Component {
         }
 
         this.setState({ showLoading: true });
-        this.postMapper.createPost(post).then(response => {
+        this.props.onSubmit(post, response => {
             this.setState({ showLoading: false })
         });
     }
