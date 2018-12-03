@@ -4,9 +4,11 @@ class SmallProfilePicture extends React.Component {
 
   render() {
     const styles = {
-      width: this.props.width ===undefined ? '50px' : this.props.width,
+      width: this.props.width === undefined ? '50px' : this.props.width,
       height: this.props.height === undefined ? '50px' : this.props.height
     };
+
+    console.log(this.props.user.profilePicture);
 
     if (this.props.user.profilePicture === undefined || this.props.user.profilePicture.thumbnail === undefined)
       return <img className="profile-picture small" style={styles} src="/pictures/smallProfilePicture.svg" alt={this.props.user.name} />
