@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import ImageMapper from '../../data/ImageMapper';
 import ImageGrid from './ImageGrid';
-import Spinner from '../ui/Spinner';
+import Spinner from '../UI/Spinner/Spinner';
 import getAuthenticationContext from "../../getAuthenticationContext";
 import ImageUploadForm from '../images/ImageUploadForm';
 
@@ -24,7 +24,7 @@ class PaginatedImageGrid extends Component {
 
         if (pageNumber < 1)
             return;
-        if (this.state.count != -1 && pageNumber > Math.ceil(this.state.count / this.props.pageSize))
+        if (this.state.count !== -1 && pageNumber > Math.ceil(this.state.count / this.props.pageSize))
             return;
 
         if (!this.state.loading)

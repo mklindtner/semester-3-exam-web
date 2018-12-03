@@ -1,40 +1,62 @@
-.jumbotron {
-    font-style: italic;
+.post {
     color: black;
-    padding: 10px;
-
-}
-
-.jumbotron p {
-    font-size: 13px;
-    font-style: oblique;
-}
-
-#content {
-    font-family: normal;
-    padding: 2px;
-    font-size: 23px;
-    color: black;
-}
-
-.pb-cmnt-container {
-    font-family: Lato;
-    margin-top: 100px;
-}
-
-.pb-cmnt-textarea {
-    resize: none;
     padding: 20px;
-    height: 130px;
-    width: 100%;
-    border: 1px solid #F2F2F2;
+    font-size: 16px;   
+    background: #efefef;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
 }
 
-.vertical-center {
-    min-height: 100%;
-    /* Fallback for browsers do NOT support vh unit */
-    min-height: 100vh;
-    /* These two lines are counted as one :-)       */
-    display: flex;
-    align-items: center;
+.post .post-header {
+    margin-bottom: 10px;
+    overflow: auto;
+}
+
+.post .author {
+    font-weight: bold;
+    float: left;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.post .created {
+    font-weight: bold;
+    float:right;
+    margin-top: 10px;
+}
+
+.post .author-pic {
+    float:left;
+}
+
+.post-gallery {
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+.post-gallery-full {
+    border-bottom: 1px solid #ddd;
+}
+
+.post-gallery-full {
+    background: #111;
+}
+
+.post-gallery-full img{
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
+}
+
+.post-gallery-thumbnails {
+    overflow: auto;
+}
+
+.post-gallery-thumbnail-container {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-right: 1px solid #ddd;
+    float:left;
+    cursor: pointer;
 }

@@ -26,6 +26,32 @@ class UserMapper {
     getFriends = (user) => {
         return get(config.restUrl + `users/${user}/friends`);
     }
+
+    sendFriendRequest(receiver){
+        return post(config.restUrl + `friendship/requests`, {
+            receiver
+        });
+    }
+
+    acceptFriendRequest(requestId){
+        return post(config.restUrl + `friendship/requests/${requestId}/accept`);
+    }
+
+    rejectFriendRequest(requestId){
+        return post(config.restUrl + `friendship/requests/${requestId}/reject`);
+    }
+
+    getFriendship(other){
+        return get(config.restUrl + `friendship/receiver/${other}`);
+    }
+
+    getSentFriendRequest(receiver){
+        return get(config.restUrl + `friendship/requests/receiver/${receiver}`);
+    }
+
+    getReceivedFriendRequests(){
+        return get(config.restUrl + `friendship/requests/received`);
+    }
 }
 
 export default UserMapper;

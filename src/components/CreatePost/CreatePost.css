@@ -1,0 +1,32 @@
+#formControlsTextarea {
+    font-size: 14px;
+}
+
+.create-post-thumbnails {
+    overflow: auto;
+    margin-top: 20px;
+}
+
+.thumbnail-container {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    float:left;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.thumbnail-container img {
+    object-fit: cover;
+    height: -webkit-fill-available;
+}
+
+.thumbnail-container img:hover {
+    transform: scale(1.1);
+    transition: 0.4s;
+}
+
+.create-post input[type="submit"]{
+    margin-bottom: 20px;
+}

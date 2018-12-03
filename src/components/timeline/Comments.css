@@ -1,0 +1,23 @@
+.comments {
+    padding: 0;
+}
+
+.comment {
+    list-style: none;
+    margin-bottom: 20px;
+    border-left: 2px solid black;
+    padding-left: 30px;
+}
+
+.comment-header {
+    overflow: auto;
+}
+
+.comment-author-name {
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+.comment-created-at {
+    font-weight: bold;
+}

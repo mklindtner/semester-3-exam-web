@@ -4,7 +4,7 @@ import config from '../config.js'
 class ImageMapper {
 
     constructor(authorization) {
-        this.authorization = authorization == undefined ? "" : authorization;
+        this.authorization = authorization === undefined ? "" : authorization;
     }
 
     create(image) {

@@ -12,7 +12,7 @@ code {
 
 main {
   margin: 0 auto;
-  padding: 20px;
+  padding: 20px 50px;
   max-width: 1200px;
 }
 
@@ -21,13 +21,8 @@ p {
   line-height: 28px;
 }
 
-header {
-  height: 75px;
-  padding-top: 12px;
-  background-image: url("http://www.psdgraphics.com/file/2017/abstract-geometric-background.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+main {
+  padding-top: 120px;
 }
 
 .navbar-brand {
@@ -43,17 +38,11 @@ header {
   border: 1px solid #ddd;
   padding: 20px;
   margin-bottom: 20px;
+  background: #eee;
 }
 
 .content-header {
-  background-image: url("http://www.psdgraphics.com/file/2017/abstract-geometric-background.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  margin: -20px -20px 20px -20px;
-  padding: 10px;
   font-weight: bold;
-  color: white;
 }
 
 .control-label {
@@ -63,4 +52,17 @@ header {
 
 .row {
   margin-bottom: 20px;
+}
+
+a {
+  cursor: pointer;
+}
+
+a.disabled {
+  color: grey;
+}
+
+a.disabled:hover {
+  cursor: default;
+  text-decoration: none;
 }

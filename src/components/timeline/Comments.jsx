@@ -1,27 +1,21 @@
 import React from "react";
+import './Comments.css';
+
 class Comments extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+
   render() {
+
     return (
-      <>
-        <div class="container">
-          <div class="row">
-            <div class="col-md-6 col-md-offset-3">
-              <textarea
-                placeholder="Comment something!"
-                class="pb-cmnt-textarea"
-              />
-              <form class="form-inline" />
+      <ul className="comments">
+        {this.props.comments.map(comment =>
+          <li className="comment" key={comment.id}>
+            <div className="comment-header">
+              <p className="comment-author-name">{comment.author.name}</p>
             </div>
-          </div>
-          <div class="row">
-          <input className="btn"></input>
-          </div>
-        </div>
-      </>
+            <p className="comment-content">{comment.contents}</p>
+          </li>
+        )}
+      </ul>
     );
   }
 }

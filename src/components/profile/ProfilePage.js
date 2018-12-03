@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import UserMapper from "../../data/UserMapper";
 import ImageMapper from "../../data/ImageMapper";
+import CommentMapper from "../../data/CommentMapper";
 import PostMapper from "../../data/PostMapper";
 import { Tabs, Tab } from "react-bootstrap";
 import Header from "../header/Header";
@@ -13,6 +14,11 @@ import CreatePost from "../CreatePost/CreatePost";
 import RollingPosts from "../timeline/RollingPosts";
 import Posts from "../timeline/Posts";
 import FriendGrid from "../FriendGrid";
+import PaginatedComments from "../timeline/PaginatedComments";
+import LargeProfilePicture from '../images/LargeProfilePicture';
+import FriendStatus from "./FriendStatus";
+
+import './ProfilePage.css';
 
 class ProfilePage extends Component {
 
@@ -22,8 +28,35 @@ class ProfilePage extends Component {
         this.userMapper = new UserMapper();
         this.imageMapper = new ImageMapper();
         this.postMapper = new PostMapper();
-        this.userToRetrieve = props.router.match.params.user ? props.router.match.params.user : getAuthenticationContext().user.id;
+        this.commentMapper = new CommentMapper();
+        this.userToRetrieve = this.getUserToRetrive();
         this.state = { user: null, posts: [], images: [], friends: [] };
+    }
+
+    getUserToRetrive = () => {
+
+        const { user, tab } = this.props.router.match.params;
+
+        if (user == undefined && tab == undefined)
+            return getAuthenticationContext().user.id;
+
+        if (user != undefined && tab != undefined)
+            return user;
+
+        return user.match("[0-9]+") ? user : getAuthenticationContext().user.id;
+    }
+
+    getActiveTab = () => {
+
+        const { user, tab } = this.props.router.match.params;
+
+        if (user == undefined && tab == undefined)
+            return "posts";
+
+        if (user != undefined && tab != undefined)
+            return tab;
+
+        return user.match("[0-9]+") ? "posts" : user;
     }
 
     componentDidMount() {
@@ -91,41 +124,97 @@ class ProfilePage extends Component {
         })
     }
 
+    onTabChange = (activeKey) => {
+
+        const { user, tab } = this.props.router.match.params;
+
+        if (user == undefined && tab == undefined)
+            this.props.router.history.push("/profile/" + this.userToRetrieve + activeKey);
+
+        if (user != undefined && tab != undefined)
+            this.props.router.history.push("/profile/" + this.userToRetrieve + "/" + activeKey);
+
+        this.props.router.history.push(activeKey);
+    }
+
     render() {
+
+        const activeTab = this.getActiveTab();
 
         return (
             <>
             <Header app={this.props.app} router={this.props.router} onLogout={this.props.onLogout} />
-            <main id="profile-page">
-                {this.state.user != null && <div id="profile-page" className="row">
-                    <div className="row">
-                        <div className="col-xl">
-                            <img src={this.state.user.profilePicture.src} />
-                            <h2>{this.state.user.name}</h2>
+            <main id="profile-page" className="container">
+                {this.state.user !== null && <div className="row">
+                    <div className="col-sm-3">
+                        <div>
+                            <LargeProfilePicture width="100%" height="auto" user={this.state.user} />
+                            <h2 className="profile-name">{this.state.user.name}</h2>
+                            {getAuthenticationContext().user.id !== this.userToRetrieve && <FriendStatus other={this.userToRetrieve} toastrFactory={this.props.toastrFactory} />}
                         </div>
                     </div>
-                    <div className="row">
-                        <div className="col-xl">
-                            <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
-                                <Tab eventKey={1} title="Posts">
-                                    {getAuthenticationContext().user.id === this.userToRetrieve && <CreatePost onSubmit={this.onPostSubmit} />}
-                                    <Posts posts={this.state.posts} />
-                                    <RollingPosts user={this.userToRetrieve} fetch={this.fetchPosts} />
-                                </Tab>
-                                <Tab eventKey={2} title="Images">
-                                    {getAuthenticationContext().user.id === this.userToRetrieve && <ImageUploadForm onSubmit={this.onImageSubmit} />}
-                                    <PaginatedImageGrid pageSize={20} edit={true} fetch={this.fetchImages} />
-                                </Tab>
-                                <Tab eventKey={3} title="Friends">
-                                    <FriendGrid friends={this.state.friends} />
-                                </Tab>
-                            </Tabs>
+                    <div className="col-sm-9">
+                        <div id="profile-page">
+                            <div className="row">
+                                <Tabs onSelect={this.onTabChange} defaultActiveKey={activeTab} id="uncontrolled-tab-example">
+                                    <Tab eventKey="posts" title="Posts">
+                                        {getAuthenticationContext().user.id === this.userToRetrieve && <CreatePost onSubmit={this.onPostSubmit} />}
+                                        <Posts posts={this.state.posts} />
+                                        <RollingPosts user={this.userToRetrieve} fetch={this.fetchPosts} comments={this.createCommentSection} />
+                                    </Tab>
+                                    <Tab eventKey="images" title="Images">
+                                        {getAuthenticationContext().user.id === this.userToRetrieve && <ImageUploadForm onSubmit={this.onImageSubmit} />}
+                                        <PaginatedImageGrid pageSize={20} edit={true} fetch={this.fetchImages} />
+                                    </Tab>
+                                    <Tab eventKey="friends" title="Friends">
+                                        <FriendGrid friends={this.state.friends} />
+                                    </Tab>
+                                </Tabs>
+                            </div>
                         </div>
                     </div>
                 </div>}
             </main>
             </>
         );
+    }
+
+    onCommentSubmit = (postId, contents, resultCallback) => {
+        this.commentMapper.createPostComment(postId, contents).then(response => {
+            if (response.status === 201) {
+                this.props.toastrFactory().success("The comment was posted.");
+                resultCallback(response.body);
+                return;
+            }
+
+            this.props.toastrFactory().success("The comment was not posted.");
+            resultCallback(false);
+        })
+    }
+
+    createCommentSection = (postId) => {
+        return <PaginatedComments
+            parent={postId}
+            onCommentSubmit={(content, resultCallback) => this.onCommentSubmit(postId, content, resultCallback)}
+            pageSize={10}
+            fetch={this.fetchComments} />
+    }
+
+    fetchComments = (postId, pageSize, pageNumber, callback) => {
+
+        const comments = this.commentMapper.getPostComments(postId, pageSize, pageNumber);
+        const count = this.commentMapper.getPostCommentsCount(postId);
+
+        Promise.all([comments, count]).then(results => {
+
+            if (results[0].status === 200 && results[0].status === 200) {
+                callback(results[0].body, results[1]);
+                return;
+            }
+
+            this.props.toastrFactory().error("Could not fetch comments.");
+            callback([], 0);
+        });
     }
 }
 

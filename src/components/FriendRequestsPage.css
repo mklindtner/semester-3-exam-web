@@ -1,0 +1,30 @@
+.friend-request {
+    background: #eee;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.friend-request .profile-picture {
+    margin: 0 auto;
+    display: block;
+}
+
+.friend-request .friend-request-actions {
+    overflow: auto;
+}
+
+.friend-request .friend-request-actions button {
+    padding: 10px 20px;
+}
+
+.friend-request .friend-request-actions .accept {
+    float: right;
+}
+
+.friend-request .friend-request-name {
+    font-weight: bold;
+    margin: 10px 0px;
+    text-align: center;
+}
+

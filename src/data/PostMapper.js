@@ -2,8 +2,8 @@ import { post, get } from './DataMapper'
 import config from '../config.js'
 
 class PostMapper {
-  submitTextPost = (submittedPost) => {
-    return post(config.restUrl + 'posts/text', submittedPost)
+  createPost = (postToSubmit) => {
+    return post(config.restUrl + 'posts', postToSubmit)
   }
 
   getRollingPosts(user, pageSize, cutoff) {

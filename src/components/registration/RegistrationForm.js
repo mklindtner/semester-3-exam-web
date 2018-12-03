@@ -45,6 +45,7 @@ class RegistrationForm extends Component {
         const { stage, errors } = this.state;
 
         return (
+            <>
             <form>
                 {stage === 1 && this.renderFirstStage()}
                 {stage === 2 && this.renderSecondStage()}
@@ -56,6 +57,7 @@ class RegistrationForm extends Component {
                     )}
                 </div>}
             </form>
+            </>
         );
     }
 
@@ -68,7 +70,7 @@ class RegistrationForm extends Component {
     onGenderChange = (event) => {
         event.persist();
         const value = event.target.value;
-        this.setState({gender: value});
+        this.setState({ gender: value });
     }
 
     onCountryChange = (event) => {
@@ -94,7 +96,7 @@ class RegistrationForm extends Component {
     }
 
     onDateOfBirthChange = (value) => {
-        this.setState({dateOfBirth: value});
+        this.setState({ dateOfBirth: value });
     }
 
     renderFirstStage = () => {
@@ -170,8 +172,14 @@ class RegistrationForm extends Component {
             dateOfBirth: new Date(this.state.dateOfBirth).toISOString().substring(0, 10),
         }
 
-        if(user.password !== user.passwordRepeat){
-            this.setState({errors: ["The two passwords must match."]});
+
+        if (user.password.length < 4) {
+            this.setState({ errors: ["The password must be longer than 3 characters."] });
+            return;
+        }
+
+        if (user.password !== user.passwordRepeat) {
+            this.setState({ errors: ["The two passwords must match."] });
             return;
         }
 
@@ -237,7 +245,7 @@ class RegistrationForm extends Component {
                     onChange={this.onDefaultChange}
                 />
                 <Button onClick={() => this.setState({ stage: this.state.stage - 1 })}>Previous</Button>
-                <Button style={{marginLeft: '20px'}} onClick={this.onSubmit}>Register account</Button>
+                <Button style={{ marginLeft: '20px' }} onClick={this.onSubmit}>Register account</Button>
             </FormGroup>
         )
     }

@@ -5,11 +5,14 @@ import Timeline from "./components/timeline/Timeline";
 import ProfilePage from "./components/profile/ProfilePage";
 import { createBrowserHistory } from "history";
 import "./App.css";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import CreatePost from "./components/CreatePost/CreatePost";
 import HomePage from './components/HomePage';
 import { ToastContainer, ToastMessageAnimated } from "react-toastr";
 import SettingsPage from "./components/SettingPage";
+import FriendRequestsPage from "./components/FriendRequestsPage";
+import ErrorPage from './components/Error/ErrorPage';
+
 
 class App extends Component {
   constructor(props) {
@@ -28,18 +31,18 @@ class App extends Component {
     localStorage.setItem("authenticationContext", text);
     this.setState({ authenticationContext });
     this.props.router.history.push("/profile");
-    this.toastr.success("You are now authenticated.");
+    this.toastr.success("You are now logged in.");
   };
 
   onLogout = () => {
     localStorage.removeItem("authenticationContext");
     this.setState({ authenticationContext: null });
-    this.props.router.history.push("/authentication");
+    this.props.router.history.push("/login");
     this.toastr.success("You are now logged out.");
   };
 
   onRegistration = user => {
-    this.props.router.history.push("/authentication");
+    this.props.router.history.push("/login");
     this.toastr.success("Your user account was created.")
   };
 
@@ -59,7 +62,7 @@ class App extends Component {
         {/*<Route component={ErrorPage}/>  skal testes*/}
         <Route exact={true} path="/" component={HomePage} />
         <Route
-          path="/profile/:user?"
+          path="/profile/:user?/:tab?"
           component={router => (
             <ProfilePage app={this.state} router={router} toastrFactory={this.toastrFactory} onLogout={this.onLogout} />
           )}
@@ -84,7 +87,7 @@ class App extends Component {
             } />
           } />
         <Route
-          path="/authentication"
+          path="/login"
           component={router =>
             <HomePage component={() =>
               <AuthenticationPage
@@ -96,10 +99,17 @@ class App extends Component {
           } />
         <Route
           path="/timeline"
-          component={router => <Timeline app={this.state} router={router} onLogout={this.onLogout} />}
+          component={router => <Timeline app={this.state} router={router} toastrFactory={this.toastrFactory} onLogout={this.onLogout} />}
+        />
+        <Route
+          path="/friend-requests"
+          component={router => <FriendRequestsPage app={this.state} router={router} toastrFactory={this.toastrFactory} onLogout={this.onLogout} />}
         />
         <Route path="/post" component={router => <CreatePost />} />
-      </div>
+        <Switch>
+        <Route path="*" exact={true} component={ErrorPage}></Route>
+        </Switch>
+  </div>
   </>
         );
   }

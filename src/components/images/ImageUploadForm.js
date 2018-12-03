@@ -38,7 +38,6 @@ class ImageUploadForm extends Component {
                             id="formControlsDescription"
                             type="text"
                             name="description"
-                            label="Description"
                             minLength={0}
                             placeholder="What is happening in this image?"
                         />
@@ -46,7 +45,6 @@ class ImageUploadForm extends Component {
                             id="formControlsFile"
                             type="file"
                             name="file"
-                            label="File"
                             minLength={0}
                             accepts="image/*"
                         />
