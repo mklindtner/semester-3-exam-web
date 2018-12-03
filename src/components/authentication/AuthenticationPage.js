@@ -10,7 +10,7 @@ const authenticationPage = (props) => {
                 <h2>Login</h2>
                 <p>Log in to your user account, to see new posts from your friends and family.</p>
                 <p>If you do not have an account, you can click <Link to="/registration">here</Link> to create an account.</p>
-                <AuthenticationForm onAuthentication={this.props.onAuthentication} />
+                <AuthenticationForm onAuthentication={props.onAuthentication} />
             </div>
         );
     }
