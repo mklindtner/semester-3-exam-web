@@ -13,10 +13,10 @@ class Post extends React.Component {
     }
 
     getFirstImage = () => {
-        if(this.props.post.images == undefined)
+        if (this.props.post.images == undefined)
             return null;
 
-        if(this.props.post.images.length < 1)
+        if (this.props.post.images.length < 1)
             return null;
 
         return this.props.post.images[0];
@@ -50,7 +50,7 @@ class Post extends React.Component {
     }
 
     focus = (image) => {
-        this.setState({focus: image});
+        this.setState({ focus: image });
     }
 
     renderGallery = (images) => {
@@ -59,13 +59,13 @@ class Post extends React.Component {
                 <div className="post-gallery-full">
                     <img src={this.state.focus.full} />
                 </div>
-                <div className="post-gallery-thumbnails">
+                {images.length > 1 && <div className="post-gallery-thumbnails">
                     {images.map(image =>
                         <div key={image.id} className="post-gallery-thumbnail-container" onClick={() => this.focus(image)}>
-                            <img src={image.thumbnail}/>
+                            <img src={image.thumbnail} />
                         </div>
                     )}
-                </div>
+                </div>}
             </div>
         )
     }
