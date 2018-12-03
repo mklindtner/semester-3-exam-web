@@ -131,13 +131,19 @@ class ProfilePage extends Component {
 
         const { user, tab } = this.props.router.match.params;
 
-        if (user == undefined && tab == undefined)
-            this.props.router.history.push("/profile/" + this.userToRetrieve + activeKey);
+        console.log({user, tab, activeKey});
 
-        if (user != undefined && tab != undefined)
+        if (user == undefined && tab == undefined) {
+            this.props.router.history.push("/profile/" + activeKey);
+            return;
+        }
+
+        if (user != undefined && tab != undefined) {
             this.props.router.history.push("/profile/" + this.userToRetrieve + "/" + activeKey);
+            return;
+        }
 
-        this.props.router.history.push(activeKey);
+        this.props.router.history.push("/profile/" + this.userToRetrieve + "/" + activeKey);
     }
 
     render() {
