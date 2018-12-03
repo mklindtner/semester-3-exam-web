@@ -11,4 +11,6 @@
     box-sizing: border-box;
     transition: all 0.5s ease-out;
     text-align: center;
+    max-width: 90vh;
+    max-height: 90vh;
 }

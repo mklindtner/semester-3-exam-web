@@ -54,12 +54,11 @@ class PaginatedComments extends Component {
     onCommentSubmit = (content, resultCallback) => {
         this.props.onCommentSubmit(content, (comment) => {
             // Intercept created comment, and display if successful
-
             if (comment) {
-                this.page(this.getLastPage(), () => {
-                    this.setState({ comments: this.state.comments.concat(comment) });
-                })
+                this.page(this.getLastPage());
             }
+
+            // Delegate
             resultCallback(comment);
         });
     }

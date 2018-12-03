@@ -68,6 +68,10 @@ class CreateGif extends Component {
         {this.state.currentImage && (
           <div>
             <img
+              style={{
+                maxWidth: '80vh',
+                maxHeight: '80vh'
+              }}
               src={this.state.currentImage.src}
               alt="mood"
             />
