@@ -96,6 +96,9 @@ class PaginatedComments extends Component {
         if (this.state.total == 0)
             return null;
 
+        if(this.state.total <= this.props.pageSize)
+            return null;
+
         const lastPage = this.getLastPage();
 
         const buttons = [];

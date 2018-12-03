@@ -28,3 +28,35 @@
 .post .author-pic {
     float:left;
 }
+
+.post-gallery {
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+.post-gallery-full {
+    border-bottom: 1px solid #ddd;
+}
+
+.post-gallery-full {
+    background: #111;
+}
+
+.post-gallery-full img{
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
+}
+
+.post-gallery-thumbnails {
+    overflow: auto;
+}
+
+.post-gallery-thumbnail-container {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-right: 1px solid #ddd;
+    float:left;
+    cursor: pointer;
+}
