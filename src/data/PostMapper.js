@@ -7,7 +7,7 @@ class PostMapper {
   }
 
   deletePost = (post, postTodelete) =>{
-    return delete(config.restUrl + `posts/user${post}`, postTodelete)
+    return delete(config.restUrl + `posts/user/${post}`, postTodelete)
   }
 
   getRollingPosts(user, pageSize, cutoff) {
