@@ -19,6 +19,18 @@ function post(url, entity) {
     }));
 }
 
+function deleter(url, entity) {
+    let status = -1;
+    return fetch(url, {
+        method: "DELETE", 
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": 
+        }
+    })
+}
+
 function get(url) {
     let status = -1;
     return fetch(url, {

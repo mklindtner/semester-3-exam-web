@@ -19,6 +19,10 @@ class UserMapper {
         return get(config.restUrl + "users/" + id);
     }
 
+    deleteFriendship = (user) => {
+        return delete(config.restUrl + `target/${user}` )
+    }
+
     updateProfileImage = (user, image) => {
         return put(config.restUrl + "users/" + user + "/profile-image", image);
     }
