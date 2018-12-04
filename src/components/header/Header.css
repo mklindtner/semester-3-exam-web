@@ -43,6 +43,7 @@ a.user-dropdown {
 .btn-group {
     padding-left: 0px;
     padding-top: 12px;
+    padding-right:10px;
     display: block;
     text-overflow: ellipsis; /*if text overflow last part will be ... 
     WOULD LIKE TO IMPLEMENT: overflow: hidden;*/
@@ -61,7 +62,7 @@ a.user-dropdown {
 
 @media only screen and (min-width: 470px) and (max-width: 850px) {
     .btn-group {
-        max-width: 200px;
+        max-width: 230px;
     }
 
     #timeline {

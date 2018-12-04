@@ -96,8 +96,8 @@ class Header extends Component {
                       type="button"
                       className="btn-link btn-default dropdown-toggle"
                       data-toggle="dropdown"
+                      aria-haspopup="true"
                       aria-expanded="false"
-                      name="test"
                     >
                       {this.props.app.authenticationContext.user.name}
                       <span className="caret" />
@@ -133,13 +133,13 @@ class Header extends Component {
             if (matches) {
               return (
                 <div>
-                  <a id="social" className="col-sm-1" href="#">
+                  <a id="social" className="col-xs-1" href="#">
                     Social
                   </a>
-                  <a id="timeline" className="col-sm-1" href="/timeline">
+                  <a id="timeline" className="col-xs-1" href="/timeline">
                     Timeline
                   </a>
-                  <div className="search-input col-sm-5">
+                  <div className="search-input col-xs-5">
                     <UserSearch />
                   </div>
                   <div className="text-right btn-group col-xs-5 pull-right">
