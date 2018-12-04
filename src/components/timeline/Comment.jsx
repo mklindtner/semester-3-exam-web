@@ -36,7 +36,7 @@ deleteCommentHandler = (id) =>{
   });
   console.log(indexToDelete)
   this.setState({ 
-    comments: comments.splice(indexToDelete, 0)
+   // comments: comments.splice(indexToDelete, 0)
   })
 
 }
