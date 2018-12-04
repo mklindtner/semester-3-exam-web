@@ -1,0 +1,91 @@
+.chat-container{
+    border: 1px solid #ddd;
+}
+
+.chat-header {
+    list-style: none;
+    overflow: auto;
+    padding: 0;
+    margin: 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.chat-header li {
+    float:left;
+    padding: 20px;
+    font-weight: bold;
+}
+
+.chat-header li.chat-control {
+    cursor: pointer;
+}
+
+.chat-header li.chat-control:hover {
+    background: orange;
+}
+
+.chat-friends-list {
+    padding: 0;
+}
+
+.chat-friends-item {
+    padding: 5px;
+    background: #eee;
+    list-style: none;
+    cursor: pointer;
+    overflow: auto;
+}
+
+.chat-friend-search {
+    display: block;
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+    border: 0;
+}
+
+.chat-friends-item:nth-of-type(2){
+    background: #ddd;
+}
+
+.chat-friends-item.active {
+    background: orange;
+}
+
+.chat-friends-item p {
+    margin: 0;
+    font-size: 12px;
+}
+
+.chat-show-header > *{
+    float: left;
+    margin-right: 20px;
+}
+
+.chat-friends-item > * {
+    float: left;
+    margin-right: 20px;
+}
+
+.chat-friend-status {
+    width: 10px;
+    height: 10px;
+    display:block;
+    border-radius: 10px;
+    margin: 5px;
+}
+
+.chat-friend-status.online {
+    background: greenyellow
+}
+
+.chat-friend-status.offline {
+    background: red;
+}
+
+.chat-input-message {
+    padding: 10px;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}

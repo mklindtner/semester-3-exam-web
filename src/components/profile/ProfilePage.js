@@ -131,8 +131,6 @@ class ProfilePage extends Component {
 
         const { user, tab } = this.props.router.match.params;
 
-        console.log({user, tab, activeKey});
-
         if (user == undefined && tab == undefined) {
             this.props.router.history.push("/profile/" + activeKey);
             return;
