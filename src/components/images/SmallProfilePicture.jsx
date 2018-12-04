@@ -3,8 +3,13 @@ import React from "react";
 class SmallProfilePicture extends React.Component {
   render() {
     const styles = {
+<<<<<<< HEAD
       width: this.props.width === undefined ? "50px" : this.props.width,
       height: this.props.height === undefined ? "50px" : this.props.height
+=======
+      width: this.props.width === undefined ? '50px' : this.props.width,
+      height: this.props.height === undefined ? '50px' : this.props.height
+>>>>>>> refs/remotes/origin/dev
     };
 
     if (

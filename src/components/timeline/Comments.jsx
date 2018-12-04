@@ -1,23 +1,18 @@
 import React from "react";
 import './Comments.css';
+import CommentMapper from '../../data/CommentMapper';
+import {Button} from 'react-bootstrap'
+import SingleComment from './Comment'
 
 class Comments extends React.Component {
-
-  render() {
-
-    return (
-      <ul className="comments">
-        {this.props.comments.map(comment =>
-          <li className="comment" key={comment.id}>
-            <div className="comment-header">
-              <p className="comment-author-name">{comment.author.name}</p>
-            </div>
-            <p className="comment-content">{comment.contents}</p>
-          </li>
-        )}
-      </ul>
-    );
-  }
-}
-
+  render(){
+  return (
+    <ul className="comments">
+      {this.props.comments.map(comment =>
+        <SingleComment key={comment.id} comment={comment} {...this.props}/>
+      )}
+    </ul>
+  )
+      }
+    }
 export default Comments;

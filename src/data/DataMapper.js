@@ -19,6 +19,25 @@ function post(url, entity) {
     }));
 }
 
+function deleter(url, entity) {
+    let status = -1;
+    return fetch(url, {
+        method: "DELETE", 
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": "Bearer " + getToken()
+        },
+        body: JSON.stringify(entity)
+    }).then((response, error) => {
+        status = response.status;
+        return response.json();
+    }).then(body => Promise.resolve({
+        status,
+        body,
+    }));
+}
+
 function get(url) {
     let status = -1;
     return fetch(url, {
@@ -65,6 +84,7 @@ function getToken(){
 
 export {
     get,
+    deleter,
     post,
     put
 }

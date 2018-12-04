@@ -48,28 +48,30 @@ class Post extends React.Component {
     this.setState({ focus: image });
   };
 
+  focus = image => {
+    this.setState({ focus: image });
+  };
+
   renderGallery = images => {
     return (
-      <>
-        {this.state.focus && (
-          <div className="post-gallery">
-            <div className="post-gallery-full">
-              <img src={this.state.focus.full} />
-            </div>
-            <div className="post-gallery-thumbnails">
-              {images.map(image => (
-                <div
-                  key={image.id}
-                  className="post-gallery-thumbnail-container"
-                  onClick={() => this.focus(image)}
-                >
-                  <img src={image.thumbnail} />
-                </div>
-              ))}
-            </div>
+      <div className="post-gallery">
+        <div className="post-gallery-full">
+          <img src={this.state.focus.full} />
+        </div>
+        {images.length > 1 && (
+          <div className="post-gallery-thumbnails">
+            {images.map(image => (
+              <div
+                key={image.id}
+                className="post-gallery-thumbnail-container"
+                onClick={() => this.focus(image)}
+              >
+                <img src={image.thumbnail} />
+              </div>
+            ))}
           </div>
         )}
-      </>
+      </div>
     );
   };
 }
