@@ -76,7 +76,7 @@
 }
 
 .chat-friend-status.online {
-    background: greenyellow
+    background: green;
 }
 
 .chat-friend-status.offline {

@@ -9,6 +9,8 @@ export default class ChatWindow extends Component {
         super(props);
         this.chatMapper = new ChatMapper();
         this.socket = this.createSocket();
+        this.socket.onopen = () => this.send("authentication", {token: getAuthenticationContext().token});
+        this.socket.onmessage = message => console.log(message.data);
         this.state = { friends: [], searchedFriends: [], show: null, messages: [] };
     }
 
@@ -25,7 +27,6 @@ export default class ChatWindow extends Component {
     }
 
     send = (type, object) => {
-        object.token = getAuthenticationContext().token;
         object.type = type;
         this.socket.send(JSON.stringify(object));
     }
