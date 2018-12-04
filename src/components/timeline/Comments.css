@@ -1,12 +1,14 @@
 .comments {
     padding: 0;
+
 }
 
 .comment {
     list-style: none;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     border-left: 2px solid black;
     padding-left: 30px;
+    border: 1px solid orange;
 }
 
 .comment-header {
@@ -21,3 +23,24 @@
 .comment-created-at {
     font-weight: bold;
 }
+
+.btn{
+    color: rgba(0, 0, 0, 0.534);
+    border: 1px solid grey;
+    width: 10%;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    margin-bottom: 10px;
+    float: right;
+}
+
+
+.btn:hover{
+  color: rgba(240, 255, 240, 0.521);
+  border: 1px solid orange;
+  transition: 0.4s;
+
+
+}
+

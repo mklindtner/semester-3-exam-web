@@ -18,7 +18,7 @@ class CommentMapper {
     }
 
     getPostCommentsCount(postId){
-        return get(config.restUrl + `commentparent/${postId}/count`).then(response => {
+        return get(config.restUrl + `comments/${postId}/count`).then(response => {
             return response.status === 200 ? Promise.resolve(response.body.count) : -1;
         });
     }

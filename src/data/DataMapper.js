@@ -29,13 +29,13 @@ function deleter(url, entity) {
             "Authorization": "Bearer " + getToken()
         },
         body: JSON.stringify(entity)
-    }).then(response =>{
+    }).then((response, error) => {
         status = response.status;
         return response.json();
     }).then(body => Promise.resolve({
         status,
-         body,
-    }))
+        body,
+    }));
 }
 
 function get(url) {
