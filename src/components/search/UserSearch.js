@@ -14,7 +14,6 @@ export default class UserSearch extends Component {
   fetch = async input => {
     let result = await fetch(config.restUrl + "users/search?name=" + input);
     let users = await result.json();
-    console.log(users);
     this.setState({
     users
     });
@@ -22,9 +21,9 @@ export default class UserSearch extends Component {
 
   render() {
     return (
-      <div className="">
+      <div>
         <SearchInput onSearchInputChange={this.fetch} />
-        <Users users={this.state.users} width={this.props.hitBoxWidth} />
+        <Users users={this.state.users} />
       </div>
     );
   }

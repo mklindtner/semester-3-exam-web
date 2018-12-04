@@ -1,6 +1,5 @@
 import React from 'react'
 import './ErrorPage.css'
-import BodyClassName from 'react-body-classname';
 
 const errorPage = () => {
     return(
