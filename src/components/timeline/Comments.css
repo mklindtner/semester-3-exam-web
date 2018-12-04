@@ -6,9 +6,9 @@
 .comment {
     list-style: none;
     margin-bottom: 15px;
-    border-left: 2px solid black;
+    border-left: 1.5px solid black;
     padding-left: 30px;
-    border: 1px solid orange;
+    
 }
 
 .comment-header {
@@ -24,23 +24,23 @@
     font-weight: bold;
 }
 
-.btn{
-    color: rgba(0, 0, 0, 0.534);
-    border: 1px solid grey;
-    width: 10%;
-    height: auto;
-    top: 50%;
-    left: 50%;
-    margin-bottom: 10px;
-    float: right;
+.btn {
+    font-size: 10.5px;
+    margin: 0px 5px;
+    opacity: 0.4;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    display: inline-block;
+    padding: 0.3em 1em;
+    text-decoration: none;
+    color: #67c5ff;
+    border: solid 2px rgb(219, 209, 209);
+    border-radius: 3px;
+    transition: .4s;
 }
 
-
-.btn:hover{
-  color: rgba(240, 255, 240, 0.521);
-  border: 1px solid orange;
-  transition: 0.4s;
-
-
+.btn:hover {
+    background: #67c5ff2a;
+    color: white;
+    border: solid 1px black;
 }
 
