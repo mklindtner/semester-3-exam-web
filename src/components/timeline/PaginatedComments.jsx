@@ -32,6 +32,13 @@ class PaginatedComments extends Component {
 
         this.page(--this.currentPage);
     }
+    
+    
+    deleteCommentHandler = (indexToDelete) =>{
+        console.log(this.state.comments)
+        this.state.comments.splice(indexToDelete, 1)
+        console.log(this.state.comments)
+        }
 
     page = (pageNumber, done) => {
 
@@ -80,7 +87,7 @@ class PaginatedComments extends Component {
         return (
             <div className="paginated-comments">
                 <a style={{ marginBottom: '10px', display: 'block' }} onClick={this.toggleVisibility}>{closed ? "Show comments." : "Hide comments"}</a>
-                {closed ? null : <Comments comments={this.state.comments} />}
+                {closed ? null : <Comments comments={this.state.comments} clicked={this.deleteCommentHandler} />}
                 {closed ? null : this.createPaginationButtons()}
                 {closed ? null : <CommentForm onSubmit={this.onCommentSubmit} />}
             </div>

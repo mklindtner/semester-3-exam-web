@@ -1,6 +1,7 @@
 import React from "react";
 import Comments from "./Comments";
 import SmallProfilePicture from '../images/SmallProfilePicture'
+import * as ReactBootstrap from 'react-bootstrap';
 
 class Post extends React.Component {
 
@@ -22,9 +23,25 @@ class Post extends React.Component {
         return this.props.post.images[0];
     }
 
+  
+
     render = () => {
+        let dropdownStyle = {
+      
+            marginBottom: '5px'
+        }
         return (
             <div className="post" key={this.props.post.id}>
+            <div className="dropdown-div">
+            <ReactBootstrap.DropdownButton
+            bsStyle={'info'}
+           style={dropdownStyle}
+            title={'Edit'}
+            key={this.props.id}
+            >
+            <ReactBootstrap.MenuItem>Delete</ReactBootstrap.MenuItem>
+            </ReactBootstrap.DropdownButton>
+            </div>
                 <div className="post-header">
                     <div className="author-pic">
                         <SmallProfilePicture user={this.props.post.author} />

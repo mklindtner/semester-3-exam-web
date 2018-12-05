@@ -16,6 +16,8 @@ class SingleComment extends React.Component {
  
   }
 
+  
+
   componentDidMount(){
     console.log(this.props.comments)
   }
@@ -34,10 +36,8 @@ deleteCommentHandler = (id) =>{
   let indexToDelete = this.props.comments.findIndex((comment) =>{
     return comment.id === id;
   });
-  console.log(indexToDelete)
-  this.setState({ 
-    comments: comments.splice(indexToDelete, 0)
-  })
+ this.props.clicked(indexToDelete)
+ console.log('we ar here')
 
 }
 
@@ -50,13 +50,13 @@ deleteCommentHandler = (id) =>{
             <div className="comment-header">
               <p className="comment-author-name">{comment.author.name}</p>
               <Button 
-            className="btn delete-btn"
+            className="btn-comment delete-btn"
             disabled={this.state.loading}
              onClick={() => this.deleteCommentHandler(comment.id)}>
              {this.state.loading ? 'Deleting comment': 'Delete'}
             </Button>
             <Button 
-            className="btn edit-btn"
+            className="btn-comment edit-btn"
             disabled={this.state.loading}
              onClick={() => this.deleteCommentHandler(comment.id)}>
              {this.state.loading ? 'Editing comment': 'Edit'}

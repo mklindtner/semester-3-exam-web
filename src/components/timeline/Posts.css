@@ -60,3 +60,15 @@
     float:left;
     cursor: pointer;
 }
+
+.dropdown-div{
+  float: right;
+  margin: 10px;
+}
+
+
+@media (max-width: 400px) {
+    .dropdown-div{
+    margin-right: 10px;
+    }
+}
