@@ -2,6 +2,9 @@ import React from "react";
 import './Comments.css';
 import CommentMapper from '../../data/CommentMapper';
 import {Button} from 'react-bootstrap'
+import { Picker, Emoji } from 'emoji-mart'
+import Modal from '../UI/Modal/Modal'
+import 'emoji-mart/css/emoji-mart.css'
 
 class SingleComment extends React.Component {
 
@@ -9,7 +12,13 @@ class SingleComment extends React.Component {
     super(props)
     this.state ={
       loading: false,
-      comments: this.props.comments
+      comments: this.props.comments,
+      showModal: false,
+      showEmoji: true,
+      emoji: {
+          id: '',
+          count: 0
+      }
     }
    
     this.commentMapper = new CommentMapper();
@@ -20,9 +29,9 @@ class SingleComment extends React.Component {
 
   componentDidMount(){
     console.log(this.props.comments)
+    console.log(this.state.emojis)
   }
 
-  
 deleteCommentHandler = (id) =>{
   console.log(id);
   this.setState({
@@ -37,9 +46,22 @@ deleteCommentHandler = (id) =>{
     return comment.id === id;
   });
  this.props.clicked(indexToDelete)
- console.log('we ar here')
+ console.log('we are here')
 
 }
+
+addEmoji = (emoji) =>{
+    console.log(emoji.id)
+    let selectedEmoji = {
+        id: emoji.id
+    }
+    this.setState({emoji: selectedEmoji })
+    console.log(this.state.emoji)
+}
+
+
+closeModalHandler = () =>
+    this.setState({showModal: false});
 
   render() {
     const {comment} = this.props;
@@ -61,9 +83,26 @@ deleteCommentHandler = (id) =>{
              onClick={() => this.deleteCommentHandler(comment.id)}>
              {this.state.loading ? 'Editing comment': 'Edit'}
             </Button>
+            <button onClick={() => this.setState({showModal: true}) }>add emojis</button>
+            <Modal show={this.state.showModal} onClose={this.closeModalHandler}>
+            <Picker onSelect={this.addEmoji} showPreview={false } style={{ bottom: '10px', right: '10px' }} />
+            </Modal>
+            </div> 
+             {this.state.showEmoji &&
+            <div className="emoji">
+            <Emoji /*onClick={() => this.setState(prevState => ({
+                emoji: {
+                    ...prevState.emoji,
+                    count: prevState.count+1
+                }     
+            }))}*/
+            emoji={{ id: this.state.emoji.id, skin: 1, }} size={25} />
+            <p>{this.state.emoji.count}</p>
             </div>
-            <p className="comment-content">{comment.contents}</p>     
+            }
+            <p className="comment-content">{comment.contents}</p>
           </li>
+        
       </ul>
     );
   }

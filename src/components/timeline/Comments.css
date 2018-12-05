@@ -44,3 +44,7 @@
     border: solid 1px black;
 }
 
+.emoji{
+    float: right;
+    margin-bottom: 5px;
+}
