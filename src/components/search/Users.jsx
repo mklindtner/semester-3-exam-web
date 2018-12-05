@@ -6,7 +6,7 @@ export default function Users({ users, error, width }) {
     users.map(user => <User key={user.id} id={user.id} name={user.name} />)) : 
     (<li className="list-group-item alert alert-danger">No user</li>);
   return (
-      <div id="overlap" style={{width: width }}>
+      <div id="overlap">
         <ul className="list-group">{usersList}</ul>
       </div>
   );

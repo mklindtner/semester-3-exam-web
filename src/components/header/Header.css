@@ -1,9 +1,5 @@
-#user-status {
-    margin-right: 25px;
-    font-weight: bold;
-}
-
 header {
+    display: grid;
     padding: 10px;
     height: 75px;
     background-image: url("http://www.psdgraphics.com/file/2017/abstract-geometric-background.png");
@@ -15,7 +11,7 @@ header {
     width: 100%;
 }
 
-#user-status > a {
+#user-status>a {
     color: white;
 }
 
@@ -23,50 +19,77 @@ header {
     background: none !important;
 }
 
-nav {
-    padding: 0 20px;
+header {
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
-.nav-item a {
-    color: white;
-    font-weight: "bold";
+.dropdown-toggle {
+    height: 36px;
 }
 
-.nav-item:hover a {
-    background: none !important;
-}
-
-nav .nav-link {
-    color: #fff;
-    font-weight: bold;
+div.search-input {
+    padding-top: 12px;
     display: block;
-    padding: 0 !important; 
 }
 
-#header-nav>div>a {
-    padding-top: 20px;
-    padding-bottom: 20px;
+a.user-dropdown {
+    overflow: hidden;
+    /*hides content overflowing content*/
+    text-align: center;
+    color: #fff;
 }
 
-#header-nav>.left {
-    float: left;
-    padding: 20px;
+.btn-group {
+    padding-left: 0px;
+    padding-top: 12px;
+    padding-right:10px;
+    display: block;
+    text-overflow: ellipsis; /*if text overflow last part will be ... 
+    WOULD LIKE TO IMPLEMENT: overflow: hidden;*/
+    white-space: nowrap;
+    /*one line*/
+    white-space: nowrap;
+    /*one line*/
 }
 
-#header-nav>.right {
-    float: right;
-    padding: 20px;
-    width: auto;
+@media only screen and (max-width: 470px) {
+    .btn-group>.btn-default:first-child {
+        width: 100%;
+    }
+
 }
 
-header .search-input {
-    margin-top: -10px;
+@media only screen and (min-width: 470px) and (max-width: 850px) {
+    .btn-group {
+        max-width: 230px;
+    }
+
+    #timeline {
+        font-size: 20px;
+        text-align: center;
+        display: block;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        color: #fff;
+    }
 }
 
-header .user-status.right > ul > li > a{
-    padding: 0;
-}
+@media only screen and (min-width: 851px) {
+    #timeline {
+        font-size: 18px;
+        text-align: center;
+        display: block;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        color: #fff;
+    }
 
-header .user-status.right ul.navbar-nav{
-    margin: 0;
+    #social {
+        font-size: 18px;
+        text-align: center;
+        display: block;
+        padding-top: 15px;
+        color: #fff;
+    }
 }

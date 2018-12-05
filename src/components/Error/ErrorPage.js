@@ -1,6 +1,5 @@
 import React from 'react'
 import './ErrorPage.css'
-import BodyClassName from 'react-body-classname';
 
 const errorPage = () => {
     return(
@@ -20,9 +19,7 @@ const errorPage = () => {
         <div class='_2'>WAS NOT FOUND</div>
         <a class='error-btn' href='#'><span>BACK TO SAFETY </span></a>
         </div>
-        </div>
-        
-    
+        </div>  
     )
 }
 export default errorPage;

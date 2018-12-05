@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
 import UserSearch from "../search/UserSearch";
+import MediaQuery from "react-responsive";
 
 class Header extends Component {
   constructor(props) {
     super(props);
-
+    this.myRef = React.createRef();
     this.state = {
       width: 0
     };
@@ -16,69 +17,168 @@ class Header extends Component {
     this.setState({ width: document.documentElement.clientWidth });
   };
 
-  componentWillMount = function () {
+  componentWillMount = function() {
     this.updateDimensions();
   };
 
-  componentDidMount = function () {
+  componentDidMount = function() {
     window.addEventListener("resize", this.updateDimensions);
     this.updateDimensions();
   };
-  componentWillUnmount = function () {
+  componentWillUnmount = function() {
     window.removeEventListener("resize", this.updateDimensions);
   };
 
   render() {
     return (
       <header>
-        <nav id="header-nav">
-          <div className="left">
-            <a className="nav-link" href="#">
-              Social
-            </a>
-          </div>
-          <div className="left">
-            <a className="nav-link" href="/timeline">
-              Timeline
-            </a>
-          </div>
-          <div className="left search-input" style={{ width: Math.min(this.state.width - 420, 800) }}>
-            <UserSearch />
-          </div>
-          <div className="right user-status">
-            <ul className="nav navbar-nav navbar-right">
-              {this.props.app.authenticationContext != null && (
-                <li className="dropdown" id="user-status">
-                  <a
-                    href="#"
-                    className="dropdown-toggle"
-                    data-toggle="dropdown"
-                    role="button"
-                    aria-expanded="false"
-                  >
-                    {this.props.app.authenticationContext.user.name}
-                    <span className="caret" />
+        <MediaQuery maxWidth={470}>
+          {matches => {
+            if (matches) {
+              return (
+                <div>
+                  <div className="search-input col-xs-9">
+                    <div className="search-input-max">
+                      <UserSearch />
+                    </div>
+                  </div>
+                  <div className="btn-group col-xs-3">
+                    <button
+                      class="btn btn-default dropdown-toggle"
+                      type="button"
+                      id="dropdownMenu"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    />
+                    <ul
+                      className="dropdown-menu"
+                      aria-labelledby="dropdownMenu"
+                    >
+                      <li>
+                        <Link to="/friend-requests">Friend requests</Link>
+                      </li>
+                      <li>
+                        <Link to="/profile">Profile</Link>
+                      </li>
+                      <li>
+                        <Link to="/settings">Settings</Link>
+                      </li>
+                      <li>
+                        <Link to="/timeline">Timeline</Link>
+                      </li>
+                      <li className="divider" />
+                      <li onClick={this.props.onLogout}>
+                        <a href="#">Log out</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              );
+            } else {
+              return null;
+            }
+          }}
+        </MediaQuery>
+        <MediaQuery maxWidth={850} minWidth={471}>
+          {matches => {
+            if (matches) {
+              return (
+                <div>
+                  <a id="timeline" className="col-xs-2" href="/timeline">
+                    Timeline
                   </a>
-                  <ul className="dropdown-menu" role="menu">
-                    <li>
-                      <Link to="/friend-requests">Friend requests</Link>
-                    </li>
-                    <li>
-                      <Link to="/profile">Profile</Link>
-                    </li>
-                    <li>
-                      <Link to="/settings">Settings</Link>
-                    </li>
-                    <li className="divider" />
-                    <li onClick={this.props.onLogout}>
-                      <a href="#">Log out</a>
-                    </li>
-                  </ul>
-                </li>
-              )}
-            </ul>
-          </div>
-        </nav>
+                  <div className="search-input col-xs-5">
+                    <UserSearch />
+                  </div>
+                  <div className="text-right btn-group col-xs-5 pull-right">
+                    <button
+                      type="button"
+                      className="btn-link btn-default dropdown-toggle"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      {this.props.app.authenticationContext.user.name}
+                      <span className="caret" />
+                    </button>
+                    <ul
+                      className="dropdown-menu"
+                      aria-labelledby="dropdownMenu"
+                    >
+                      <li>
+                        <Link to="/friend-requests">Friend requests</Link>
+                      </li>
+                      <li>
+                        <Link to="/profile">Profile</Link>
+                      </li>
+                      <li>
+                        <Link to="/settings">Settings</Link>
+                      </li>
+                      <li className="divider" />
+                      <li onClick={this.props.onLogout}>
+                        <a href="#">Log out</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              );
+            } else {
+              return null;
+            }
+          }}
+        </MediaQuery>
+        <MediaQuery minWidth={851}>
+          {matches => {
+            if (matches) {
+              return (
+                <div>
+                  <a id="social" className="col-xs-1" href="#">
+                    Social
+                  </a>
+                  <a id="timeline" className="col-xs-1" href="/timeline">
+                    Timeline
+                  </a>
+                  <div className="search-input col-xs-5">
+                    <UserSearch />
+                  </div>
+                  <div className="text-right btn-group col-xs-5 pull-right">
+                    <button
+                      type="button"
+                      className="btn-link btn-default dropdown-toggle"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      {this.props.app.authenticationContext.user.name}
+                      <span className="caret" />
+                    </button>
+                    <ul
+                      className="dropdown-menu"
+                      aria-labelledby="dropdownMenu"
+                    >
+                      <li>
+                        <Link to="/friend-requests">Friend requests</Link>
+                      </li>
+                      <li>
+                        <Link to="/profile">Profile</Link>
+                      </li>
+                      <li>
+                        <Link to="/settings">Settings</Link>
+                      </li>
+                      <li className="divider" />
+                      <li onClick={this.props.onLogout}>
+                        <a href="#">Log out</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              );
+            } else {
+              return null;
+            }
+          }}
+        </MediaQuery>
       </header>
     );
   }

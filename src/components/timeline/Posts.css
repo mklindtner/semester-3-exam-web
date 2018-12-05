@@ -62,13 +62,14 @@
 }
 
 .dropdown-div{
-  float: right;
-  margin: 10px;
+float: right;
+margin: 0 15px;
+
 }
 
 
 @media (max-width: 400px) {
     .dropdown-div{
-    margin-right: 10px;
+    margin-right: 20px;
     }
 }

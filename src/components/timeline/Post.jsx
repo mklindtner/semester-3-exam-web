@@ -4,31 +4,29 @@ import SmallProfilePicture from '../images/SmallProfilePicture'
 import * as ReactBootstrap from 'react-bootstrap';
 
 class Post extends React.Component {
+  constructor(props) {
+    super(props);
 
-    constructor(props) {
-        super(props);
+    this.state = {
+      focus: this.getFirstImage()
+    };
+  }
 
-        this.state = {
-            focus: this.getFirstImage()
-        }
-    }
+  getFirstImage = () => {
+    if (this.props.post.images == undefined) return null;
 
-    getFirstImage = () => {
-        if (this.props.post.images == undefined)
-            return null;
+    if (this.props.post.images.length < 1) return null;
 
-        if (this.props.post.images.length < 1)
-            return null;
-
-        return this.props.post.images[0];
-    }
+    return this.props.post.images[0];
+  };
 
   
 
     render = () => {
         let dropdownStyle = {
-      
-            marginBottom: '5px'
+            paddingBottom: '10px',
+            float: 'right'
+
         }
         return (
             <div className="post" key={this.props.post.id}>
@@ -56,36 +54,44 @@ class Post extends React.Component {
         );
     };
 
-    displayImages = () => {
+  displayImages = () => {
+    const { images } = this.props.post;
 
-        const { images } = this.props.post;
+    if (images != undefined && images.length < 1) return null;
 
-        if (images != undefined && images.length < 1)
-            return null;
+    return this.renderGallery(images);
+  };
 
-        return this.renderGallery(images);
-    }
+  focus = image => {
+    this.setState({ focus: image });
+  };
 
-    focus = (image) => {
-        this.setState({ focus: image });
-    }
+  focus = image => {
+    this.setState({ focus: image });
+  };
 
-    renderGallery = (images) => {
-        return (
-            <div className="post-gallery">
-                <div className="post-gallery-full">
-                    <img src={this.state.focus.full} />
-                </div>
-                {images.length > 1 && <div className="post-gallery-thumbnails">
-                    {images.map(image =>
-                        <div key={image.id} className="post-gallery-thumbnail-container" onClick={() => this.focus(image)}>
-                            <img src={image.thumbnail} />
-                        </div>
-                    )}
-                </div>}
-            </div>
-        )
-    }
+  renderGallery = images => {
+    return (
+      <div className="post-gallery">
+        <div className="post-gallery-full">
+          <img src={this.state.focus.full} />
+        </div>
+        {images.length > 1 && (
+          <div className="post-gallery-thumbnails">
+            {images.map(image => (
+              <div
+                key={image.id}
+                className="post-gallery-thumbnail-container"
+                onClick={() => this.focus(image)}
+              >
+                <img src={image.thumbnail} />
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  };
 }
 
 export default Post;
