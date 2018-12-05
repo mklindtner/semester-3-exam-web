@@ -36,7 +36,9 @@ class PaginatedComments extends Component {
     
     deleteCommentHandler = (indexToDelete) =>{
         console.log(this.state.comments)
-        this.state.comments.splice(indexToDelete, 1)
+        let currComments = this.state.comments;
+        currComments.splice(indexToDelete, 1);
+        this.setState({comments: currComments})
         console.log(this.state.comments)
         }
 
