@@ -25,13 +25,14 @@ class Header extends Component {
     window.addEventListener("resize", this.updateDimensions);
     this.updateDimensions();
   };
+
   componentWillUnmount = function() {
     window.removeEventListener("resize", this.updateDimensions);
   };
 
   render() {
     return (
-      <header>
+      <header id="header">
         <MediaQuery maxWidth={470}>
           {matches => {
             if (matches) {
@@ -42,15 +43,17 @@ class Header extends Component {
                       <UserSearch />
                     </div>
                   </div>
-                  <div className="btn-group col-xs-3">
-                    <button
-                      class="btn btn-default dropdown-toggle"
-                      type="button"
-                      id="dropdownMenu"
+                  <div className="col-xs-3">
+                  <a
+                      class="dropdown-toggle"
+                      href="#"
+                      id="dropdownMenuLink"
                       data-toggle="dropdown"
                       aria-haspopup="true"
                       aria-expanded="false"
-                    />
+                    >
+                      <img src="/pictures/menu.svg" id="menu" width="35" height="35" title="Burger menu" alt="Menu"></img>
+                    </a>
                     <ul
                       className="dropdown-menu"
                       aria-labelledby="dropdownMenu"
@@ -92,16 +95,18 @@ class Header extends Component {
                     <UserSearch />
                   </div>
                   <div className="text-right btn-group col-xs-5 pull-right">
-                    <button
-                      type="button"
-                      className="btn-link btn-default dropdown-toggle"
+                    <a
+                      class="link dropdown-toggle"
+                      href="#"
+                      role="button"
+                      id="dropdownMenuLink"
                       data-toggle="dropdown"
                       aria-haspopup="true"
                       aria-expanded="false"
                     >
                       {this.props.app.authenticationContext.user.name}
                       <span className="caret" />
-                    </button>
+                    </a>
                     <ul
                       className="dropdown-menu"
                       aria-labelledby="dropdownMenu"
@@ -143,16 +148,18 @@ class Header extends Component {
                     <UserSearch />
                   </div>
                   <div className="text-right btn-group col-xs-5 pull-right">
-                    <button
-                      type="button"
-                      className="btn-link btn-default dropdown-toggle"
+                    <a
+                      class="link dropdown-toggle"
+                      href="#"
+                      role="button"
+                      id="dropdownMenuLink"
                       data-toggle="dropdown"
                       aria-haspopup="true"
                       aria-expanded="false"
                     >
                       {this.props.app.authenticationContext.user.name}
                       <span className="caret" />
-                    </button>
+                    </a>
                     <ul
                       className="dropdown-menu"
                       aria-labelledby="dropdownMenu"

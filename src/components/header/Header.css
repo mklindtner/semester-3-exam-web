@@ -11,8 +11,10 @@ header {
     width: 100%;
 }
 
-#user-status>a {
-    color: white;
+
+
+img#menu {
+    margin-top: 11px;
 }
 
 #user-status a {
@@ -20,8 +22,8 @@ header {
 }
 
 header {
-    padding-left: 0px;
-    padding-right: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
 }
 
 .dropdown-toggle {
@@ -42,10 +44,11 @@ a.user-dropdown {
 
 .btn-group {
     padding-left: 0px;
-    padding-top: 12px;
-    padding-right:10px;
+    padding-top: 11px;
+    padding-right: 10px;
     display: block;
-    text-overflow: ellipsis; /*if text overflow last part will be ... 
+    text-overflow: ellipsis;
+    /*if text overflow last part will be ... 
     WOULD LIKE TO IMPLEMENT: overflow: hidden;*/
     white-space: nowrap;
     /*one line*/
@@ -53,11 +56,26 @@ a.user-dropdown {
     /*one line*/
 }
 
+div.pull-right {
+    /*just for the dropdown element, when it is not in mobile format */
+    padding-top: 16px;
+}
+
+a.link {
+    color: #fff;
+    text-decoration: none;
+    font-family: Verdana, Tahoma, sans-serif;
+}
+
 @media only screen and (max-width: 470px) {
     .btn-group>.btn-default:first-child {
         width: 100%;
     }
 
+    #header .dropdown-menu {
+        left: auto;
+        right: 0px;
+    }
 }
 
 @media only screen and (min-width: 470px) and (max-width: 850px) {
