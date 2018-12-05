@@ -9,9 +9,46 @@ export default class ChatWindow extends Component {
         super(props);
         this.chatMapper = new ChatMapper();
         this.socket = this.createSocket();
-        this.socket.onopen = () => this.send("authentication", {token: getAuthenticationContext().token});
-        this.socket.onmessage = message => console.log(message.data);
+        this.socket.onopen = () => this.send("authentication", { token: getAuthenticationContext().token });
+        this.socket.onmessage = message => this.handleIncoming(JSON.parse(message.data));
         this.state = { friends: [], searchedFriends: [], show: null, messages: [] };
+    }
+
+    handleIncoming = (message) => {
+        const type = message.type;
+        console.log(message);
+        if (type == 'message') {
+            return;
+        }
+
+        if (type == 'user-connected') {
+            this.updateFriends(friend => {
+                if (friend.user.id == message.payload.user) {
+                    friend.online = true;
+                    console.log(friend);
+                }
+                return friend;
+            });
+            return;
+        }
+
+        if (type == 'user-disconnected') {
+            this.updateFriends(friend => {
+                if (friend.user.id == message.payload.user) {
+                    friend.online = false;
+                    console.log(friend);
+                }
+                return friend;
+            });
+            return;
+        }
+    }
+
+    updateFriends = (f) => {
+        const friends = this.state.friends.map(f);
+        const searchedFriends = this.state.searchedFriends.map(f);
+
+        this.setState({ friends, searchedFriends });
     }
 
     createSocket = () => {
@@ -33,7 +70,7 @@ export default class ChatWindow extends Component {
 
     onFriendSearch = (e) => {
         const value = e.currentTarget.value;
-        this.setState({ searchedFriends: this.state.friends.filter(f => f.user.name.startsWith(value)) })
+        this.setState({ searchedFriends: this.state.friends.filter(f => f.user.name.toLowerCase().startsWith(value.toLowerCase())) })
     }
 
     show = (friend) => {
