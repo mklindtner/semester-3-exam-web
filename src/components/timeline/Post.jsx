@@ -2,14 +2,18 @@ import React from "react";
 import Comments from "./Comments";
 import SmallProfilePicture from '../images/SmallProfilePicture'
 import * as ReactBootstrap from 'react-bootstrap';
+import PostMapper from '../../data/PostMapper'
 
 class Post extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      focus: this.getFirstImage()
+      focus: this.getFirstImage(),
+      loading: true
+
     };
+    this.postMapper = new PostMapper()
   }
 
   getFirstImage = () => {
@@ -20,6 +24,15 @@ class Post extends React.Component {
     return this.props.post.images[0];
   };
 
+
+  deletePostHandler = (id) =>{
+    console.log(id);
+    this.setState({loading: true})
+    this.postMapper.deletePost(id).then(res =>{
+        console.log(res)
+        this.setState({loading: false})
+    })
+  }
   
 
     render = () => {
@@ -37,7 +50,7 @@ class Post extends React.Component {
             title={'Edit'}
             key={this.props.id}
             >
-            <ReactBootstrap.MenuItem>Delete</ReactBootstrap.MenuItem>
+            <ReactBootstrap.MenuItem onClick={() => this.deletePostHandler(this.props.post.id)}>Delete</ReactBootstrap.MenuItem>
             </ReactBootstrap.DropdownButton>
             </div>
                 <div className="post-header">

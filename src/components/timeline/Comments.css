@@ -38,7 +38,7 @@
     transition: .4s;
 }
 
-.btn:hover {
+.btn-comment:hover {
     background: #67c5ff2a;
     color: white;
     border: solid 1px black;
