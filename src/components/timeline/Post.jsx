@@ -10,7 +10,7 @@ class Post extends React.Component {
 
     this.state = {
       focus: this.getFirstImage(),
-      loading: true
+      loading: false
 
     };
     this.postMapper = new PostMapper()
@@ -24,15 +24,27 @@ class Post extends React.Component {
     return this.props.post.images[0];
   };
 
+  componentDidMount(){
+    console.log(typeof this.props.clicked)
+    console.log(this.props.posts)
+  }
+
 
   deletePostHandler = (id) =>{
     console.log(id);
+  
     this.setState({loading: true})
     this.postMapper.deletePost(id).then(res =>{
         console.log(res)
         this.setState({loading: false})
     })
-  }
+    let indexToDelete = this.props.posts.findIndex((post) =>{
+        return post.id === id;
+      });
+    this.props.clicked(indexToDelete);
+     console.log('we ar here')
+    
+    }
   
 
     render = () => {
@@ -50,7 +62,7 @@ class Post extends React.Component {
             title={'Edit'}
             key={this.props.id}
             >
-            <ReactBootstrap.MenuItem onClick={() => this.deletePostHandler(this.props.post.id)}>Delete</ReactBootstrap.MenuItem>
+            <ReactBootstrap.MenuItem onClick={() => this.deletePostHandler(this.props.post.id)}>{this.state.loading ? 'Deleting...' : 'Delete'}</ReactBootstrap.MenuItem>
             </ReactBootstrap.DropdownButton>
             </div>
                 <div className="post-header">

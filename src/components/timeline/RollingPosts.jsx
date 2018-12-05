@@ -15,14 +15,25 @@ class RollingPosts extends Component {
 
     window.onscroll = event => this.onScroll(event);
   }
+ 
+  deletePostHandler = (indexToDelete) => {
+    console.log(this.state.posts)
+    let currPosts = this.state.posts;
+    currPosts.splice(indexToDelete, 1)
+    this.setState({ posts: currPosts})
+    console.log(this.state.posts)
+  }
 
   render() {
     return (
       <div>
-        <Posts posts={this.state.posts} comments={this.props.comments} />
+        <Posts posts={this.state.posts} comments={this.props.comments} clicked={this.deletePostHandler} />
       </div>
     );
   }
+
+ 
+  
 
   componentDidMount = () => {
     this.loadPosts();
@@ -41,7 +52,7 @@ class RollingPosts extends Component {
     }
   };
 
-  loadPosts = () => {
+  loadPosts = () => { 
     this.props.fetch(this.props.user, this.cutoff, posts => {
       if (posts.length === 0) {
         this.hasMore = false;
