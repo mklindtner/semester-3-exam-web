@@ -17,6 +17,7 @@ import FriendGrid from "../FriendGrid";
 import PaginatedComments from "../timeline/PaginatedComments";
 import LargeProfilePicture from '../images/LargeProfilePicture';
 import FriendStatus from "./FriendStatus";
+import ChatWindow from '../chat/ChatWindow';
 
 import './ProfilePage.css';
 
@@ -183,6 +184,7 @@ class ProfilePage extends Component {
                     </div>
                 </div>}
             </main>
+            <ChatWindow />
             </>
         );
     }

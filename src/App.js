@@ -60,61 +60,57 @@ class App extends Component {
           toastMessageFactory={React.createFactory(ToastMessageAnimated)}
         />
         <Switch>
-        <Route exact={true} path="/" component={HomePage} />
-        <Route
-          path="/profile/:user?/:tab?"
-          component={router => (
-            <ProfilePage app={this.state} router={router} toastrFactory={this.toastrFactory} onLogout={this.onLogout} />
-          )}
-        />
-        <Route path="/settings" component={router =>
-          <SettingsPage
-            app={this.state}
-            router={router}
-            onLogout={this.onLogout}
-            toastrFactory={this.toastrFactory}
-          />}
-        />
-        <Route
-          path="/registration"
-          component={router =>
-            <HomePage component={() =>
-              <RegistrationPage
-                app={this.state}
-                router={router}
-                onRegistration={this.onRegistration}
-              />
+          <Route exact={true} path="/" component={HomePage} />
+          <Route
+            path="/profile/:user?/:tab?"
+            component={router => (
+              <ProfilePage app={this.state} router={router} toastrFactory={this.toastrFactory} onLogout={this.onLogout} />
+            )}
+          />
+          <Route path="/settings" component={router =>
+            <SettingsPage
+              app={this.state}
+              router={router}
+              onLogout={this.onLogout}
+              toastrFactory={this.toastrFactory}
+            />}
+          />
+          <Route
+            path="/registration"
+            component={router =>
+              <HomePage component={() =>
+                <RegistrationPage
+                  app={this.state}
+                  router={router}
+                  onRegistration={this.onRegistration}
+                />
+              } />
             } />
-          } />
-        <Route
-          path="/login"
-          component={router =>
-            <HomePage component={() =>
-              <AuthenticationPage
-                app={this.state}
-                router={router}
-                onAuthentication={this.onAuthentication}
-              />
+          <Route
+            path="/login"
+            component={router =>
+              <HomePage component={() =>
+                <AuthenticationPage
+                  app={this.state}
+                  router={router}
+                  onAuthentication={this.onAuthentication}
+                />
+              } />
             } />
-          } />
-        <Route
-          path="/timeline"
-          component={router => <Timeline app={this.state} router={router} toastrFactory={this.toastrFactory} onLogout={this.onLogout} />}
-        />
-        <Route
-          path="/friend-requests"
-          component={router => <FriendRequestsPage app={this.state} router={router} toastrFactory={this.toastrFactory} onLogout={this.onLogout} />}
-        />
-        <Route 
-          path="/chat"
-          component={router => <ChatWindow />}
-        />
-        <Route path="/post" component={router => <CreatePost />} />
-        <Switch>
-        <Route path="*" exact={true} component={ErrorPage}></Route>
+          <Route
+            path="/timeline"
+            component={router => <Timeline app={this.state} router={router} toastrFactory={this.toastrFactory} onLogout={this.onLogout} />}
+          />
+          <Route
+            path="/friend-requests"
+            component={router => <FriendRequestsPage app={this.state} router={router} toastrFactory={this.toastrFactory} onLogout={this.onLogout} />}
+          />
+          <Route path="/post" component={router => <CreatePost />} />
+          <Switch>
+            <Route path="*" exact={true} component={ErrorPage}></Route>
+          </Switch>
         </Switch>
-        </Switch>
-  </div>
+      </div>
   </>
         );
   }

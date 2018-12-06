@@ -160,7 +160,7 @@ export default class ChatWindow extends Component {
     render() {
 
         return (
-            <div className="chat-container" >
+            <div className="chat-window" >
                 <ul className="chat-header">
                     {!this.state.show && <li>Your friends</li>}
                     {this.state.show && <li className="chat-control" onClick={this.showFriends}>Back</li>}
