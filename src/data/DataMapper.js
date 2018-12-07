@@ -19,16 +19,14 @@ function post(url, entity) {
     }));
 }
 
-function deleter(url, entity) {
+function deleter(url) {
     let status = -1;
     return fetch(url, {
         method: "DELETE", 
         headers: {
-            "Content-Type": "application/json",
             "Accept": "application/json",
             "Authorization": "Bearer " + getToken()
         },
-        body: JSON.stringify(entity)
     }).then((response, error) => {
         status = response.status;
         return response.json();

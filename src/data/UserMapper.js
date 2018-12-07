@@ -1,5 +1,5 @@
 import config from '../config.js';
-import { get, post, put } from './DataMapper';
+import { get, post, put, deleter } from './DataMapper';
 
 class UserMapper {
 
@@ -20,7 +20,7 @@ class UserMapper {
     }
 
     deleteFriendship = (user) => {
-        return delete(config.restUrl + `target/${user}` )
+        return deleter(config.restUrl + `friendship/target/${user}` )
     }
 
     updateProfileImage = (user, image) => {

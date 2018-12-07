@@ -43,8 +43,8 @@ export default class FriendStatus extends Component {
     }
 
     render() {
-
-        if (this.identity.id === this.props.other)
+    
+        if (this.identity.id == this.props.other)
             return null;
 
         return (
@@ -54,12 +54,27 @@ export default class FriendStatus extends Component {
         )
     }
 
+    unfriend = () => {
+        this.userMapper.deleteFriendship(this.props.other).then(response => {
+            if(response.status === 200){
+                this.props.toastrFactory().success("You are no longer friends.");
+                this.setState({send: false, friendship: null})
+                return;
+            }
+
+            this.props.toastrFactory().error("An error occurred.");            
+        })
+    }
+
     getContents = () => {
 
-        if (this.state.friendship){
+        if (this.state.friendship) {
             const since = new Date(this.state.friendship.since);
             const formatted = `${since.getFullYear()}-${since.getMonth() + 1}-${since.getUTCDate()}`;
-            return <p>Friends since {formatted}</p>
+            return <>
+                <p>Friends since {formatted}</p>
+                <button className="unfriend-button" onClick={this.unfriend}>Unfriend</button>
+            </>
         }
 
         if (this.state.sent === true)

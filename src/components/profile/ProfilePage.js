@@ -158,7 +158,8 @@ class ProfilePage extends Component {
                         <div>
                             <LargeProfilePicture width="100%" height="auto" user={this.state.user} />
                             <h2 className="profile-name">{this.state.user.name}</h2>
-                            {getAuthenticationContext().user.id !== this.userToRetrieve && <FriendStatus other={this.userToRetrieve} toastrFactory={this.props.toastrFactory} />}
+                            {getAuthenticationContext().user.id !== this.userToRetrieve && 
+                            <FriendStatus other={this.userToRetrieve} toastrFactory={this.props.toastrFactory} />}
                         </div>
                     </div>
                     <div className="col-sm-9">
@@ -177,7 +178,7 @@ class ProfilePage extends Component {
                                     </Tab>
                                     <Tab eventKey="images" title="Images">
                                         {getAuthenticationContext().user.id === this.userToRetrieve && <ImageUploadForm onSubmit={this.onImageSubmit} />}
-                                        <PaginatedImageGrid pageSize={20} edit={true} fetch={this.fetchImages} />
+                                        <PaginatedImageGrid pageSize={20} edit={true} fetch={this.fetchImages}/>
                                     </Tab>
                                     <Tab eventKey="friends" title="Friends">
                                         <FriendGrid friends={this.state.friends} />
