@@ -99,7 +99,8 @@ export default class ChatWindow extends Component {
     }
 
     updateStateFromUserMap = () => {
-        this.setState({ friends: Object.values(this.userMap) }, () => {
+        const authed = getAuthenticationContext().user.id;
+        this.setState({ friends: Object.values(this.userMap).filter(f => f.user.id != authed) }, () => {
             if(this.state.search)
                 this.search(this.state.search);
         });
