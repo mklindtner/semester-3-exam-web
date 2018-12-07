@@ -28,15 +28,8 @@ class Post extends React.Component {
   deletePostHandler = (id) => {
 
     this.setState({ loading: true })
-    this.postMapper.deletePost(id).then(res => {
-      this.setState({ loading: false })
-    })
-    let indexToDelete = this.props.posts.findIndex((post) => {
-      return post.id === id;
-    });
-    this.props.clicked(indexToDelete);
+    this.props.onDelete(id);
   }
-
 
   render = () => {
 

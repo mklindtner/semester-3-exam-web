@@ -169,7 +169,11 @@ class ProfilePage extends Component {
                                         {getAuthenticationContext().user.id === this.userToRetrieve &&
                                             <CreatePost onSubmit={this.onPostSubmit} />}
                                         <Posts posts={this.state.posts} />
-                                        <RollingPosts user={this.userToRetrieve} fetch={this.fetchPosts} comments={this.createCommentSection} />
+                                        <RollingPosts
+                                            toastrFactory={this.props.toastrFactory}
+                                            user={this.userToRetrieve}
+                                            fetch={this.fetchPosts}
+                                            comments={this.createCommentSection} />
                                     </Tab>
                                     <Tab eventKey="images" title="Images">
                                         {getAuthenticationContext().user.id === this.userToRetrieve && <ImageUploadForm onSubmit={this.onImageSubmit} />}
