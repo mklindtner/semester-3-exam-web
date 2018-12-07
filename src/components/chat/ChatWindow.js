@@ -12,7 +12,7 @@ export default class ChatWindow extends Component {
         this.socket = this.createSocket();
         this.socket.onopen = () => this.send("authentication", { token: getAuthenticationContext().token });
         this.socket.onmessage = message => this.handleIncoming(JSON.parse(message.data));
-        this.state = { friends: [], searchedFriends: [], show: null, messages: [], search: null };
+        this.state = { input: "", friends: [], searchedFriends: [], show: null, messages: [], search: null };
         this.userMap = {};
         this.userMap[getAuthenticationContext().user.id] = {
             user: getAuthenticationContext().user
@@ -138,7 +138,7 @@ export default class ChatWindow extends Component {
             sender: getAuthenticationContext().user.id
         };
         this.send("text", message);
-        this.setState({ messages: this.state.messages.concat(message) })
+        this.setState({input: "", messages: this.state.messages.concat(message) })
     }
 
     fetchMore = (container) => {
@@ -216,7 +216,7 @@ export default class ChatWindow extends Component {
                             </div>
                             <div className="chat-input-container">
                                 <form className="chat-input-form" onSubmit={e => this.onSendMessage(e, this.state.show.user)} >
-                                    <textarea placeholder="Send a message" name="message" className="chat-input-message" type="text" />
+                                    <textarea placeholder="Send a message" name="message" className="chat-input-message" type="text" onChange={this.onChange} value={this.state.input}/>
                                     <input name="submit" className="chat-input-submit" type="submit" />
                                 </form>
                             </div>
@@ -225,5 +225,10 @@ export default class ChatWindow extends Component {
                 </div>
             </div >
         )
+    }
+
+    onChange = e => {
+        const v = e.currentTarget.value;
+        this.setState({input: v});
     }
 }
