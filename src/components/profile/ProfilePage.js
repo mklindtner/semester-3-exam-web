@@ -17,6 +17,7 @@ import FriendGrid from "../FriendGrid";
 import PaginatedComments from "../timeline/PaginatedComments";
 import LargeProfilePicture from '../images/LargeProfilePicture';
 import FriendStatus from "./FriendStatus";
+import ChatWindow from '../chat/ChatWindow';
 
 import './ProfilePage.css';
 
@@ -130,8 +131,6 @@ class ProfilePage extends Component {
     onTabChange = (activeKey) => {
 
         const { user, tab } = this.props.router.match.params;
-
-        console.log({user, tab, activeKey});
 
         if (user == undefined && tab == undefined) {
             this.props.router.history.push("/profile/" + activeKey);

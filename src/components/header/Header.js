@@ -17,15 +17,15 @@ class Header extends Component {
     this.setState({ width: document.documentElement.clientWidth });
   };
 
-  componentWillMount = function() {
+  componentWillMount = function () {
     this.updateDimensions();
   };
 
-  componentDidMount = function() {
+  componentDidMount = function () {
     window.addEventListener("resize", this.updateDimensions);
     this.updateDimensions();
   };
-  componentWillUnmount = function() {
+  componentWillUnmount = function () {
     window.removeEventListener("resize", this.updateDimensions);
   };
 
@@ -162,6 +162,9 @@ class Header extends Component {
                       </li>
                       <li>
                         <Link to="/profile">Profile</Link>
+                      </li>
+                      <li>
+                        <Link to="/chat">Chat</Link>
                       </li>
                       <li>
                         <Link to="/settings">Settings</Link>
