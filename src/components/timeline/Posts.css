@@ -1,10 +1,11 @@
 .post {
     color: black;
     padding: 20px;
-    font-size: 16px;   
+    font-size: 16px;
     background: #efefef;
     border: 1px solid #ddd;
     margin-bottom: 20px;
+    overflow: auto;
 }
 
 .post .post-header {
