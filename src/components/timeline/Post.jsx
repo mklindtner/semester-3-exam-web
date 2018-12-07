@@ -24,26 +24,17 @@ class Post extends React.Component {
     return this.props.post.images[0];
   };
 
-  componentDidMount(){
-    console.log(typeof this.props.clicked)
-    console.log(this.props.posts)
-  }
-
 
   deletePostHandler = (id) =>{
-    console.log(id);
   
     this.setState({loading: true})
     this.postMapper.deletePost(id).then(res =>{
-        console.log(res)
         this.setState({loading: false})
     })
     let indexToDelete = this.props.posts.findIndex((post) =>{
         return post.id === id;
       });
     this.props.clicked(indexToDelete);
-     console.log('we ar here')
-    
     }
   
 
@@ -51,8 +42,8 @@ class Post extends React.Component {
         let dropdownStyle = {
             paddingBottom: '10px',
             float: 'right'
-
         }
+
         return (
             <div className="post" key={this.props.post.id}>
             <div className="dropdown-div">
@@ -85,10 +76,6 @@ class Post extends React.Component {
     if (images != undefined && images.length < 1) return null;
 
     return this.renderGallery(images);
-  };
-
-  focus = image => {
-    this.setState({ focus: image });
   };
 
   focus = image => {

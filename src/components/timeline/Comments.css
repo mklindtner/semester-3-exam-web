@@ -26,22 +26,10 @@
 
 .btn-comment {
     font-size: 10.5px;
-    margin: 0px 5px;
-    opacity: 0.4;
+    margin: 0;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     display: inline-block;
-    padding: 0.3em 1em;
     text-decoration: none;
-    color: #67c5ff;
-    border: solid 2px rgb(219, 209, 209);
-    border-radius: 3px;
-    transition: .4s;
-}
-
-.btn-comment:hover {
-    background: #67c5ff2a;
-    color: white;
-    border: solid 1px black;
 }
 
 .emoji{

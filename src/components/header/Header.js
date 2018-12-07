@@ -44,7 +44,7 @@ class Header extends Component {
                   </div>
                   <div className="btn-group col-xs-3">
                     <button
-                      class="btn btn-default dropdown-toggle"
+                      className="btn btn-default dropdown-toggle"
                       type="button"
                       id="dropdownMenu"
                       data-toggle="dropdown"
