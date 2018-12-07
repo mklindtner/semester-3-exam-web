@@ -184,7 +184,6 @@ class ProfilePage extends Component {
                     </div>
                 </div>}
             </main>
-            <ChatWindow />
             </>
         );
     }

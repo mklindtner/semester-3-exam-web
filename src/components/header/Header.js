@@ -67,6 +67,9 @@ class Header extends Component {
                       <Link to="/profile">Profile</Link>
                     </li>
                     <li>
+                      <Link to="/chat">Chat</Link>
+                    </li>
+                    <li>
                       <Link to="/settings">Settings</Link>
                     </li>
                     <li className="divider" />

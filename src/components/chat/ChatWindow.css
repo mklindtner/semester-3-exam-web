@@ -1,23 +1,19 @@
-.chat-header {
-    list-style: none;
+.chat-window {
     overflow: auto;
-    padding: 0;
-    margin: 0;
-    border-bottom: 1px solid #ddd;
 }
 
-.chat-header li {
+.chat-friends-container {
+    width: 40%;
     float:left;
-    padding: 20px;
-    font-weight: bold;
 }
 
-.chat-header li.chat-control {
-    cursor: pointer;
+.chat-friend {
+    width: 60%;
+    float:left;
 }
 
-.chat-header li.chat-control:hover {
-    background: orange;
+.chat-friend-unread {
+    color: orangered;
 }
 
 .chat-friends-list {

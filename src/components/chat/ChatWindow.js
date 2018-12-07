@@ -12,7 +12,7 @@ export default class ChatWindow extends Component {
         this.socket = this.createSocket();
         this.socket.onopen = () => this.send("authentication", { token: getAuthenticationContext().token });
         this.socket.onmessage = message => this.handleIncoming(JSON.parse(message.data));
-        this.state = { friends: [], searchedFriends: [], show: null, messages: [] };
+        this.state = { friends: [], searchedFriends: [], show: null, messages: [], search: null };
         this.userMap = {};
         this.userMap[getAuthenticationContext().user.id] = {
             user: getAuthenticationContext().user
@@ -34,7 +34,12 @@ export default class ChatWindow extends Component {
 
         const type = message.type;
         if (type == 'message') {
-            this.appendTextMessage(message.payload);
+            if (this.state.show && this.state.show.user.id == message.payload.sender)
+                this.appendTextMessage(message.payload);
+            else {
+                this.userMap[message.payload.sender].unreadMessages++;
+                this.updateStateFromUserMap();
+            }
             return;
         }
 
@@ -86,8 +91,18 @@ export default class ChatWindow extends Component {
     }
 
     onFriendSearch = (e) => {
-        const value = e.currentTarget.value;
-        this.setState({ searchedFriends: this.state.friends.filter(f => f.user.name.toLowerCase().startsWith(value.toLowerCase())) })
+        this.search(e.currentTarget.value);
+    }
+
+    search(term) {
+        this.setState({ search: term, searchedFriends: this.state.friends.filter(f => f.user.name.toLowerCase().startsWith(term.toLowerCase())) })
+    }
+
+    updateStateFromUserMap = () => {
+        this.setState({ friends: Object.values(this.userMap) }, () => {
+            if(this.state.search)
+                this.search(this.state.search);
+        });
     }
 
     show = (friend) => {
@@ -95,6 +110,8 @@ export default class ChatWindow extends Component {
             if (response.status === 200) {
                 this.setState({ show: friend, messages: response.body }, () => {
                     var container = document.getElementById("chat-messages");
+                    this.userMap[friend.user.id].unreadMessages = 0; // Produces errors when all unread messages has not been retrieved.
+                    this.updateStateFromUserMap();
                     container.scrollTop = container.scrollHeight;
                     this.fetchingMore = false;
                     this.hasMore = true;
@@ -135,7 +152,7 @@ export default class ChatWindow extends Component {
         this.fetchingMore = true;
         const beforeHeight = container.scrollHeight;
         this.chatMapper.getHistory(this.state.show.user.id, 25, message.id).then(response => {
-    
+
             if (response.status === 200) {
                 this.setState({ messages: response.body.concat(this.state.messages) }, () => {
                     if (response.body.length == 0)
@@ -161,41 +178,35 @@ export default class ChatWindow extends Component {
 
         return (
             <div className="chat-window" >
-                <ul className="chat-header">
-                    {!this.state.show && <li>Your friends</li>}
-                    {this.state.show && <li className="chat-control" onClick={this.showFriends}>Back</li>}
-                    {this.state.show && <li className="chat-show-header">
-                        <span className={this.state.show.online ? "chat-friend-status online" : "chat-friend-status offline"}></span>
-                        <span className="chat-friend-name">{this.state.show.user.name}</span>
-                    </li>}
-                </ul>
                 <div className="chat-content">
-                    {!this.state.show &&
-                        <div className="chat-friends-container">
-                            <input placeholder="Search by name" type="search" class="chat-friend-search" onChange={this.onFriendSearch} />
-                            <ul className="chat-friends-list">
-                                {this.state.searchedFriends.map(friend =>
-                                    <li key={friend.user.id} className={friend == this.state.show ? "chat-friends-item active" : "chat-friends-item"}
-                                        onClick={() => this.show(friend)}>
-                                        <span className={friend.online ? "chat-friend-status online" : "chat-friend-status offline"}></span>
-                                        <span className="chat-friend-name">{friend.user.name}</span>
-                                    </li>
-                                )}
-                            </ul>
-                        </div>}
-                    {this.state.show &&
-                        <div className="chat-friend">
+
+                    <div className="chat-friends-container">
+                        <input placeholder="Search by name" type="search" className="chat-friend-search" onChange={this.onFriendSearch} />
+                        <ul className="chat-friends-list">
+                            {this.state.searchedFriends.map(friend =>
+                                <li key={friend.user.id} className={friend == this.state.show ? "chat-friends-item active" : "chat-friends-item"}
+                                    onClick={() => this.show(friend)}>
+                                    <span className={friend.online ? "chat-friend-status online" : "chat-friend-status offline"}></span>
+                                    <span className="chat-friend-name">{friend.user.name}</span>
+                                    {friend.unreadMessages != 0 && <span className="chat-friend-unread">{friend.unreadMessages} new</span>}
+                                </li>
+                            )}
+                        </ul>
+                    </div>
+                    <div className="chat-friend">
+                        {this.state.show && 
+                        <>
                             <div className="chat-messages-container col-xl-auto">
                                 <ul id="chat-messages" className="chat-messages" onScroll={this.onScroll}>
                                     {this.state.messages.length < 1 &&
                                         <li className="chat-message">
                                             <p style={{ fontStyle: 'italic' }} className="chat-message-contents">No messages</p>
                                         </li>}
-                                    {this.state.messages.map(message =>
-                                        <li className={getAuthenticationContext().user.id == message.sender ? "chat-message sender" : "chat-message receiver"}>
+                                    {this.state.messages.map((message, index) =>
+                                        <li key={message.id ? message.id : index} className={getAuthenticationContext().user.id == message.sender ? "chat-message sender" : "chat-message receiver"}>
                                             <div className="chat-message-profile">
                                                 <SmallProfilePicture user={this.userMap[message.sender].user} />
-                                                <p className="chat-message-author">{message.id} + {this.userMap[message.sender].user.name}</p>
+                                                <p className="chat-message-author">{this.userMap[message.sender].user.name}</p>
                                             </div>
                                             <p className="chat-message-contents">{message.contents}</p>
                                         </li>
@@ -208,7 +219,8 @@ export default class ChatWindow extends Component {
                                     <input name="submit" className="chat-input-submit" type="submit" />
                                 </form>
                             </div>
-                        </div>}
+                            </>}
+                        </div>
                 </div>
             </div >
         )

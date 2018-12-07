@@ -12,7 +12,7 @@ import { ToastContainer, ToastMessageAnimated } from "react-toastr";
 import SettingsPage from "./components/SettingPage";
 import FriendRequestsPage from "./components/FriendRequestsPage";
 import ErrorPage from './components/Error/ErrorPage';
-import ChatWindow from './components/chat/ChatWindow';
+import ChatPage from './components/chat/ChatPage';
 
 class App extends Component {
   constructor(props) {
@@ -105,7 +105,7 @@ class App extends Component {
             path="/friend-requests"
             component={router => <FriendRequestsPage app={this.state} router={router} toastrFactory={this.toastrFactory} onLogout={this.onLogout} />}
           />
-          <Route path="/post" component={router => <CreatePost />} />
+          <Route path="/chat" component={router => <ChatPage   app={this.state} router={router} toastrFactory={this.toastrFactory} onLogout={this.onLogout}/>} />
           <Switch>
             <Route path="*" exact={true} component={ErrorPage}></Route>
           </Switch>
