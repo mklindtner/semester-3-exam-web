@@ -60,19 +60,18 @@ let newEmojis = this.state.emojis.map(emoji => {
   // if emoji already there, simply increment count
   if (emoji.id === newEmoji.id) {
     containsNewEmoji = true;
-    
-    console.log(typeof newEmoji.count)
-    
+
     return { 
       ...newEmoji,
-      count: newEmoji.count += 1,
-    }
+      ...emoji,
+      count: emoji.count + 1,
+    };
   }
 
   // otherwise return a copy of previos emoji
   return {
-    ... emoji
-  } 
+    ...emoji
+  };
 });
 
 // if newEmoji was not in the array previously, add it freshly
@@ -81,11 +80,8 @@ if (!containsNewEmoji) {
 }
 
 // set new state
-this.setState({ emojis: newEmojis,
-showEmoji: true });
-console.log(typeof newEmoji.count)
-  
-   console.log(this.state.emojis)
+this.setState({ emojis: newEmojis, 
+showEmoji: true});
 }
 /*
 increment = (newEmoji) =>{
@@ -134,9 +130,13 @@ closeModalHandler = () =>
             <div className="emoji">
             {this.state.emojis && 
             this.state.emojis.map( (emoji, index) =>{
-            return  <Emoji onClick={this.increment} tooltip={true}
+            return(
+            
+             <Emoji key={index} onClick={this.addEmoji} tooltip={true}
             emoji={{id: emoji.id, skin: 1}} size={25}  />
-            })
+ 
+            )
+            })  
             }
             </div>
              }
