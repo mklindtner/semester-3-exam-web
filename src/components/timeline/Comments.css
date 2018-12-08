@@ -32,6 +32,22 @@
     text-decoration: none;
 }
 
+.emoji-button{
+    padding: 7px;
+    border-radius: 15px;
+    margin-left: 3px;
+    border: 2px solid #ffffff;
+    cursor: pointer;
+    color: #000000;
+    -webkit-transition: color 0.5s, background-color 0.5s;
+    -moz-transition: color 0.5s, background-color 0.5s;
+    -o-transition: color 0.5s, background-color 0.5s;
+}
+.emoji-button:hover {
+    color: #ffffff;
+    background-color: #AA66CC;
+}
+
 .emoji{
     display: inline-block;
     text-align: center;

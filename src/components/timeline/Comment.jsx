@@ -6,6 +6,8 @@ import { Picker, Emoji } from 'emoji-mart'
 import Modal from '../UI/Modal/Modal'
 import 'emoji-mart/css/emoji-mart.css'
 import { number } from "prop-types";
+import ReactToolTip from 'react-tooltip'
+
 
 class SingleComment extends React.Component {
 
@@ -51,20 +53,35 @@ deleteCommentHandler = (id) =>{
 
 }
 
+showUsers = () =>{
+
+}
+
+
 addEmoji = (newEmoji) =>{
 // mark if new emoji is already in the array or not
 let containsNewEmoji = false;
 
 // recreate emojis array
 let newEmojis = this.state.emojis.map(emoji => {
+
   // if emoji already there, simply increment count
   if (emoji.id === newEmoji.id) {
-    containsNewEmoji = true;
 
+    let author = this.props.comment.author.name;
+    if([...emoji.authors].indexOf(author) !== -1){
+      containsNewEmoji = true;
+      return { 
+        ...emoji,
+        count: emoji.count + 1,
+        authors: [...emoji.authors]
+      };
+    }
+    containsNewEmoji = true;
     return { 
-      ...newEmoji,
       ...emoji,
       count: emoji.count + 1,
+      authors: [...emoji.authors, author]
     };
   }
 
@@ -76,7 +93,7 @@ let newEmojis = this.state.emojis.map(emoji => {
 
 // if newEmoji was not in the array previously, add it freshly
 if (!containsNewEmoji) {
-  newEmojis = [...newEmojis, {...newEmoji, count: 0}];
+  newEmojis = [...newEmojis, {...newEmoji, count: 1, authors: [this.props.comment.author.name]}];
 }
 
 // set new state
@@ -105,10 +122,11 @@ closeModalHandler = () =>
 
    const EmojiCount = (props)  => {
     return (
-      <div>
-        <Emoji key={props.index} onClick={this.addEmoji} tooltip={true}
+      <div data-tip={props.emoji.authors}>
+        <Emoji key={props.index} onMouseEnter={this.showUsers} onClick={this.addEmoji} tooltip={true}
             emoji={{id: props.emoji.id, skin: 1}} size={25}  />
         <div>{props.count}</div>
+        <ReactToolTip />
         </div>
     );
   }
@@ -132,9 +150,9 @@ closeModalHandler = () =>
              onClick={() => this.deleteCommentHandler(comment.id)}>
              {this.state.loading ? 'Editing comment': 'Edit'}
             </Button>
-            <button onClick={() => this.setState({showModal: true}) }>add emojis</button>
+            <Button bsClass="btn-comment emoji-button" onClick={() => this.setState({showModal: true}) }>add emojis</Button>
             <Modal show={this.state.showModal} onClose={this.closeModalHandler}>
-            <Picker onSelect={this.addEmoji} showPreview={false } style={{ bottom: '10px', right: '10px' }} />
+            <Picker onSelect={this.addEmoji} showPreview={false} style={{ bottom: '10px', right: '10px' }} />
             </Modal>
             </div> 
              {this.state.showEmoji && this.state.emojis &&
@@ -144,7 +162,7 @@ closeModalHandler = () =>
             return(
             <div className="emoji">
              <EmojiCount key={index} onClick={this.addEmoji} tooltip={true}
-             emoji={{id: emoji.id, skin: 1}} size={25} count={emoji.count} />
+             emoji={{id: emoji.id, skin: 1, authors: emoji.authors}} size={25} count={emoji.count} />
              </div>
             )
             })  
@@ -159,7 +177,6 @@ closeModalHandler = () =>
             */}
             <p className="comment-content">{comment.contents}</p>
           </li>
-        
       </ul>
     );
   }
