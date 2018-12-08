@@ -32,15 +32,12 @@ class PaginatedComments extends Component {
 
         this.page(--this.currentPage);
     }
-    
-    
-    deleteCommentHandler = (indexToDelete) =>{
-        console.log(this.state.comments)
+
+    deleteCommentHandler = (indexToDelete) => {
         let currComments = this.state.comments;
         currComments.splice(indexToDelete, 1);
-        this.setState({comments: currComments})
-        console.log(this.state.comments)
-        }
+        this.setState({ comments: currComments });
+    }
 
     page = (pageNumber, done) => {
 
@@ -105,7 +102,7 @@ class PaginatedComments extends Component {
         if (this.state.total == 0)
             return null;
 
-        if(this.state.total <= this.props.pageSize)
+        if (this.state.total <= this.props.pageSize)
             return null;
 
         const lastPage = this.getLastPage();

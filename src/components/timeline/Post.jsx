@@ -24,60 +24,39 @@ class Post extends React.Component {
     return this.props.post.images[0];
   };
 
-  componentDidMount(){
-    console.log(typeof this.props.clicked)
-    console.log(this.props.posts)
+
+  deletePostHandler = (id) => {
+
+    this.setState({ loading: true })
+    this.props.onDelete(id);
   }
 
+  render = () => {
 
-  deletePostHandler = (id) =>{
-    console.log(id);
-  
-    this.setState({loading: true})
-    this.postMapper.deletePost(id).then(res =>{
-        console.log(res)
-        this.setState({loading: false})
-    })
-    let indexToDelete = this.props.posts.findIndex((post) =>{
-        return post.id === id;
-      });
-    this.props.clicked(indexToDelete);
-     console.log('we ar here')
-    
-    }
-  
-
-    render = () => {
-        let dropdownStyle = {
-            paddingBottom: '10px',
-            float: 'right'
-
-        }
-        return (
-            <div className="post" key={this.props.post.id}>
-            <div className="dropdown-div">
-            <ReactBootstrap.DropdownButton
-            bsStyle={'info'}
-           style={dropdownStyle}
-            title={'Edit'}
-            key={this.props.id}
-            >
-            <ReactBootstrap.MenuItem onClick={() => this.deletePostHandler(this.props.post.id)}>{this.state.loading ? 'Deleting...' : 'Delete'}</ReactBootstrap.MenuItem>
-            </ReactBootstrap.DropdownButton>
-            </div>
-                <div className="post-header">
-                    <div className="author-pic">
-                        <SmallProfilePicture user={this.props.post.author} />
-                    </div>
-                    <p className="author">{this.props.post.author.name}</p>
-                    <p className="created">{this.props.post.timeCreated}</p>
-                </div>
-                <p className="contents">{this.props.post.contents}</p>
-                {this.displayImages()}
-                {this.props.comments != null && this.props.comments(this.props.post.id)}
-            </div >
-        );
-    };
+    return (
+      <div className="post" key={this.props.post.id}>
+        <div className="dropdown-div">
+        </div>
+        <div className="post-header">
+          <div className="author-pic">
+            <SmallProfilePicture user={this.props.post.author} />
+          </div>
+          <p className="author">{this.props.post.author.name}</p>
+          <p className="created">{this.props.post.timeCreated}</p>
+        </div>
+        <p className="contents">{this.props.post.contents}</p>
+        {this.displayImages()}
+        {this.props.comments != null && this.props.comments(this.props.post.id)}
+        <ReactBootstrap.DropdownButton
+          bsStyle={'info'}
+          title={'Action'}
+          key={this.props.id}
+        >
+          <ReactBootstrap.MenuItem onClick={() => this.deletePostHandler(this.props.post.id)}>{this.state.loading ? 'Deleting...' : 'Delete'}</ReactBootstrap.MenuItem>
+        </ReactBootstrap.DropdownButton>
+      </div >
+    );
+  };
 
   displayImages = () => {
     const { images } = this.props.post;
@@ -85,10 +64,6 @@ class Post extends React.Component {
     if (images != undefined && images.length < 1) return null;
 
     return this.renderGallery(images);
-  };
-
-  focus = image => {
-    this.setState({ focus: image });
   };
 
   focus = image => {

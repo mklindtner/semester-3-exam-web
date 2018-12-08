@@ -17,15 +17,15 @@ class Header extends Component {
     this.setState({ width: document.documentElement.clientWidth });
   };
 
-  componentWillMount = function() {
+  componentWillMount = function () {
     this.updateDimensions();
   };
 
-  componentDidMount = function() {
+  componentDidMount = function () {
     window.addEventListener("resize", this.updateDimensions);
     this.updateDimensions();
   };
-  componentWillUnmount = function() {
+  componentWillUnmount = function () {
     window.removeEventListener("resize", this.updateDimensions);
   };
 
@@ -44,7 +44,7 @@ class Header extends Component {
                   </div>
                   <div className="btn-group col-xs-3">
                     <button
-                      class="btn btn-default dropdown-toggle"
+                      className="btn btn-default dropdown-toggle"
                       type="button"
                       id="dropdownMenu"
                       data-toggle="dropdown"
@@ -162,6 +162,9 @@ class Header extends Component {
                       </li>
                       <li>
                         <Link to="/profile">Profile</Link>
+                      </li>
+                      <li>
+                        <Link to="/chat">Chat</Link>
                       </li>
                       <li>
                         <Link to="/settings">Settings</Link>

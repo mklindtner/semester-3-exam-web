@@ -23,4 +23,6 @@ body, html, #root {
     top: 50px;
     right: 50px;
     z-index: 2;
+    max-height: 80%;
+    overflow-y: scroll;
 }

@@ -102,6 +102,17 @@ closeModalHandler = () =>
     const {comment} = this.props;
     console.log(this.state.emojis)
    console.log(this.state.showEmoji)
+
+   const EmojiCount = (props)  => {
+    return (
+      <div>
+        <Emoji key={props.index} onClick={this.addEmoji} tooltip={true}
+            emoji={{id: props.emoji.id, skin: 1}} size={25}  />
+        <div>{props.count}</div>
+        </div>
+    );
+  }
+  
    
 
     return (
@@ -131,10 +142,10 @@ closeModalHandler = () =>
             {this.state.emojis && 
             this.state.emojis.map( (emoji, index) =>{
             return(
-            
-             <Emoji key={index} onClick={this.addEmoji} tooltip={true}
-            emoji={{id: emoji.id, skin: 1}} size={25}  />
- 
+            <div className="emoji">
+             <EmojiCount key={index} onClick={this.addEmoji} tooltip={true}
+             emoji={{id: emoji.id, skin: 1}} size={25} count={emoji.count} />
+             </div>
             )
             })  
             }
