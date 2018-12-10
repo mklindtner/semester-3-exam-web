@@ -96,7 +96,7 @@ class Header extends Component {
                   </div>
                   <div className="text-right btn-group col-xs-5 pull-right">
                     <a
-                      class="link dropdown-toggle"
+                      className="link dropdown-toggle"
                       href="#"
                       role="button"
                       id="dropdownMenuLink"
