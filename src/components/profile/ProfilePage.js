@@ -17,6 +17,7 @@ import FriendGrid from "../FriendGrid";
 import PaginatedComments from "../timeline/PaginatedComments";
 import LargeProfilePicture from '../images/LargeProfilePicture';
 import FriendStatus from "./FriendStatus";
+import ChatWindow from '../chat/ChatWindow';
 
 import './ProfilePage.css';
 
@@ -131,8 +132,6 @@ class ProfilePage extends Component {
 
         const { user, tab } = this.props.router.match.params;
 
-        console.log({user, tab, activeKey});
-
         if (user == undefined && tab == undefined) {
             this.props.router.history.push("/profile/" + activeKey);
             return;
@@ -159,7 +158,8 @@ class ProfilePage extends Component {
                         <div>
                             <LargeProfilePicture width="100%" height="auto" user={this.state.user} />
                             <h2 className="profile-name">{this.state.user.name}</h2>
-                            {getAuthenticationContext().user.id !== this.userToRetrieve && <FriendStatus other={this.userToRetrieve} toastrFactory={this.props.toastrFactory} />}
+                            {getAuthenticationContext().user.id !== this.userToRetrieve && 
+                            <FriendStatus other={this.userToRetrieve} toastrFactory={this.props.toastrFactory} />}
                         </div>
                     </div>
                     <div className="col-sm-9">
@@ -170,11 +170,15 @@ class ProfilePage extends Component {
                                         {getAuthenticationContext().user.id === this.userToRetrieve &&
                                             <CreatePost onSubmit={this.onPostSubmit} />}
                                         <Posts posts={this.state.posts} />
-                                        <RollingPosts user={this.userToRetrieve} fetch={this.fetchPosts} comments={this.createCommentSection} />
+                                        <RollingPosts
+                                            toastrFactory={this.props.toastrFactory}
+                                            user={this.userToRetrieve}
+                                            fetch={this.fetchPosts}
+                                            comments={this.createCommentSection} />
                                     </Tab>
                                     <Tab eventKey="images" title="Images">
                                         {getAuthenticationContext().user.id === this.userToRetrieve && <ImageUploadForm onSubmit={this.onImageSubmit} />}
-                                        <PaginatedImageGrid pageSize={20} edit={true} fetch={this.fetchImages} />
+                                        <PaginatedImageGrid pageSize={20} edit={true} fetch={this.fetchImages}/>
                                     </Tab>
                                     <Tab eventKey="friends" title="Friends">
                                         <FriendGrid friends={this.state.friends} />

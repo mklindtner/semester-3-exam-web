@@ -17,16 +17,20 @@ class Header extends Component {
     this.setState({ width: document.documentElement.clientWidth });
   };
 
-  componentWillMount = function() {
+  componentWillMount = function () {
     this.updateDimensions();
   };
 
-  componentDidMount = function() {
+  componentDidMount = function () {
     window.addEventListener("resize", this.updateDimensions);
     this.updateDimensions();
   };
+<<<<<<< HEAD
 
   componentWillUnmount = function() {
+=======
+  componentWillUnmount = function () {
+>>>>>>> be76a2eea43958535a72bf97c2a50d34c437280c
     window.removeEventListener("resize", this.updateDimensions);
   };
 
@@ -43,11 +47,19 @@ class Header extends Component {
                       <UserSearch />
                     </div>
                   </div>
+<<<<<<< HEAD
                   <div className="col-xs-3">
                   <a
                       class="dropdown-toggle"
                       href="#"
                       id="dropdownMenuLink"
+=======
+                  <div className="btn-group col-xs-3">
+                    <button
+                      className="btn btn-default dropdown-toggle"
+                      type="button"
+                      id="dropdownMenu"
+>>>>>>> be76a2eea43958535a72bf97c2a50d34c437280c
                       data-toggle="dropdown"
                       aria-haspopup="true"
                       aria-expanded="false"
@@ -169,6 +181,9 @@ class Header extends Component {
                       </li>
                       <li>
                         <Link to="/profile">Profile</Link>
+                      </li>
+                      <li>
+                        <Link to="/chat">Chat</Link>
                       </li>
                       <li>
                         <Link to="/settings">Settings</Link>

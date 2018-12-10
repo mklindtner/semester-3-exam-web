@@ -63,7 +63,7 @@
                 text-decoration: none;
                 margin-right: 10px
             }
-            .btn:hover{
+            .error-btn:hover{
                opacity: 0.9;
             }
             .right{

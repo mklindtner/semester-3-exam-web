@@ -2,11 +2,16 @@ import React, { Component } from "react";
 import FieldGroup from '../FieldGroup';
 import { ControlLabel, FormControl, FormGroup } from "react-bootstrap";
 
+
+  
+
 export default class CommentForm extends Component {
 
     state = {
-        content: ""
+        content: "",
     }
+
+
 
     onCommentSubmit = (e) => {
         e.preventDefault();
@@ -23,6 +28,7 @@ export default class CommentForm extends Component {
     render() {
         return (
             <div className="comment-form">
+         
                 <form onSubmit={this.onCommentSubmit}>
                     <FormGroup bsSize="large">
                         <FormGroup controlId="formControlsTextarea">
@@ -30,6 +36,7 @@ export default class CommentForm extends Component {
                         </FormGroup>
                         <input type="submit" value="Submit" />
                     </FormGroup>
+                    
                 </form>
             </div>
         );

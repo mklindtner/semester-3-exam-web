@@ -45,6 +45,7 @@ class Timeline extends Component {
               user={this.props.app.authenticationContext.user.id}
               fetch={this.fetchTimeline}
               comments={this.createCommentSection}
+              toastrFactory={this.props.toastrFactory}
             />
           </div>
         </div>

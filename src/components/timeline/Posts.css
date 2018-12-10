@@ -1,10 +1,11 @@
 .post {
     color: black;
     padding: 20px;
-    font-size: 16px;   
+    font-size: 16px;
     background: #efefef;
     border: 1px solid #ddd;
     margin-bottom: 20px;
+    overflow: auto;
 }
 
 .post .post-header {
@@ -59,4 +60,16 @@
     border-right: 1px solid #ddd;
     float:left;
     cursor: pointer;
+}
+
+.dropdown-div{
+    float: right;
+    margin: 0 15px;
+}
+
+
+@media (max-width: 400px) {
+    .dropdown-div{
+    margin-right: 20px;
+    }
 }
